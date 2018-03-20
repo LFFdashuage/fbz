@@ -1,0 +1,45 @@
+@import '~lib/sandal/core';
+@import '~assets/css/core/vars', '~assets/css/core/functions';
+// $imgTextCartNumColor: $colorYellowEasy;
+// .vux-number-selector,
+// .vux-number-input {
+//     border-color: $imgTextCartNumColor !important;
+// }
+// .vux-number-input {
+//     border-radius: 0 !important;
+// }
+// .vux-number-selector svg {
+//     fill: $colorYellowEasy !important;
+// }
+// .vux-number-selector-plus {
+//     background-color: $imgTextCartNumColor !important;
+//     svg {
+//         fill: #fff !important;
+//     }
+// }
+.weui-cell {
+    padding: 10px 12px!important;
+}
+
+.weui-cell:before {
+    border: 0!important;
+}
+
+.vux-number-selector, .vux-number-input {
+    border-color: $fontColorGray !important;
+}
+
+.vux-number-input {
+   border-radius: 0 !important;
+}
+
+.vux-number-selector svg {
+    fill: #333 !important;
+}
+
+.vux-number-selector-plus {
+    background-color: #fff !important;
+    svg {
+        fill: #333 !important;
+    }
+}

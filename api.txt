@@ -1,0 +1,88 @@
+
+1.1.0-音视频列表 
+
+接口：product/spare/order
+传参
+	customerId:1
+	goodsId:1
+	spareAmount:3
+	spareType:1
+
+接口：pay/wallet
+参数：
+	customerId:1
+	payPwd:oD/FE44YVudyD7mMBMTyETJSlC5bCwHb8Ej3Tj6+AHA8EMiGez1YIJ150W2yTvTjUblCd12e6CWevvMGGGgEdHkrM5RDby9DjOV9h+NWT58BRAp0qVRFnCUjNUF14x575AF50nGQmv83Tb1i78qZBYoZ3xukBqBkx3qLIKZothE=
+	orderId:10
+	type:
+
+接口：pay/wx/prePayId
+参数：
+	customerId:1
+	orderId:12
+	type:3
+
+接口：customer/order/list
+参数：
+	customerId:1
+	orderStatus:
+	orderType:0
+	pageNum:1
+	pageSize:10
+
+
+课程订单
+
+订单信息
+	订单id
+	订单创建时间
+	订单总额
+	订单实付金额
+	订单状态（两个，一个英文，一个中文）
+	订单type
+		orderType
+		type
+产品信息：
+	产品名称
+	产品id
+	产品单价
+	产品数量
+	产品图片
+上课人信息
+	名字
+礼品信息
+	礼品名称
+	礼品数量
+
+接口：goods/category
+参数：
+	pageSize:1
+	pageNum:100
+
+接口： /customer/order/list
+参数：
+	customerId:1
+	pageNum:1
+	pageSize:10
+	orderStatus:0
+	orderType:1
+
+相关课程
+接口：curriculum/relevantCurriculum
+参数：
+	periodsId:9
+	pageNum:1
+	pageSize:4
+
+QavdSv/JpRDTipb0ZD5TZmM3FqboYpxduAfVGhYxhR+Hk5nafyauiSzik3nkBj9rRv/owEItJJ21cDrvX7uxi7fAweAGVqTcnfkAzJv5ZY45PGTa8pqfNvEfMsLwgnhHdseCVmtljFmHUVJhjUTHZUWiTRToTSJkMecM38aO6wU=
+
+gjMT022FTG/T24tO3otbJk32E0s+n7WL3f1MwVqBT0vS/QrfRTx4TQvY1T3legEIwHi+r4WjAat+Skm9MiOVntVVj3B+y00ooxM5gTMTIBhogK0KJyeJL7GJ4XlNexcr5r827IX7Q0+iWpskK3OXkTMYjVtu7KADANmDrEu+GZo=
+
+接口：product/spare/list
+参数：
+	spareType:1
+	goodsId:8
+	pageNum:1
+	pageSize:10
+
+	
+

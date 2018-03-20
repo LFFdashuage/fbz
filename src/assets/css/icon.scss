@@ -1,0 +1,60 @@
+// 图标css
+$icon: service, // 服务
+idCardType, // 证件类型
+idCard, // 身份证
+tel, // 手机号
+add, // 添加
+horn, // 喇叭
+user, // 姓名
+weixin, // 微信
+qrcode, // 验证码
+user-customer, // 我的客户
+user-agent, // 我的代理
+user-wallet, // 我的奖学金
+user-order, // 我的订单
+user-file, // 我的资料
+user-collection, // 我的收藏
+user-msg, // 我的消息
+user-qrcode, // 分享二维码
+user-member, // 会员中心
+user-friend, // 常用名单
+user-address, // 用户地址
+user-small-program, // 小程序兑换
+user-feedback, // 意见反馈	
+user-orderActivityList, //		 
+user-orderCourseList, //
+user-orderMallList, //
+user-orderSourceList, //
+// user-cart, // 我的购物车
+// user-course, // 我的课程
+// user-file, // 我的资料
+// user-activity, // 活动订单
+// user-share, // 我的分享
+// user-ticket, // 我的门票券  
+// user-clear, // 清楚缓存 
+// user-voucher, // 清楚缓存 
+// user-integral, // 清楚缓存 
+service; // 
+.icon {
+    position: relative;
+    padding-left: $iconL;
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: - $iconW/2;
+        width: $iconW;
+        height: $iconW;
+        background: left center no-repeat;
+        background-size: 100%;
+    }
+}
+
+@each $iconName in $icon {
+    .icon-#{$iconName} {
+        &:before {
+            background-image: url("~assets/img/icon/#{$iconName}.png");
+        }
+    }
+}
