@@ -12,6 +12,10 @@ npm install / cnpm install
 
 
 
+
+
+
+
 bower install
 
 # serve with hot reload at localhost:8080
