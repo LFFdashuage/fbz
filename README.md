@@ -6,11 +6,9 @@
 
 ## Build Setup
 
-``` bash
+```. bash
 # install dependencies
 npm install / cnpm install 
-
-
 
 bower install
 
