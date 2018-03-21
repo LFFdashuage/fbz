@@ -6,11 +6,13 @@
 
 ## Build Setup
 
-``` bash
+```. bash
 # install dependencies
-npm install
+npm install / cnpm install 
 
-cnpm install 
+
+
+bower install
 
 # serve with hot reload at localhost:8080
 npm run dev
