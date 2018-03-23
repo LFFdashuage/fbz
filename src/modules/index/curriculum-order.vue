@@ -356,7 +356,7 @@ export default {
       // console.log(val);
     },
     onChangePeople(ind,val) {
-      this.friendValue = this.friendValue.splice(ind, 1);
+     this.friendValue.splice(ind, 1);
     },
     // 拉取奖学金，抵用券
     getScholarship() {
