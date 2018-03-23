@@ -664,13 +664,10 @@ export default {
       width: 45%;
       color: #fff;
       display: flex;
-      justify-content: flex-end;
       align-items: center;
       background-color: $colorRedDeep;
       p {
-        display: inline-block;
-        justify-content: flex-end;
-        align-items: center;
+        margin:0 auto;
         color:#fff;
       }
     }
