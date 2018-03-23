@@ -397,11 +397,13 @@ export default {
 
       this.specialData.playCount = specialData.playCount;
       if(specialData.onlineType == 1) {      
-        this.$refs.video.loadNext(
-          specialData.fileUrl
-        );
+        this.$refs.video.loadNext({
+          src: specialData.fileUrl,
+          id: specialData.id
+        });
       } else {
         this.$refs.audio.loadNext({
+          id: specialData.id,
           name: specialData.name,
           childName: specialData.childName,
           fileUrl: specialData.fileUrl,
