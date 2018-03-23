@@ -11,7 +11,7 @@
 			<swipeout>
 				<swipeout-item v-show="item.value" @on-close="swipeoutClose(item, index)" @on-open="swipeoutOpen(item, index)" :ref="'swipeout' + index" v-for="(item, index) in friendData" :key="index" transition-mode="reveal">
 	        <div slot="right-menu">
-	          <swipeout-button @click.native="deleteFriend(index+1,item)" type="warn">删除</swipeout-button>
+	          <swipeout-button @click.native="deleteFriend(index,item)" type="warn">删除</swipeout-button>
 	        </div>
 	        <div slot="content" class="user-block">
 						
