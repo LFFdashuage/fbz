@@ -4,7 +4,7 @@
 
 <template>
 	<div class="agency">
-		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
     	<div>
 				<div class="agency-header">
 					<div class="title">我的代理</div>

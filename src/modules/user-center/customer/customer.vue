@@ -4,7 +4,7 @@
 
 <template>
 	<div class="customer">
-		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore(tabSelected)" ref="scrollerBottom" :scroll-bottom-offst="200">
+		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore(tabSelected)" ref="scrollerBottom" :scroll-bottom-offset="200">
     	<div>
 				<div class="customer-header">
 					<div class="title">我的客户</div>

@@ -13,7 +13,7 @@
 
 		<div v-transfer-dom>
 			<popup class="ticket-popup" v-model="ticketPopup.status" position="right" is-transparent>
-				<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+				<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 					<div class="ticket-content">
 						<x-button class="ticket-popup-btn" type="primary" @click.native="hidePopup">确定</x-button>
 						<divider v-show="scrollerInfo.list">可用课程门票</divider>

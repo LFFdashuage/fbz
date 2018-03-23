@@ -3,7 +3,7 @@
  -->
 <template>
 	<div class="special-column" v-cloak>
-    	<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="100" v-cloak>
+    	<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="100" v-cloak>
 		    <div class="content-cell">
 
           <!-- 轮播图 -->

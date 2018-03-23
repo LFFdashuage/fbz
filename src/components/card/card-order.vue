@@ -5,7 +5,7 @@
  -->
 <template>
 	<div class="card-order-list" v-cloak>
-	  <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 			<div>
 				<div class="card" v-for="(item, index) in cardData" :key="index">
 					<div class="card-header">

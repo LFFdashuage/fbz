@@ -4,7 +4,7 @@
 
 <template>
 	<div class="train-top">
-	  <scroller lock-x :height="-topData.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  <scroller lock-x :height="-topData.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 			<div>
 				<el-img-text-news v-for="(item, index) in topData.list" :img-text-data="item" :key="index"></el-img-text-news>
 
@@ -104,12 +104,6 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-nav {
-	// display: none;
-}
-</style>
 
 <style lang="scss" scoped>
 	@import '~lib/sandal/core';

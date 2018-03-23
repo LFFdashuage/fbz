@@ -5,7 +5,7 @@
 <template>
 	<div class="quotation" v-cloak>
 		<div class="container">
-		  <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+		  <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 		  	<div>
 					<el-quotation @on-comment-click="commetClick" :quotation-data="item" v-for="(item, index) in quotationData" :key="index"></el-quotation>
 

@@ -20,7 +20,7 @@
 	        		</div>
 	        	</template>
 	        	<template v-else>
-	  					<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  					<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 	        			<div>
         					<!-- <el-img-text-rank @on-data-change="btnClick" v-for="(item, ind) in tabContentDatasList.list" :img-text-data="item" :is-download=true img-text-btn="1" :key="ind"></el-img-text-rank> -->
 	        				<el-img-text-rank @on-data-change="btnClick" v-for="(item, ind) in download.list" :img-text-data="item" :is-download=true img-text-btn="1" :key="ind"></el-img-text-rank>

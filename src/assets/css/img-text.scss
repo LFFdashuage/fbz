@@ -78,6 +78,14 @@
 		}
 	}
 
+	&.img-text-news {
+		padding-left: $padding;
+		
+		.img-text-img {
+			height: auto;
+		}
+	}
+
 	.text {
 		position: relative;
 		line-height: 1.5;

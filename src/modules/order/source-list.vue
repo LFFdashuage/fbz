@@ -11,7 +11,7 @@
       <swiper-item v-for="(tabDataItem, tabDataIndex) in tabData" :key="tabDataIndex">
     		<!-- <el-card-order @on-load-more="loadMore" :card-data="item.list" :card-count="count" :card-index="index"></el-card-order> -->
     		<template v-if="tabDataItem.value == 'video'">
-	  			<scroller class="scroller" lock-x height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  			<scroller class="scroller" lock-x height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 						<div>
   						<el-img-text-rank @on-btn-click="btnClick" v-for="(item, ind) in tabDataItem.list" :img-text-data="item" img-text-btn="-1" :key="ind"></el-img-text-rank>
 
@@ -21,7 +21,7 @@
     		</template>
 
     		<template v-if="tabDataItem.value == 'file'">
-	  			<scroller class="scroller" lock-x height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  			<scroller class="scroller" lock-x height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
   					<div>
 							<el-file-block v-for="(item, ind) in tabDataItem.list" :file-data="item" :key="ind"></el-file-block>
   						<!-- <el-img-text-rank @on-data-change="btnFileClick" v-for="(item, ind) in tabDataItem.list" :is-download=true :img-text-data="item" img-text-btn="1" :key="ind"></el-img-text-rank> -->
@@ -32,7 +32,7 @@
     		</template>
 
     		<template v-if="tabDataItem.value == 'column'">
-	  			<scroller class="scroller" lock-x height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  			<scroller class="scroller" lock-x height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 						<div class="column-list">
   						<el-img-text-column @on-btn-click="btnClick" v-for="(item, ind) in tabDataItem.list" :img-text-data="item" :key="ind"></el-img-text-column>
 

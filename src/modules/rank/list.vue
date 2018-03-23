@@ -11,7 +11,7 @@
 	      </tab>
 	      <swiper class="list" height="100%" v-model="tabSelected" :show-dots="false" :threshold="tabChangeW">
 	        <swiper-item v-for="(tabContentDatasList, index) in tabData" :key="index">
-	  				<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  				<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 	          	<div class="scroller-list">
 	          		<el-img-text-rank v-for="(item, ind) in tabContentDatasList.list" :img-text-data="item" img-text-btn="-1" from-rank="true" :key="ind"></el-img-text-rank>
 								
