@@ -45,7 +45,7 @@
     </div>
 
 		<div class="container">
-    	<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200" v-cloak>
+    	<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200" v-cloak>
 		    <div class="all-course">
 			    <el-img-text-relate v-for="(item, index) in scrollerInfo.list" :img-text-data="item" :key="index"></el-img-text-relate>
 			    <el-load-more :load-all="scrollerInfo.loadAll"></el-load-more>

@@ -92,7 +92,7 @@
         let _this = this;
         if(!this.playStatus && _this.player.getCurrentTime() < 3) {
           this.playStatus = true;
-          this.addPlayCount(this.baseData.id);
+          this.addPlayCount(this.vidioData.id);
         } else {
           setTimeout(function() {
             _this.videoClick();
@@ -100,10 +100,14 @@
         }
       },
       loadNext(data) {
-        this.player.loadByUrl(data);
-        this.player.play();
+        this.status = true;
 
-        this.addPlayCount(this.baseData.id);
+        this.$nextTick(function(){
+          this.init();
+          this.player.loadByUrl(data);
+          this.player.play();
+          this.addPlayCount(data.id);
+        })
       }
     }
   };
@@ -134,5 +138,9 @@
     margin: 0 auto;
     z-index: 100;
     background: #000;
+
+    p {
+      margin: 0 auto;
+    }
   }
 </style>

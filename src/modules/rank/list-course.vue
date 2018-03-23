@@ -26,7 +26,7 @@
 
 	      <swiper class="list" height="100%" v-model="tabSelected" :show-dots="false" :threshold="tabChangeW">
 	        <swiper-item v-for="(tabContentDatasList, index) in tabData" :key="index">
-  					<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+  					<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
   						<div class="file-list">
   							<el-file-block v-for="(item, ind) in tabContentDatasList.list" :file-data="item" :key="ind"></el-file-block>
 								<el-load-more :load-all="tabContentDatasList.loadAll"></el-load-more>

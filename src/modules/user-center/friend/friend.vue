@@ -4,7 +4,7 @@
 
 <template>
 	<div class="friend" v-cloak>
-		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 			<div class="btns">
 				<x-button type="primary" @click.native="addFriend">新增好友</x-button>
 			</div>

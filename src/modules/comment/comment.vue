@@ -5,7 +5,7 @@
 <template>
 	<div class="comment-bar">
 		<div class="comment-list">
-			<scroller lock-x :height="-comment.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+			<scroller lock-x :height="-comment.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 				<div class="comment-list-content">
 					<div class="comment-list-block" v-for="(item, index) in comment.list" :key="index">
 						<div v-if="item.img" class="img">

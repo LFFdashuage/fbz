@@ -264,22 +264,24 @@
 	@import '~lib/sandal/core';
   @import '~assets/css/core/functions', '~assets/css/core/mixins', '~assets/css/core/vars';
 	
-	.btns {
-		padding: $padding;
+	.reward {
+		.btns {
+			padding: $padding;
 
-		&.reward-pay-btn {
-			padding-left: 0;
-			padding-right: 0;
-			padding-bottom: 0;
+			&.reward-pay-btn {
+				padding-left: 0;
+				padding-right: 0;
+				padding-bottom: 0;
 
-			.weui-btn {
-				line-height: 50px;
-				border-radius: 0;
+				.weui-btn {
+					line-height: 50px;
+					border-radius: 0;
+				}
 			}
-		}
 
-		.disabled {
-			background: $disabledPay;
+			.disabled {
+				background: $disabledPay;
+			}
 		}
 	}
 </style>

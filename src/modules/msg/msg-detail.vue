@@ -4,7 +4,7 @@
 
 <template>
 	<div class="msg-detail" v-cloak>
-		<scroller class="scroller" lock-x :height="-offsetBottom + 'px'" @done-pulldown="donePulldown" @on-pulldown-loading="onPulldownLoading" @on-pullup-loading="onPullupLoading" ref="scrollerBottom" :scroll-bottom-offst="200" :use-pulldown="true" :use-pullup="true" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
+		<scroller class="scroller" lock-x :height="-offsetBottom + 'px'" @done-pulldown="donePulldown" @on-pulldown-loading="onPulldownLoading" @on-pullup-loading="onPullupLoading" ref="scrollerBottom" :scroll-bottom-offset="200" :use-pulldown="true" :use-pullup="true" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
 			<div id="msg-box">		
 				<el-msg-info-block :info-data="item" v-for="(item, index) in list" :key="index"></el-msg-info-block>
 				<div v-if="list.length == 0" class="none-data">暂无数据</div>

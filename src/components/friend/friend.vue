@@ -36,7 +36,7 @@
 						<div class="friend-popup-sure" @click="friendPopupSure">确定</div>
 					</div>
 
-					<scroller lock-x :height="scrollerInfo.height + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+					<scroller lock-x :height="scrollerInfo.height + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 						<div class="friend-btn-add">
 							<x-button @click.native="friendAdd" mini>新增</x-button>
 						</div>

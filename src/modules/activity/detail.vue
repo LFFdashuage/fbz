@@ -270,10 +270,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-// .detail .tab .list
-</style>
-
 <style lang="scss" scoped>
 @import "~lib/sandal/core";
 @import "~assets/css/core/functions",

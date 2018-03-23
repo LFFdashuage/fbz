@@ -3,7 +3,7 @@
  -->
 
 <template>
-	<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200" v-cloak>
+	<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200" v-cloak>
 		<timeline>
 			<timeline-item v-for="(item, index) in courseList" :key="index">
 				<div class="course-recent">

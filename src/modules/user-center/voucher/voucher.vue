@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="wallet-content">
-			<scroller lock-x :height="-wallet.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+			<scroller lock-x :height="-wallet.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 		  	<div>
 					<card>
 			      <div class="wallet-card-header" slot="header">收支明细</div>

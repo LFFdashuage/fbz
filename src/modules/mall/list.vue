@@ -4,7 +4,7 @@
 
 <template>
 	<div class="mall-list" v-cloak>
-	  <scroller lock-x :height="-offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+	  <scroller lock-x :height="-offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 			<div class="mall-list-content">
 				<!-- <el-mall-card :mall-card-data="item" v-for="(item, index) in listData" :key="index"></el-mall-card> -->
 				

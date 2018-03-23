@@ -245,7 +245,7 @@
 
     &.active {
       .audio-img {
-        animation: rotateImg 2s linear infinite;
+        animation: rotateImg 5s linear infinite;
       }
     }
 

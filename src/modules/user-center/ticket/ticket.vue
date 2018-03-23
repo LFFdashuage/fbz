@@ -5,7 +5,7 @@
 <template>
 	<div class="ticket">
 		<divider v-if="scrollerInfo.list.length == 0">暂时无信息</divider>
-		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offst="200">
+		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
 			<div class="ticket-content">
 				<div class="ticket-block" v-for="(item, index) in scrollerInfo.list" :key="index">
 					<div :class="['ticket-block-content', { 'active': item.tips }]">

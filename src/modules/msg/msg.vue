@@ -10,7 +10,7 @@
 		</div>
 
 		<div class="msg-group group-pengyou" ref="group" v-if="pengyou.list.length > 0">
-			<scroller class="scroller" lock-x :height="-offsetBottom + 'px'" @done-pulldown="donePulldown" @on-pulldown-loading="onPulldownLoading" @on-pullup-loading="onPullupLoading" ref="scrollerBottom" :scroll-bottom-offst="200" :use-pulldown="true" :use-pullup="true" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
+			<scroller class="scroller" lock-x :height="-offsetBottom + 'px'" @done-pulldown="donePulldown" @on-pulldown-loading="onPulldownLoading" @on-pullup-loading="onPullupLoading" ref="scrollerBottom" :scroll-bottom-offset="200" :use-pulldown="true" :use-pullup="true" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
 				<div>
 					<el-msg :data-msg="item" v-for="(item, index) in pengyou.list" :key="index"></el-msg>
 					<!-- <el-load-more :load-all="pengyou.loadAll"></el-load-more> -->
