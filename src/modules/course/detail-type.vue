@@ -485,7 +485,7 @@
 
         // this.relateData.playCount = relateData.playCount;
         if(relateData.onlineType == 1) {      
-          this.$refs.video.loadNext(relateData.src);
+          this.$refs.video.loadNext({src: relateData.src, id: relateData.id});
         } else {
           this.$refs.audio.loadNext({
             id: relateData.id,

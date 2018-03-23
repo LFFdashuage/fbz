@@ -100,14 +100,20 @@
         }
       },
       loadNext(data) {
-        this.status = true;
-
-        this.$nextTick(function(){
-          this.init();
-          this.player.loadByUrl(data);
+        if(this.status) {
+          this.player.loadByUrl(data.src);
           this.player.play();
           this.addPlayCount(data.id);
-        })
+        } else {        
+          this.status = true;
+
+          this.$nextTick(function(){
+            this.init();
+            this.player.loadByUrl(data.url);
+            this.player.play();
+            this.addPlayCount(data.id);
+          })
+        }
       }
     }
   };
