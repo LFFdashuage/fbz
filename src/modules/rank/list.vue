@@ -6,9 +6,12 @@
 	<div class="rank-list" v-cloak>
 		<div class="container">
 			<div class="tab">
+        
+        <div class="tab-header">
 	      <tab v-model="tabSelected">
 	        <tab-item :selected="tabSelected == index" v-for="(item, index) in tabData" @click="tabSelected = index" :key="index">{{ item.title }}</tab-item>
 	      </tab>
+        </div>
 	      <swiper class="list" height="100%" v-model="tabSelected" :show-dots="false" :threshold="tabChangeW">
 	        <swiper-item v-for="(tabContentDatasList, index) in tabData" :key="index">
 	  				<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
@@ -218,7 +221,7 @@
 
 <style lang="scss">
 	.rank-list .vux-slider > .vux-swiper {
-    overflow-y: auto;
+    // overflow-y: auto;
   }
 </style>
 
@@ -226,7 +229,10 @@
 	@import '~lib/sandal/core';
 	@import '~assets/css/core/functions', '~assets/css/core/mixins', '~assets/css/core/vars';
 	
-	@import '~assets/css/rank';
+  @import '~assets/css/rank';
+  .rank-list{
+    overflow: hidden;
+  }
 
 	.pay-btn {
 		padding: $padding;
@@ -238,5 +244,5 @@
 	
 	.scroller-list {
 		// padding-bottom: 90px;
-	}
+  }
 </style>

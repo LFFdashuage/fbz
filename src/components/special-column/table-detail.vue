@@ -30,7 +30,7 @@
         <div class="detail-notice-box">
           <p class="icon">本课程为￥{{tableDetailData.price}}终身订阅，订阅成功后，即可永久收听。</p>
           <p class="icon">版权归原作者所有，严禁录成任何形式，严禁在任何第三方平台传播，违者将追究其法律责任。</p>
-          <p class="icon">在购买过程中，如果有任何问题，您可以拨打客服电话021-XXXXXXXX。</p>
+          <!-- <p class="icon">在购买过程中，如果有任何问题，您可以拨打客服电话021-XXXXXXXX。</p> -->
         </div>
       </div>
 
