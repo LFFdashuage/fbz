@@ -225,7 +225,11 @@
 			}
 		}
 	}
-
+  .fa{
+    @include ellipsisOne();
+    padding-right: 50px;
+    height: 25px;
+  }
 	.price {
 		position: absolute;
 		right: $padding;
