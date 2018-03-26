@@ -69,20 +69,20 @@ export default {
                 orderType: e.data.data.orderType,
                 type: e.data.data.type
               };
-              // 金额大于奖学金，调微信支付
-              if (_this.cartData.money > _this.cartData.wallet) {
-                // _this.$router.push({
-                //   name: "confirmOrder",
-                //   query: {
-                //     orderId: e.data.data.orderId,
-                //     orderType: e.data.data.orderType,
-                //     type: e.data.data.type
-                //   }
-                // });
-                // console.log(_this.cartData.wallet)
-                _this.payPrepar();
+              // 如果不使用奖学金和抵用券就直接调起微信支付。
+              if (_this.cartData.walletStatus == 1) {
+                // 金额大于奖学金，调微信支付
+                if (_this.cartData.money > _this.cartData.wallet) {
+                  _this.payPrepar();
+                } else {
+                  _this.enterPassword();
+                }
               } else {
-                _this.enterPassword();
+                if (_this.cartData.money == 0) {
+                  _this.enterPassword();
+                } else {
+                  _this.payPrepar();
+                }
               }
             } else {
               _this.$vux.alert.show({
@@ -130,43 +130,43 @@ export default {
       let _this = this;
 
       if (pwd) {
-      _this.$store.commit("updateLoadingStatus", { isLoading: true });
-      _this.$http
-        .post(
-          "/api/pay/wallet",
-          _this.qs.stringify({
-            customerId: _this.$store.state.user.userId,
-            payPwd: pwd,
-            orderId: _this.orderInfo.orderId,
-            type: _this.orderInfo.type
-          })
-        )
-        .then(function(e) {
-          _this.$store.commit("updateLoadingStatus", { isLoading: false });
-          if (e.data.code == 200) {
-            // _this.payPrepar();
-            _this.$router.push({
-              name: "orderDoneMall",
-              query: {
-                orderId: _this.orderInfo.orderId,
-                orderType: _this.orderInfo.orderType
-              }
-            });
-          } else {
-            if (e.data.code == 401) {
-              _this.$vux.alert.show({
-                content: e.data.msg,
-                onHide() {
-                  _this.goBalance();
+        _this.$store.commit("updateLoadingStatus", { isLoading: true });
+        _this.$http
+          .post(
+            "/api/pay/wallet",
+            _this.qs.stringify({
+              customerId: _this.$store.state.user.userId,
+              payPwd: pwd,
+              orderId: _this.orderInfo.orderId,
+              type: _this.orderInfo.type
+            })
+          )
+          .then(function(e) {
+            _this.$store.commit("updateLoadingStatus", { isLoading: false });
+            if (e.data.code == 200) {
+              // _this.payPrepar();
+              _this.$router.push({
+                name: "orderDoneMall",
+                query: {
+                  orderId: _this.orderInfo.orderId,
+                  orderType: _this.orderInfo.orderType
                 }
               });
             } else {
-              _this.$vux.alert.show({
-                content: e.data.msg
-              });
+              if (e.data.code == 401) {
+                _this.$vux.alert.show({
+                  content: e.data.msg,
+                  onHide() {
+                    _this.goBalance();
+                  }
+                });
+              } else {
+                _this.$vux.alert.show({
+                  content: e.data.msg
+                });
+              }
             }
-          }
-        });
+          });
       } else {
         _this.payPrepar();
       }

@@ -125,16 +125,21 @@ export default {
             orderType: e.data.data.orderType,
             type: e.data.data.type
           };
-          // if(_this.cartCourseData.money > 0) {
-          // 	_this.$router.push({name: 'confirmOrder', query: { orderId: e.data.data.orderId, type: e.data.data.type, orderType: e.data.data.orderType }});
-          // } else {
-          // 	_this.enterPassword();
-          // }
-          // 金额大于奖学金，调微信支付
-          if (_this.cartCourseData.money > _this.cartData.walletAmount) {
-            _this.payPrepar();
+
+          // 如果不使用奖学金和抵用券就直接调起微信支付。
+          if ( _this.cartCourseData.walletAmount == 1 || _this.cartCourseData.voucherAmount == 1  ) {
+            // 金额大于奖学金，调微信支付
+            if (_this.cartCourseData.money > _this.cartData.walletAmount) {
+              _this.payPrepar();
+            } else {
+              _this.enterPassword();
+            }
           } else {
-            _this.enterPassword();
+            if (_this.cartCourseData.money == 0) {
+              _this.enterPassword();
+            } else {
+              _this.payPrepar();
+            }
           }
         } else {
           _this.$vux.alert.show({

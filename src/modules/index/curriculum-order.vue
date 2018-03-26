@@ -25,17 +25,17 @@
       <span>¥{{cartCourseData.total | numToCash}}</span>
     </div>
 		
-    <div v-if="courseInfo.type != 'package'&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'" class="footer-box">
+    <div v-if="ticketDatas.maxNum !== 0&&courseInfo.type != 'package'&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'" class="footer-box">
       <div :class="{ 'footer-icon' : isIcon, 'footer-icon-tow': !isIcon}" @click="ticket" class="footer-name">门票券</div>
 	    <x-number :max="ticketDatas.maxNum" :min="ticketDatas.minNum" v-model="ticketDatas.useNum"></x-number>
     </div>
 
-    <div class="footer-box" v-if="courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'">
+    <div class="footer-box" v-if="voucher.num !== 0&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'">
       <div :class="{ 'footer-icon' : discountIcon, 'footer-icon-tow': !discountIcon}" @click="discount" class="footer-name">抵用券</div>
 	     <div class="discount-number">¥{{ voucher.num | numToCash}}</div>
     </div>
 
-    <div class="footer-box">
+    <div v-if="moneyDatas.wallet !== 0" class="footer-box">
       <div :class="{ 'footer-icon' : walletIcon, 'footer-icon-tow': !walletIcon}" @click="walletAmount" class="footer-name">奖学金</div>
 	     <div class="discount-number">¥{{ moneyDatas.wallet | numToCash}}</div>
     </div>
@@ -93,11 +93,11 @@ export default {
       ticketData: 0,
       voucher: {
         status: false,
-        num: "0"
+        num: 0
       },
       moneyDatas: {
         status: false,
-        wallet: "0"
+        wallet: 0
       },
       cartData: {
         voucherAmount: 0,
