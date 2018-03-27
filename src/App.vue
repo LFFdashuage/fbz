@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <loading v-model="loadbar.isLoading"></loading>
-    <div :class="['container', {'active': nav.status}]">
+    <div v-show="user.userId" :class="['container', {'active': nav.status}]">
       <!-- <transition :name="'vux-pop-' + (direction.direction === 'forward' ? 'in' : 'out')"> -->
-          <router-view v-show="user.userId" class="router-view" :key="key"></router-view>
+          <router-view class="router-view" :key="key"></router-view>
         <!-- </transition> -->
       <!-- <router-view></router-view>     -->
     </div>

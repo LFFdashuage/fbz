@@ -78,11 +78,18 @@ $ie6-7: false;
   white-space: nowrap;
 }
 
-@mixin ellipsisMore ($num: 3) {
+@mixin ellipsisMore ($num: 1) {
+  display:box;
+  box-orient: vertical;
+  display:-moz-box;
+  -moz-box-orient: vertical;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
   -webkit-line-clamp: $num;
   overflow: hidden;
+  // -webkit-box-orient: vertical;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical; // 参考 https://github.com/postcss/autoprefixer/issues/776
+  /* autoprefixer: on */
 }
 
 // 正文处理

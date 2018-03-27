@@ -82,7 +82,12 @@
 		padding-left: $padding;
 		
 		.img-text-img {
-			height: auto;
+			height: 66px;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 
@@ -98,7 +103,6 @@
 			font-size: $fontSizeH4;
 			line-height: 1.35;
 			color: $fontColorBlack;
-			display: flex;
 
 			&.text-left {
 				padding-right: 80px;

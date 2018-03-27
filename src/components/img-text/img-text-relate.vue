@@ -204,7 +204,7 @@
 		line-height: 1.75;
 
 		h5 {
-			font-size: $fontSizeH3;
+			font-size: $fontSizeH4;
 			color: $fontColorBlack;
 		}
 
@@ -228,7 +228,6 @@
   .fa{
     @include ellipsisOne();
     padding-right: 50px;
-    height: 25px;
   }
 	.price {
 		position: absolute;

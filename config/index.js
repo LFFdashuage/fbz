@@ -30,7 +30,7 @@ module.exports = {
     proxyTable: {
         '/api': {
             // target: 'https://fbz.ittun.com/',
-            // target: 'http://192.168.1.101:8088/',
+            // target: 'http://192.168.22.100:8088/',
             // target: 'http://114.215.135.236:8088/',
             target: 'http://fbz3.10-suns.com/api/',
         

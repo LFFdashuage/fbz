@@ -51,7 +51,7 @@
 	
 	.img-text-news {
 		.title {
-			@include ellipsisMore(2); 
+			// @include ellipsisMore(2);
 		}
 
 		.text {

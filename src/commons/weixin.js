@@ -106,30 +106,6 @@ let showTopMenu = (status) => {
 Vue.prototype.signUrl = (url, status = false, obj = {}) => {
     store.commit("updateUserPay", { 'pay': true })
 
-    // Vue.wechat.hideOptionMenu();
-    // Vue.wechat.hideAllNonBaseMenuItem();
-
-    // Vue.wechat.showMenuItems({
-    //     menuList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 要显示的菜单项，所有menu项见附录3
-    // });
-    // setShareProductUrl("富班长", '网络学习中心', location.href, '');
-
-
-    // Vue.wechat.hideMenuItems({
-    //   menuList: [
-    //     'menuItem:readMode', // 阅读模式
-    //     'menuItem:share:timeline', // 分享到朋友圈
-    //     'menuItem:copyUrl' // 复制链接
-    //   ],
-    //   success: function (res) {
-    //     alert('已隐藏“阅读模式”，“分享到朋友圈”，“复制链接”等按钮');
-    //   },
-    //   fail: function (res) {
-    //     alert(JSON.stringify(res));
-    //   }
-    // });
-
-
     Vue.http.post("/api/wechat/sign", qs.stringify({ url: url })).then(function(e) {
         let data = e.data.data.signature;
 
@@ -215,20 +191,5 @@ Vue.prototype.signUrl = (url, status = false, obj = {}) => {
             setShareProductUrl("富班长平台", '网络学习中心', obj.url || url, '');
         });
 
-    //     Vue.wechat.ready(function() {
-    //         Vue.wechat.checkJsApi({
-    //             // jsApiList : [ 'onMenuShareTimeline', 'onMenuShareAppMessage', 'showMenuItems', 'hideOptionMenu', 'showOptionMenu', 'hideAllNonBaseMenuItem', 'closeWindow' ]
-    //         });
-    //     });
-
-    //     Vue.wechat.error(function(res) {
-    //         if (res.err_msg) {
-    //             alert(res.err_msg);
-    //         }
-    //     });
-
-    //     if (!status) {
-    //         Vue.prototype.openShare()
-    //     }
     });
 }
