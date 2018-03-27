@@ -125,20 +125,26 @@ export default {
             orderType: e.data.data.orderType,
             type: e.data.data.type
           };
-
-          // 如果不使用奖学金和抵用券就直接调起微信支付。
-          if ( _this.cartCourseData.walletAmount == 1 || _this.cartCourseData.voucherAmount == 1  ) {
-            // 金额大于奖学金，调微信支付
-            if (_this.cartCourseData.money > _this.cartData.walletAmount) {
-              _this.payPrepar();
-            } else {
-              _this.enterPassword();
-            }
+          //原始单价为0时，不走密码
+          if (_this.cartCourseData.judgePrice == 0) {
+            console.log(e.data.data);
+            //调免密方法
+            _this.playFreeOrder();
           } else {
-            if (_this.cartCourseData.money == 0) {
-              _this.enterPassword();
+            // 如果不使用奖学金和抵用券就直接调起微信支付。
+            if ( _this.cartCourseData.walletAmount == 1 || _this.cartCourseData.voucherAmount == 1  ) {
+              // 金额大于奖学金，调微信支付
+              if (_this.cartCourseData.money > _this.cartData.walletAmount) {
+                _this.payPrepar();
+              } else {
+                _this.enterPassword();
+              }
             } else {
-              _this.payPrepar();
+              if (_this.cartCourseData.money == 0) {
+                _this.enterPassword();
+              } else {
+                _this.payPrepar();
+              }
             }
           }
         } else {
@@ -188,7 +194,8 @@ export default {
               customerId: _this.$store.state.user.userId,
               payPwd: pwd,
               orderId: _this.orderInfo.orderId,
-              type: _this.orderInfo.type
+              type: _this.orderInfo.type,
+              isFree: 0
             })
           )
           .then(function(e) {
@@ -250,6 +257,42 @@ export default {
         },
         1
       );
+    },
+    //免费课程，活动，音视屏奖学金接口
+    playFreeOrder() {
+      let _this = this;
+      _this.$store.commit("updateLoadingStatus", { isLoading: true });
+      _this.$http
+        .post(
+          "/api/pay/wallet",
+          _this.qs.stringify({
+            customerId: _this.$store.state.user.userId,
+            payPwd: "",
+            orderId: _this.orderInfo.orderId,
+            type: _this.orderInfo.type,
+            isFree: 1
+          })
+        )
+        .then(function(e) {
+          _this.$store.commit("updateLoadingStatus", { isLoading: false });
+          if (e.data.code == 200) {
+            // _this.payPrepar();
+            _this.$router.push({
+              name: "orderDoneMall",
+              query: {
+                orderId: _this.orderInfo.orderId,
+                orderType: _this.orderInfo.orderType
+              }
+            });
+          } else {
+            _this.$vux.alert.show({
+              content: e.data.msg,
+              onHide() {
+                _this.payOrder();
+              }
+            });
+          }
+        });
     }
   }
 };

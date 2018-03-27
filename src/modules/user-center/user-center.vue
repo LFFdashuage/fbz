@@ -509,7 +509,7 @@ export default {
 					_this.qs.stringify({
 						customerId: _this.$store.state.user.userId
 					})).then(function(e) {
-						_this.msgNum = e.data.data.allMessage;
+						_this.msgNum = e.data.data.allMessage || 0;
 				})
     }
   }
