@@ -25,17 +25,17 @@
       <span>¥{{cartCourseData.total | numToCash}}</span>
     </div>
 		
-    <div v-if="ticketDatas.maxNum !== 0&&courseInfo.type != 'package'&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'" class="footer-box">
+    <div v-if="ticketDatas.maxNum !== 0&&courseInfo.price !== 0&&courseInfo.type != 'package'&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'" class="footer-box">
       <div :class="{ 'footer-icon' : isIcon, 'footer-icon-tow': !isIcon}" @click="ticket" class="footer-name">门票券</div>
 	    <x-number :max="ticketDatas.maxNum" :min="ticketDatas.minNum" v-model="ticketDatas.useNum"></x-number>
     </div>
 
-    <div class="footer-box" v-if="voucher.num !== 0&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'">
+    <div class="footer-box" v-if="voucher.num !== 0&&courseInfo.price !== 0&&courseInfo.type != 'video'&&courseInfo.type != 'specialColumn'">
       <div :class="{ 'footer-icon' : discountIcon, 'footer-icon-tow': !discountIcon}" @click="discount" class="footer-name">抵用券</div>
 	     <div class="discount-number">¥{{ voucher.num | numToCash}}</div>
     </div>
 
-    <div v-if="moneyDatas.wallet !== 0" class="footer-box">
+    <div v-if="moneyDatas.wallet !== 0&&courseInfo.price !== 0" class="footer-box">
       <div :class="{ 'footer-icon' : walletIcon, 'footer-icon-tow': !walletIcon}" @click="walletAmount" class="footer-name">奖学金</div>
 	     <div class="discount-number">¥{{ moneyDatas.wallet | numToCash}}</div>
     </div>
@@ -61,7 +61,7 @@ export default {
   directives: {
     TransferDom
   },
-  components: {
+ components: {
     Group, Cell, CheckIcon, XSwitch,  Selector,  XNumber, XInput,  XButton,  FormPreview, Popup, 
     elNewFriend, elTicket, elImgText, elCartCurriculum
   },
@@ -104,6 +104,7 @@ export default {
         walletAmount: 0,
         admissionTicket: 0
       },
+      judgePrice: 0,
       addManInfo: [],
       friendValue: [],
       orderInfo: {}
@@ -129,6 +130,7 @@ export default {
     cartCourseData() {
       let voucherAmount = 0,
         walletAmount = 0,
+        judgePrice = 0,
         amount = this.friendValue.length || 1,
         adTicketCount = this.ticketDatas.ticket,
         enrollInfo = "",
@@ -178,7 +180,8 @@ export default {
         voucherAmount: this.voucher.status ? 1 : 0, // 使用课程券的金额
         walletAmount: this.moneyDatas.status ? 1 : 0, // 使用课程券的金额
         adTicketCount: adTicketCount + "", // 使用门票的数量，默认为0
-        enrollInfo: enrollInfo // 报名人信息
+        enrollInfo: enrollInfo, // 报名人信息
+        judgePrice: this.judgePrice //yon
       };
     }
   },
@@ -285,6 +288,7 @@ export default {
                 list: list,
                 isClick: false
               };
+              _this.judgePrice = resInfo.discountprice; //判断钱数
             }
           } else if (_this.courseInfo.type == "activity") {
             _this.courseInfo = {
@@ -302,6 +306,7 @@ export default {
               date: date,
               isClick: false
             };
+            _this.judgePrice = resInfo.price; //判断钱数
           } else if (_this.courseInfo.type == "video") {
             // console.log(resInfo);
             _this.courseInfo = {
@@ -314,17 +319,19 @@ export default {
               img: resInfo.images, // 1
               isClick: false
             };
+            _this.judgePrice = resInfo.price; //判断钱数
           } else if (_this.courseInfo.type == "specialColumn") {
             // console.log(resInfo);
-             _this.courseInfo = {
+            _this.courseInfo = {
               id: _this.$route.query.id,
               type: _this.$route.query.type,
               name: resInfo.termName,
               price: resInfo.price,
-              originalPrice: resInfo.originalPrice || resInfo.price, 
-              img: resInfo.images, 
+              originalPrice: resInfo.originalPrice || resInfo.price,
+              img: resInfo.images,
               isClick: false
             };
+            _this.judgePrice = resInfo.price; //判断钱数
           }else {
             _this.courseInfo = {
               course: "",
@@ -341,6 +348,7 @@ export default {
               date: date,
               isClick: false
             };
+            _this.judgePrice = resInfo.price; //判断钱数
           }
           // 拉取奖学金，抵用券
           _this.getScholarship();
@@ -356,7 +364,7 @@ export default {
       // console.log(val);
     },
     onChangePeople(ind,val) {
-     this.friendValue.splice(ind, 1);
+      this.friendValue.splice(ind, 1);
     },
     // 拉取奖学金，抵用券
     getScholarship() {
