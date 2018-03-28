@@ -4,31 +4,31 @@
 
 <template>
 	<div class="wallet">
-		<div class="wallet-header">
-			<p>抵用券</p>
-			<div class="money">{{  user.voucherAmount | numToCash }}</div>
-			<div class="wallet-btn" @click="btnClick">充值</div>
-		</div>
 
-		<div class="wallet-content">
-			<scroller lock-x :height="-wallet.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
-		  	<div>
-					<card>
-			      <div class="wallet-card-header" slot="header">收支明细</div>
-			      <div slot="content" class="wallet-card-content">
-			      	<div class="wallet-block" v-for="(item, index) in wallet.list" :key="index">
-			      		<div class="wallet-block-list">		      			
-				      		<div class="title">{{ item.detail }}</div>
-				      		<span class="value">{{ item.operateType == 'sub' ? '-' : '+' }}{{ item.amount }}</span>
-			      		</div>
+    <div class="wallet-content">
+      <scroller lock-x :height="-wallet.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" :scroll-bottom-offset="200">
+        <div>
 
-			      		<div class="wallet-block-list">
-				      		<div class="time">{{ item.time }}</div>
-				      		<span v-if="item.cashStatus" class="status">{{ item.cashStatus }}</span>		      			
-			      		</div>
-			      	</div>
-			      </div>
-			    </card>
+          <div class="wallet-header">
+            <p>抵用券</p>
+            <div class="money">{{  user.voucherAmount | numToCash }}</div>
+            <div class="wallet-btn" @click="btnClick">充值</div>
+          </div>
+
+			    <div class="wallet-card-header" slot="header">收支明细</div>
+			    <div slot="content" class="wallet-card-content">
+			    	<div class="wallet-block" v-for="(item, index) in wallet.list" :key="index">
+			    		<div class="wallet-block-list">		      			
+				    		<div class="title">{{ item.detail }}</div>
+				    		<span class="value">{{ item.operateType == 'sub' ? '-' : '+' }}{{ item.amount }}</span>
+			    		</div>
+
+			    		<div class="wallet-block-list">
+			      		<div class="time">{{ item.time }}</div>
+			      		<span v-if="item.cashStatus" class="status">{{ item.cashStatus }}</span>		      			
+			    		</div>
+			    	</div>
+			    </div>
 
 					<el-load-more :load-all="wallet.loadAll"></el-load-more>
 				</div>
@@ -59,7 +59,7 @@
 
 <script type="text/babel">
 	import { mapState } from 'vuex'
-	import { TransferDom, Actionsheet, Popup, Group, XInput, XButton, FormPreview, Selector, Checker, CheckerItem, Scroller, Card } from 'vux'
+	import { TransferDom, Actionsheet, Popup, Group, XInput, XButton, FormPreview, Selector, Checker, CheckerItem, Scroller } from 'vux'
 	import elLoadMore from 'components/load-more/load-more'
 
 	export default {
@@ -68,12 +68,12 @@
 	    TransferDom
 	  },
 		components: {
-			Actionsheet, Popup, Group, XInput, XButton, FormPreview, Selector, Checker, CheckerItem, Scroller, elLoadMore, Card 
+			Actionsheet, Popup, Group, XInput, XButton, FormPreview, Selector, Checker, CheckerItem, Scroller, elLoadMore 
 		},
 		data () {
 			return {
 				wallet: {
-					offsetBottom: 160,
+					offsetBottom: 3,
 					money: '',
 					onFetching: false,
 					loadAll: false,
@@ -223,6 +223,7 @@
         })
 			},
 			loadMore () {
+        let _this = this;
 				if(this.wallet.onFetching || this.wallet.loadAll) {
           _this.$refs.scrollerBottom.reset()
 				} else {
