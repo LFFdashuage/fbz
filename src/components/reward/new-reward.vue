@@ -238,7 +238,8 @@
 						customerId: _this.$store.state.user.userId,
 						payPwd: pwd,
 						orderId: _this.paymentType.orderId,
-						type: _this.paymentType.type 
+            type: _this.paymentType.type,
+            isFree:0  
 					})).then(function(e) {
 						_this.$store.commit('updateLoadingStatus', {isLoading: false});
 						if(e.data.code == 200) {
