@@ -4,69 +4,73 @@
 
 <template>
 	<div class="user-center scroll-fix" v-cloak>
-		<header>
-			<div class="person-info">
-        <div class="information"  @click="goPage({'name': 'msg'})">
-          <span v-if="msgNum > 0">{{ msgNum | numMaxToChange }}</span>
-        </div>
-        <div class="img">
-				  <img @click="goPage({name:'personal'})" :src="user.img" alt="">
-        </div>
-				<div class="header-info">
-					<!-- <label>{{ user.level == 'common' ? '普通用户' : user.levelName || "会员" }}</label> -->
-					<p>{{ user.name }}</p>
-          <p class="grade">{{ user.level == 'common' ? '普通用户' : user.levelName || "会员" }}
-            <span v-if="user.level == 'common'" @click="goPage('binding')">会员注册</span>
-            <span v-if="user.level != 'common' && user.level != 'dreamPartner' " @click="submitUpgrade">升级</span>
-          </p>
-          <!-- <p v-if="user.isAvailable==1" class="expiry-time">学霸卡到期时间：{{ user.expiryTime }}</p> -->
-        </div>	
-			</div>
-			
-			<div class="user-center-money">
-				<div class="user-center-money-block" v-for="(item, index) in moneyDatas" :key="index"  @click="checkLogin({name: item.url}, item.click)">
-					<span>{{ item.value }}</span>
-					{{ item.name }}
-				</div>
-			</div>
+  
+    <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" ref="scrollerBottom" v-cloak>
+      <div>
+        <header>
+          <div class="person-info">
+            <div class="information"  @click="goPage({'name': 'msg'})">
+              <span v-if="msgNum > 0">{{ msgNum | numMaxToChange }}</span>
+            </div>
+            <div class="img">
+              <img @click="goPage({name:'personal'})" :src="user.img" alt="">
+            </div>
+            <div class="header-info">
+              <!-- <label>{{ user.level == 'common' ? '普通用户' : user.levelName || "会员" }}</label> -->
+              <p>{{ user.name }}</p>
+              <p class="grade">{{ user.level == 'common' ? '普通用户' : user.levelName || "会员" }}
+                <span v-if="user.level == 'common'" @click="goPage('binding')">会员注册</span>
+                <span v-if="user.level != 'common' && user.level != 'dreamPartner' " @click="submitUpgrade">升级</span>
+              </p>
+              <!-- <p v-if="user.isAvailable==1" class="expiry-time">学霸卡到期时间：{{ user.expiryTime }}</p> -->
+            </div>  
+          </div>
+          
+          <div class="user-center-money">
+            <div class="user-center-money-block" v-for="(item, index) in moneyDatas" :key="index"  @click="checkLogin({name: item.url}, item.click)">
+              <span>{{ item.value }}</span>
+              {{ item.name }}
+            </div>
+          </div>
+        </header>
 
-		</header>
+        <main>
+          <!-- member-list-padding -->
+          <div class="member-list ">
+            <div class="member-block" v-for="(item, index) in memberDatas.list" :key="index" @click="checkLogin({name: item.url}, item.click)">
+              <i :class="['icon', 'icon-user-' + item.icon]"></i>
+              {{ item.name }}
+            </div>
+          </div>
 
-		<main>
-      <!-- member-list-padding -->
-			<div class="member-list ">
-				<div class="member-block" v-for="(item, index) in memberDatas.list" :key="index" @click="checkLogin({name: item.url}, item.click)">
-					<i :class="['icon', 'icon-user-' + item.icon]"></i>
-					{{ item.name }}
-				</div>
-			</div>
+          <div class="member-list">
+            <div class="member-block" v-for="(item, index) in operationDatas.list" :key="index" @click="checkLogin({name: item.url}, item.click)">
+              <i :class="['icon', 'icon-user-' + item.icon]"></i>
+              {{ item.name }}
+            </div>
+          </div>
 
-			<div class="member-list">
-				<div class="member-block" v-for="(item, index) in operationDatas.list" :key="index" @click="checkLogin({name: item.url}, item.click)">
-					<i :class="['icon', 'icon-user-' + item.icon]"></i>
-					{{ item.name }}
-				</div>
-			</div>
+          <div class="xueba" @click="goPage({name: 'xueba'})">
+            <div class="xueba-header">加入“学霸养成计划”</div>
+            <div class="xueba-content">
+              <img src="~assets/img/user-center/hat.png" alt="">
+              <p>月度，季度，年度，专项学霸卡
+                <span>各种课程随心随时随地听</span>
+              </p>
+            </div>
+          </div>
 
-			<div class="xueba" @click="goPage({name: 'xueba'})">
-				<div class="xueba-header">加入“学霸养成计划”</div>
-				<div class="xueba-content">
-					<img src="~assets/img/user-center/hat.png" alt="">
-					<p>月度，季度，年度，专项学霸卡
-						<span>各种课程随心随时随地听</span>
-					</p>
-				</div>
-			</div>
-
-			<div class="user-center-setup">
-				<group>
-		      <cell :class="{'setup-active': item.new}" v-for="(item, index) in setupDatas" :key="index" :title="item.name" @click.native="checkLogin({name: item.url}, item.click)" is-link>
-		      	<div slot="icon" :class="['icon-setup', 'icon', 'icon-user-' + item.icon]"></div>
-		      	<div class="member-rights" slot="default">{{ item.desc }}</div>
-		      </cell>
-		    </group>
-			</div>
-		</main>
+          <div class="user-center-setup">
+            <group>
+              <cell :class="{'setup-active': item.new}" v-for="(item, index) in setupDatas" :key="index" :title="item.name" @click.native="checkLogin({name: item.url}, item.click)" is-link>
+                <div slot="icon" :class="['icon-setup', 'icon', 'icon-user-' + item.icon]"></div>
+                <div class="member-rights" slot="default">{{ item.desc }}</div>
+              </cell>
+            </group>
+          </div>
+        </main>
+      </div>
+	  </scroller>
 
 		<div v-transfer-dom>
 			<actionsheet v-model="show7" :menus="menu7" theme="android" @on-click-menu="click">
@@ -77,7 +81,7 @@
 
 <script type="text/babel">
 import { mapState } from "vuex";
-import { Group, Cell, Actionsheet, TransferDom } from "vux";
+import { Scroller, Group, Cell, Actionsheet, TransferDom } from "vux";
 
 export default {
   name: "userCenter",
@@ -85,11 +89,14 @@ export default {
     TransferDom
   },
   components: {
-    Group, Cell, Actionsheet
+    Scroller, Group, Cell, Actionsheet
   },
   data() {
     return {
       title: "用户中心",
+      scrollerInfo: {
+        offsetBottom: 50
+      },
       kefuUrl: "kefu",
       msgNum: 0,
       moneyDatas: [
@@ -415,7 +422,14 @@ export default {
               content: e.data.msg
             });
           }
+          _this.resetView();
         });
+    },
+    resetView () {
+      let _this = this;
+      this.$nextTick(() => {
+        this.$refs.scrollerBottom.reset()
+      })
     },
     clearStorage() {
       window.localStorage.clear();

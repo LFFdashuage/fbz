@@ -47,29 +47,20 @@
       }
     },
     mounted () {
-      let userCode = this.$store.state.user.userCode || hold.storage.get("userCode"),
+      let userId = this.$store.state.user.userId || hold.storage.get("userId"),
           storageOpenId = hold.storage.get("openId"),
           storeOpenId = this.$store.state.user.openId,
           openId = storageOpenId || storeOpenId;
       let _this = this;
       
+      if(userId) {
+        this.$store.commit("updateUserUserId", { userId: userId });
+      }
+
       if(openId) {
         this.$store.commit("updateUserOpenId", { openId: openId });
         this.getUserInfo(openId);
       }
-
-      // this.signUrl(location.href);
-
-      // this.$nextTick(function(argument) {
-      //   this.overscroll(document.querySelector('#app, .container, .filter-file.rank-filter'));
-      //   document.querySelector('.v-transfer-dom, .vue-alert, .vux-toast, .rank-list .container, .rank-list .top-search').addEventListener('touchmove', function(evt) {
-      //     //In this case, the default behavior is scrolling the body, which
-      //     //would result in an overflow.  Since we don't want that, we preventDefault.
-      //     if(!evt._isScroller) {
-      //       evt.preventDefault();
-      //     }
-      //   })
-      // })
     },
     methods: {
       // overscroll (el) {

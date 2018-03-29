@@ -91,10 +91,10 @@ router.afterEach((to, from, next) => {
   // if(to.name == 'share') store.commit('updateUserShareImg', {shareImg: ''});
 
   if(to.name == 'index') {
-    Vue.prototype.signUrl('http://fbz3.10-suns.com/#' + to.fullPath, false, { url: 'http://fbz3.10-suns.com/#/index?uuid=' + openId, imgUrl: '' });
+    Vue.prototype.signUrl(Vue.prototype.wordBook.urlLink.signUrl + to.fullPath, false, { url: Vue.prototype.wordBook.urlLink.signUrl + '/index?uuid=' + openId, imgUrl: '' });
   } else {
     // Vue.prototype.signUrl(location.href, true, { url: 'http://fbz3.10-suns.com/fbz/#/share?openId' + hold.storage.get('openId'), imgUrl: '' });
-    Vue.prototype.signUrl('http://fbz3.10-suns.com/#' + to.fullPath, true, { url: 'http://fbz3.10-suns.com/#' + to.fullPath, imgUrl: '' });
+    Vue.prototype.signUrl(Vue.prototype.wordBook.urlLink.signUrl + to.fullPath, true, { url: Vue.prototype.wordBook.urlLink.signUrl + to.fullPath, imgUrl: '' });
   }
 
   store.commit('updateLoadingStatus', {isLoading: false})

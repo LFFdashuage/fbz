@@ -30,9 +30,9 @@ module.exports = {
     proxyTable: {
         '/api': {
             // target: 'https://fbz.ittun.com/',
-            // target: 'http://192.168.22.100:8088/',
-            // target: 'http://114.215.135.236:8088/',
-            target: 'http://fbz3.10-suns.com/api/',
+            target: 'http://zls.10-suns.com/api/',
+            // target: 'http://222.73.203.198/api/',
+            // target: 'http://fbz3.10-suns.com/api/',
         
             // target: 'http://fubanzhang.10-suns.com:8081/wechat',
             // target: 'http://114.215.135.236:8081/wechat',

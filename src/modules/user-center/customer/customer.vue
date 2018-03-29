@@ -105,7 +105,8 @@
 		watch: {
 			tabSelected (newValue, oldValue) {
 				this.onTabClick(newValue)
-			}
+			},
+
 		},
 		mounted () {
 			this.fetchData(this.tabData[this.tabSelected], this.tabSelected);
@@ -126,7 +127,7 @@
 							}
 						} else {
 							_this.$vux.alert.show({
-								content: e.data.msg
+								content: e.data.msg + _this.$store.state.user.userId
 							})
 						}
 					})
@@ -171,7 +172,7 @@
 
 						} else {
 							_this.$vux.alert.show({
-								content: e.data.msg
+								content: e.data.msg + _this.$store.state.user.userId
 							})
 						}
 

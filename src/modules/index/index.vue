@@ -8,97 +8,103 @@
 			<el-top></el-top>
 		</div>
 		
-		<div class="index-container scroll-fix">
+		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" ref="scrollerBottom" v-cloak>
+			<div class="index-container scroll-fix">
 			
-			<div class="banner">
-	    	<swiper auto dots-position="center" :list="bannerTopDatas" :aspect-ratio="bannerWidthHeight" loop></swiper>
-			</div>
-			
-			<div v-if="user.level == 'commom'" class="join-in">
-				<label for="">现在加入，你讲获得200份免费协议资料。</label>
-				<div class="join-btn" @click="goPage({name: 'binding'})">加入富班长</div> 
-			</div>
-			
-			<div class="entry">
-				<div v-for="(item, index) in entryDatas" :key="index" :class="['entry-' + item.img]" @click="entry(item.url, item.type)">
-					<p>{{ item.name }}</p>
+				<div class="banner">
+		    	<swiper auto dots-position="center" :interval=2000 loop>
+		    	<!-- <swiper auto dots-position="center" :interval=2000 :list="bannerTopDatas" loop> -->
+		    		<swiper-item v-for="(item, index) in bannerTopDatas" :key="index">
+		    			<div class="banner-img" :style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
+		    		</swiper-item>
+		    	</swiper>
 				</div>
-			</div>
-			
-			<!-- 课程预告 -->
-			<el-card-more :card-more-data="coursePreview">
-				<div class="card-more-content-slot course-preview clearfix" slot="content">
-					<div @click="goPage({name: 'courseDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
-						<div class="course-preview-header">
-							<img :src="item.img" alt="头像">
-							<span>{{ item.author }}</span>
-						</div>
+				
+				<div v-if="user.level == 'commom'" class="join-in">
+					<label for="">现在加入，你讲获得200份免费协议资料。</label>
+				</div>
+				
+				<div class="entry">
+					<div v-for="(item, index) in entryDatas" :key="index" :class="['entry-' + item.img]" @click="entry(item.url, item.type)">
 						<p>{{ item.name }}</p>
-						<span>{{ item.date }}</span>
 					</div>
 				</div>
-			</el-card-more>
+				
+				<!-- 课程预告 -->
+				<el-card-more :card-more-data="coursePreview">
+					<div class="card-more-content-slot course-preview clearfix" slot="content">
+						<div @click="goPage({name: 'courseDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
+							<div class="course-preview-header">
+								<img :src="item.img" alt="头像">
+								<span>{{ item.author }}</span>
+							</div>
+							<p>{{ item.name }}</p>
+							<span>{{ item.date }}</span>
+						</div>
+					</div>
+				</el-card-more>
 
-			<!-- 培训头条 -->
-			<div class="index-news">
-				<div class="index-news-title">培训<span>头条</span></div>
-				<div class="index-news-msg">
-					<swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
-			      <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
-			    </swiper>
+				<!-- 培训头条 -->
+				<div class="index-news">
+					<div class="index-news-title">培训<span>头条</span></div>
+					<div class="index-news-msg">
+						<swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
+				      <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
+				    </swiper>
+					</div>
+					<div class="index-news-btn" @click="goPage({name: 'news'})">更多</div>
 				</div>
-				<div class="index-news-btn" @click="goPage({name: 'news'})">更多</div>
-			</div>
 
-			<!-- 音频 -->
-			<el-card-more :card-more-data="tuijianAudioDatas">
-				<div class="card-more-content-slot clearfix" slot="content">
-					<el-card-more-block class="card-more-padding" v-for="(item, index) in tuijianAudioDatas.list" :card-more-block-data="item" :key="index"></el-card-more-block>
-				</div>
-			</el-card-more>
+				<!-- 音频 -->
+				<el-card-more :card-more-data="tuijianAudioDatas">
+					<div class="card-more-content-slot clearfix" slot="content">
+						<el-card-more-block class="card-more-padding" v-for="(item, index) in tuijianAudioDatas.list" :card-more-block-data="item" :key="index"></el-card-more-block>
+					</div>
+				</el-card-more>
 
-			<!-- 视频 -->
-			<el-card-more :card-more-data="tuijianVideoDatas">
-				<div class="card-more-content-slot clearfix" slot="content">
-					<el-card-more-block class="card-more-padding" v-for="(item, index) in tuijianVideoDatas.list" :card-more-block-data="item" :key="index"></el-card-more-block>
-				</div>
-			</el-card-more>
-			<!-- <el-card-more :card-more-data="tuijianVideoDatas">
-				<div class="peixun-news" slot="content">
-					<el-img-text-news :img-text-data="item" @click="goPage({name: 'courseTypeDetail', query: { type: 'video', id: item.id }})" v-for="(item, index) in tuijianVideoDatas.list" :key="index"></el-img-text-news>
-				</div>
-			</el-card-more> -->
+				<!-- 视频 -->
+				<el-card-more :card-more-data="tuijianVideoDatas">
+					<div class="card-more-content-slot clearfix" slot="content">
+						<el-card-more-block class="card-more-padding" v-for="(item, index) in tuijianVideoDatas.list" :card-more-block-data="item" :key="index"></el-card-more-block>
+					</div>
+				</el-card-more>
+				<!-- <el-card-more :card-more-data="tuijianVideoDatas">
+					<div class="peixun-news" slot="content">
+						<el-img-text-news :img-text-data="item" @click="goPage({name: 'courseTypeDetail', query: { type: 'video', id: item.id }})" v-for="(item, index) in tuijianVideoDatas.list" :key="index"></el-img-text-news>
+					</div>
+				</el-card-more> -->
 
-			<!-- 培训导航推荐 -->
-			<a :href="bannerCenterDatas.adLinked" class="tuijian-banner">
-			<!-- <a href="bannerCenterDatas.adLinked" class="tuijian-banner" @click="goPage('course', {'type': 1})"> -->
-				<img :src="bannerCenterDatas.adImage" alt="">
-			</a>
+				<!-- 培训导航推荐 -->
+				<a :href="bannerCenterDatas.adLinked" class="tuijian-banner">
+				<!-- <a href="bannerCenterDatas.adLinked" class="tuijian-banner" @click="goPage('course', {'type': 1})"> -->
+					<img :src="bannerCenterDatas.adImage" alt="">
+				</a>
 
-			<!-- 专栏订阅 -->
-			<el-card-more :card-more-data="specialColumn">
-				<div slot="content">
-					<el-img-text-column v-for="(item, index) in specialColumn.list" :img-text-data="item" :key="index"></el-img-text-column>
-				</div>
-			</el-card-more>
+				<!-- 专栏订阅 -->
+				<el-card-more :card-more-data="specialColumn">
+					<div slot="content">
+						<el-img-text-column v-for="(item, index) in specialColumn.list" :img-text-data="item" :key="index"></el-img-text-column>
+					</div>
+				</el-card-more>
 
-			<!-- 底部入口 entrance -->
-			<div class="index-entrance">
-				<div class="index-entrance-block" v-for="(item, index) in entranceData" :key="index">				
-					<div :class="['index-entrance-block-content', 'index-entrance-' + item.img]">
-						<p>{{ item.title }}</p>
-						<span>{{ item.titleEn }}</span>
+				<!-- 底部入口 entrance -->
+				<div class="index-entrance">
+					<div class="index-entrance-block" v-for="(item, index) in entranceData" :key="index">				
+						<div :class="['index-entrance-block-content', 'index-entrance-' + item.img]">
+							<p>{{ item.title }}</p>
+							<span>{{ item.titleEn }}</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</scroller>
 	</div>
 </template>
 
 <script type="text/babel">
   import { mapState } from 'vuex'
 	import hold from 'src/commons/hold'
-	import { Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, TransferDom } from 'vux'
+	import { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, TransferDom } from 'vux'
 	
 	import elTop from 'components/index/top'
 	import elTuijian from 'components/tuijian/tuijian'
@@ -112,15 +118,21 @@
 
 	import { getterIndex } from 'services/index';
 
+	import imgBanner from 'assets/img/banner-base.jpg'
+
 	export default {
 		name: 'index',
 		directives: {
 	    TransferDom
 	  },
-		components: { Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, 
+		components: { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, 
 			elTop, elTuijian, elImgText, elImgTextZhuanlan, elVideo, elCardMore, elCardMoreBlock, elImgTextNews, elImgTextColumn },
 	  data () {
 	    return {
+	    	imgBanner: imgBanner,
+	    	scrollerInfo: {
+					offsetBottom: 94
+				},
 	    	bannerWidthHeight: this.wordBook.bannerWidthHeight,
 	      bannerTopDatas: [],
 	      bannerCenterDatas: {},
@@ -203,6 +215,12 @@
         user: state => state.user
       })
     },
+    watch: {
+    	bannerTopDatas: (newValue, oldValue) => {
+    		console.log(1)
+    		// alert(0)
+    	}
+    },
 	  mounted () {
 	  	this.fetchData();
 	  },
@@ -229,48 +247,39 @@
 	  						content: e.data.msg
 	  					})
 	  				}
+	  				_this.resetView();
 	  			});
 	  	},
 	  	getBanner (type) {
-	  		// index/advertisement/
 	  		let _this = this;
   		 	_this.$http.post('/api/index/advertisement',
 	  				this.qs.stringify({
 							type: type
 						})
 	  			).then(function(e) {
+	  				let resData = e.data.data,
+	  						topList = [],
+	  						midList = [];
 	  				if(e.data.code == 200) {
-	  					if(e.data.data.adTopList.length > 0) {
-		  					_this.bannerTopDatas = e.data.data.adTopList.map(function(item, index){
+	  					if(resData.adTopList.length > 0) {
+		  					topList = resData.adTopList.map(function(item, index){
 		  						return {
 		  							url: item.adLinked,
-									  img: item.adImage,
-									  title: ""
-									  // title: item.name
+									  img: item.adImage
 		  						}
 		  					});
 	  					}
+	  					_this.bannerTopDatas = topList;
 
-	  					if(e.data.data.adMidList.length > 0) {
-		  					_this.bannerCenterDatas = e.data.data.adMidList[0];
+	  					if(resData.adMidList.length > 0) {
+		  					_this.bannerCenterDatas = resData.adMidList[0];
 	  					}
-
-	  					if(e.data.data.adBottomList.length > 0) {
-		  					_this.bannerBottomDatas = e.data.data.adBottomList.map(function(item, index){
-		  						return {
-		  							url: item.adLinked,
-									  img: item.adImage,
-									  title: ""
-									  // title: item.name
-		  						}
-		  					});
-	  					}
-
 	  				} else {
 	  					_this.$vux.alert.show({
 	  						content: e.data.msg
 	  					})
 	  				}
+	  				_this.resetView();
 	  			});
 	  	},
 	  	getAudio () {
@@ -312,6 +321,7 @@
 	  						content: e.data.msg
 	  					})
 	  				}
+	  				_this.resetView();
 	  			});
 	  	},
 	  	getVideo () {
@@ -343,13 +353,6 @@
 										desc: item.subscribeStatus,
 										type: 'video'
 									}
-	  						// 	return {
-									// 	desc: item.remark,
-									// 	id: item.id,
-									// 	readCount: item.viewCount,
-									// 	img: _this.resolveImg(item.images),
-									// 	title: item.name
-									// }
 								})
 
 								_this.tuijianVideoDatas.list = list;
@@ -359,6 +362,7 @@
 	  						content: e.data.msg
 	  					})
 	  				}
+	  				_this.resetView();
 	  			});
 	  	},
 	  	getNews () {
@@ -399,6 +403,7 @@
 	  						content: e.data.msg
 	  					})
 	  				}
+	  				_this.resetView();
 	  			});
 	  	},
 	  	updateNews () {
@@ -453,6 +458,7 @@
 								content: e.data.msg
 							})
 						}
+	  				_this.resetView();
 					});
 	  	},
 	  	getColumn () {
@@ -488,6 +494,7 @@
               content: e.data.msg
             });
           }
+  				_this.resetView();
         });
 	  	},
 	  	entry (url, type) {
@@ -495,7 +502,19 @@
 	  	},
 	  	videoAudioDetail (url, id) {
 	  		this.$router.push({ name: url, params: { id: id }})
-	  	}
+	  	},
+			resetView () {
+				let _this = this;
+				this.$nextTick(() => {
+          this.$refs.scrollerBottom.reset();
+
+          setTimeout(()=>{
+	          this.$nextTick(() => {
+	          	this.$refs.scrollerBottom.reset();
+	          })
+          }, 1000)
+        })
+			}
 	  }
 	}
 </script>
@@ -511,12 +530,22 @@
 	$playBtnW: 30px;
 
 	.index {
+		height: 100%;
+		width: 100%;
 		padding-top: $indexTopH;
 		// padding-bottom: 30px;
 	}
 
 	.ad {
 		margin: 0 auto;
+	}
+
+	.banner-img {
+		width: 100%;
+		height: 100%;
+		background: no-repeat;
+		background-size: cover;
+		background-position: center;
 	}
 
 	.course-others {
