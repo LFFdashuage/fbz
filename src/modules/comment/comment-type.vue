@@ -15,7 +15,7 @@
 						<div class="comment-list-block-info">
 							<div class="name">{{ item.name }}</div>
 							<!-- <span class="time">{{ item.time }}</span> -->
-              <p>
+              <p v-if="commentType !==3">
                 <rater :active-color="wordBook.raterConfig.activeColor" :font-size="wordBook.raterConfig.fontSize" v-model="item.rank" disabled></rater>{{item.rank.toFixed(1)}}
 							</p>
               <p class="comment-list-content">{{ item.content }}</p>
@@ -35,7 +35,7 @@
 						<div class="comment-cancel" @click="hideText">取消</div>
 						<div :class="['comment-submit', { 'disable': commentValue.length == 0 }]" @click="submitComment">发表</div>
 					</div>
-          <div class="rater-box">
+          <div v-if="commentType !==3" class="rater-box">
             <p>评星：<rater v-model="rater" :active-color="wordBook.raterConfig.activeColor" :font-size=20></rater></p>
           </div>
 					<x-textarea ref="textarea" v-model="commentValue" :placeholder="comment.placeholder" :rows="6"></x-textarea>

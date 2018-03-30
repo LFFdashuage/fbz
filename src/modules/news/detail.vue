@@ -131,13 +131,20 @@
             }
           });
       },
-      // 评价
-      comment() {
-        this.$router.push({
-          name: "comment",
-          query: { id: this.news.id }
-        });
-      }
+      // // 评价
+      // comment() {
+      //   this.$router.push({
+      //     name: "comment",
+      //     query: { id: this.news.id }
+      //   });
+      // },
+       // 跳转评论页面
+    comment() {
+      this.$router.push({
+        name: "commentType",
+        query: { id: this.news.id, type: 3 }
+      });
+    }
     }
   };
 </script>
