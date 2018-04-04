@@ -4,12 +4,14 @@
  
 <template>
 	<div>
+
 		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" v-cloak>
 			<div class="expend-box">
         <el-img-text-money v-for="(item, index) in scrollerInfo.list" :img-text-data="item" :type-data="2" :key="index"></el-img-text-money>
 				<el-load-more :load-all="scrollerInfo.loadAll"></el-load-more>
 			</div>
 		</scroller>
+
 	</div>
 </template>
 
@@ -22,8 +24,7 @@ export default {
   name: "elExpenditure",
   components: {
     Scroller,
-    elLoadMore,
-    elImgTextMoney
+    elLoadMore, elImgTextMoney
   },
   data() {
     return {

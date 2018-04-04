@@ -4,10 +4,12 @@
 <template>
   <div>
     <div class="class-header">
+      
       <div class="header-top">
         <span @click="goPage('classList')">设置背景</span>
         <span class="class-search " @click="setFocus"></span>
       </div>
+
       <div class="footer-icon"  :class="{ 'footer-icon' : !discountIcon, 'footer-icon-tow': discountIcon}">
        <search
           @result-click="resultClick"
@@ -23,9 +25,11 @@
          >
           </search>
         </div>
+
       <div class="class-img">
         <img src="~assets/img/audio.png" alt="">
       </div>
+
       <p class="class-name">{{classinfo.className}}</p>
       <p class="class-num"><span class="classmate">同学：{{classinfo.studentCount}}</span><span class="class-money">班费：{{classinfo.classMoney | numToCash}}</span></p>
       <p class="class-introduction">简介：{{classinfo.introduction}}</p>
@@ -79,12 +83,8 @@ import elAlbum from "components/class/home-page/album";
 export default {
   name: "class",
   components: {
-    Tab,
-    TabItem,
-    Search,
-    elHome,
-    elDynamic,
-    elAlbum
+    Tab, TabItem, Search,
+    elHome, elDynamic, elAlbum
   },
   data() {
     return {

@@ -29,7 +29,12 @@
 						<p>{{ item.name }}</p>
 					</div>
 				</div>
-				
+				<!-- <div @click="goPage({name: 'class'})">
+					跳到班级主页
+				</div> -->
+				<!-- <div @click="goPage({name: 'winWin'})">
+					跳到共赢页
+				</div> -->
 				<!-- 课程预告 -->
 				<el-card-more :card-more-data="coursePreview">
 					<div class="card-more-content-slot course-preview clearfix" slot="content">

@@ -43,12 +43,8 @@ import elIncome from "components/class/class-money/income";
 export default {
   name: "classMoney",
   components: {
-    Tab,
-    TabItem,
-    Swiper,
-    SwiperItem,
-    elIncome,
-    elExpenditure
+    Tab, TabItem, Swiper, SwiperItem,
+    elIncome, elExpenditure
   },
   data() {
     return {

@@ -17,10 +17,12 @@
         <div class="text-tisp">
           99分
         </div>
+        
         <div v-if="typeData>0" class="btn">
           申请
         </div>
       </div>
+
     </div>
 </template>
 
@@ -98,6 +100,7 @@ export default {
     width: 100px;
     flex-direction: column;
     // align-items: center;
+
     .text-tisp {
       width: 100%;
       color: #333;
@@ -106,6 +109,7 @@ export default {
       background-size: 15%;
       background-position: 85% 2px;
     }
+    
     .btn {
       width: 80px;
       background-color: #907351;

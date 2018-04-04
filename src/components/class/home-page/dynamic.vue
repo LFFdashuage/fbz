@@ -6,6 +6,7 @@
     <div class="dynamic-title">
         <p class="title-name">题目题目题目题目</p><span class="title-when-long">30分钟前</span>
     </div>
+
     <div class="dynamic-center" @click="goPage('dynamicDetails')">
       <p>
         写山坡的诗很多，有的写着写着，诗就陡起来了，这首也是。
@@ -16,11 +17,13 @@
         <div class="dynamic-img-box" v-for="(item, index) in 6"  :key="index"><img src="" alt="图片"></div>
       </div>
     </div>
+
     <div class="dynamic-footer">
       <div class="comment dynamic-footer-btn" @click="goPage('classMoney')">543</div>
       <div class="sign-up dynamic-footer-btn" @click="signUp">报名</div>
       <div class="thumbs-up dynamic-footer-btn" @click="thumbsUp">123</div>
     </div>
+    
 	</div>
 </template>
 

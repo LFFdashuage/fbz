@@ -4,27 +4,32 @@
 <template>
 	<div class="home" v-cloak>
     <p class="home-tip">基本信息</p>
+
 		<div class="header-box">
       <div class="monitor">
         <div class="monitor-img">
           <img src="~assets/img/audio.png" alt="">
         </div>
+
         <div class="monitor-info">
           <p>{{monitorName}}</p>
           <p>{{monitorCompanyInfo}}</p>
         </div>
       </div> 
+
       <div class="conter">
         <p class="createTime"> 创建时间：{{createTime}}</p>
         <div class="tag-type">
           标签：<span class="tag-type-name" v-for="(item, index) in tagTypeList" :key="index">{{item.tagTypeName}}</span>
         </div>
       </div>
+
       <div class="class-introduction">
         <p>
           <span>班级介绍：</span>
           <span>{{profile}}</span>
         </p>
+
         <div class="tag-type">
           标签：<span class="tag-type-name" v-for="(item, index) in tagTypeList" :key="index">{{item.tagTypeName}}</span>
         </div>
@@ -74,26 +79,6 @@ export default {
         {
           tagTypeId: 4,
           tagTypeName: "力行"
-          // },
-          // {
-          //   tagTypeId: 4,
-          //   tagTypeName: "力行"
-          // },
-          // {
-          //   tagTypeId: 4,
-          //   tagTypeName: "力行"
-          // },
-          // {
-          //   tagTypeId: 4,
-          //   tagTypeName: "力行"
-          // },
-          // {
-          //   tagTypeId: 4,
-          //   tagTypeName: "力行"
-          // },
-          // {
-          //   tagTypeId: 4,
-          //   tagTypeName: "力行"
         }
       ]
     };

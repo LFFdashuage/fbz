@@ -3,6 +3,7 @@
  -->
 <template>
   <div class="dynamic-details">
+
       <div class="dynamic-header">
         <p class="dynamic-name">参加考察--0316普华商学院参观学习</p>
         <p class="release-time">发布时间：2018/03/15 10:28:33</p>
@@ -16,16 +17,17 @@
           <div class="dynamic-img-box" v-for="(item, index) in 6"  :key="index"><img src="~assets/img/audio.png" alt="图片"></div>
         </div>
       </div>
+
       <div class="dynamic-footer">
+
         <div class="footer-tips">
-           <!-- <div class="footer-collection"  :class="{ 'collection-icon' : isIcon, 'collection-icon-tow': !isIcon}" @click="collection">收藏</div> -->
           <div class="footer-tips-btn sign-up " :class="{ 'sign-up-icon' : isShow==true, 'sign-up-icon-tow': isShow==false}" @click="signUp"> 报名 17</div>
           <div class="footer-tips-btn" :class="{ 'comment-icon' : isShow==false, 'comment-icon-tow': isShow==true}" @click="comment"> 193</div>
           <div class="footer-tips-btn thumbs-up"  :class="{ 'thumbsUp-icon' : isIcon, 'thumbsUp-icon-tow': !isIcon}" @click="thumbsUp"> 104</div>
         </div>
+
         <div class="sign-up-list">
 
-         
           <div v-if="isShow==false" v-for="(item, index) in 2"  :key="index">
             <el-img-text-sign-up></el-img-text-sign-up>
           </div>
@@ -46,12 +48,8 @@ import elImgTextComment from "components/class/dynamic/img-text-comment";
 export default {
   name: "dynamicDetails",
   components: {
-    Tab,
-    TabItem,
-    Swiper,
-    SwiperItem,
-    elImgTextSignUp,
-    elImgTextComment
+    Tab, TabItem, Swiper, SwiperItem,
+    elImgTextSignUp, elImgTextComment
   },
   data() {
     return {

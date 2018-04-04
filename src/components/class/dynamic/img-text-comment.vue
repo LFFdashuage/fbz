@@ -57,15 +57,18 @@ export default {
     flex-direction: row;
     align-items: center;
     position: relative;
+
     .name {
       font-size: $fontSizeH4;
       @include ellipsisMore(1);
     }
+
     .comment {
       font-size: $fontSize;
       line-height: 1.75;
       @include ellipsisMore(1);
     }
+    
     .time {
       text-align: right;
       font-size: $fontSizeTips;

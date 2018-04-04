@@ -3,17 +3,20 @@
  -->
 <template>
 	<div class="img-text-box" v-cloak>
+
 		<div class="content">
 			<div>
 				<p>{{imgTextData.name}}</p>
 				<p>{{imgTextData.time}}</p>
 			</div>
 		</div>
+
 		<div class="money">
 			<span v-if="typeData==1">+</span>
 			<span v-else>-</span>
 			{{imgTextData.money | numToCash }}
 		</div>
+    
 	</div>
 </template>
 

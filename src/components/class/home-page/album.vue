@@ -5,13 +5,14 @@
 	<div class="album" v-cloak>
     <div class="album-box">
       <p>2018-02-23星期二</p>
+
       <div class="dynamic-center-img">
         <div class="dynamic-img-box" v-for="(item, index) in 7"  :key="index">
           <img src="" alt="图片">
         </div>
       </div>
+
     </div>
-     
 	</div>
 </template>
 
@@ -32,9 +33,11 @@ export default {
   "~assets/css/core/vars";
 
 .album-box {
+  
   p {
     padding: $padding;
   }
+
   .dynamic-center-img {
     padding-left: 3px;
     width: 100%;

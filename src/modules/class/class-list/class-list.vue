@@ -1,5 +1,5 @@
 <!-- 
-  班费明细
+  班级列表
  -->
 <template>
   <div class="class-list">
@@ -39,9 +39,7 @@
     </div>
 
     
-      <div class="top-header-search">
-        
-        <div class="search-box">
+      <div class="top-search">
         <search
             @result-click="resultClick"
             @on-change="getResult"
@@ -54,10 +52,9 @@
             ref="search"
           >
         </search>
+        <div class="establish-btn" @click="goPage('establishClass')">
+          创建
         </div>
-
-        <div class="establish-btn">创建</div>
-
       </div>
       
       <div class="class-info-box">
@@ -80,25 +77,23 @@
 	    </tab>
 
 	    <div class="content">
+        
+        <div class="label">
+            <checker v-model="demo23" type="checkbox" default-item-class="label-default" selected-item-class="label-selected">
+              <checker-item :value="item" v-for="(item, index) in tagTypeList" :key="index">{{item.tagTypeName}}</checker-item>
+            </checker>
+          <div><span>{{demo23}}</span></div>
+        </div>
           
         <!-- 主页 -->
 	      <template v-if="tabSelected == 0">
-          <div>
-
-            <div class="tag-type">
-              <span class="tag-type-name" v-for="(item, index) in tagTypeList" :key="index">{{item.tagTypeName}}</span>
-            </div>
             <div v-for="(item, index) in 2" :key="index">
               <el-img-text-class :type-data="typeData"></el-img-text-class>
             </div>
-          </div>
 	    	</template>
 	        
         <!-- 动态 -->
 	      <template v-if="tabSelected == 1">
-					  <div class="tag-type">
-              <span class="tag-type-name" v-for="(item, index) in tagTypeList" :key="index">{{item.tagTypeName}}</span>
-            </div>
             <div v-for="(item, index) in 4" :key="index">
               <el-img-text-class></el-img-text-class>
             </div>
@@ -112,7 +107,7 @@
 </template>
 
 <script>
-import { Tab, TabItem, Search, Scroller } from "vux";
+import { Tab, TabItem, Search, Scroller, Checker, CheckerItem } from "vux";
 import elHome from "components/class/home-page/home";
 import elDynamic from "components/class/home-page/dynamic";
 import elAlbum from "components/class/home-page/album";
@@ -120,17 +115,12 @@ import elImgTextClass from "components/class/class-list/img-text-class-list";
 export default {
   name: "classMoney",
   components: {
-    Tab,
-    TabItem,
-    Search,
-    Scroller,
-    elImgTextClass,
-    elHome,
-    elDynamic,
-    elAlbum
+    Tab, TabItem, Search, Scroller, Checker, CheckerItem,
+    elImgTextClass, elHome,  elDynamic, elAlbum
   },
   data() {
     return {
+      demo23:'',
       typeData: 1,
       type: 0,
       isShow: false,
@@ -164,11 +154,11 @@ export default {
           tagTypeName: "经济"
         },
         {
-          tagTypeId: 4,
+          tagTypeId: 5,
           tagTypeName: "力行"
         },
         {
-          tagTypeId: 4,
+          tagTypeId: 9,
           tagTypeName: "力行"
         }
       ]
@@ -219,40 +209,35 @@ export default {
             });
           }
         });
+    },
+    goPage(url) {
+      // this.$router.push({ name: url, query: query })
+      this.$router.push({ name: url });
     }
   }
 };
 </script>
-
 <style lang="scss">
-	@import '~lib/sandal/core';
-	@import '~assets/css/core/functions', '~assets/css/core/mixins', '~assets/css/core/vars';
+@import "~lib/sandal/core";
+@import "~assets/css/core/functions",
+  "~assets/css/core/mixins",
+  "~assets/css/core/vars";
 
-	.top-header-search .search-box{
-		.weui-search-bar {
-			padding: 0;
-			border-radius: $borderRadius;
-
-			&:before, &:after {
-				display: none;
-			}
-		}
-
-		.weui-search-bar__form {
-			border-radius: $borderRadius;
-		}
-
-		.weui-search-bar__label {
-			background-color: #f1f1f1;
-		}
-	}
+.top-search {
+  .weui-search-bar {
+    background-color: #fff;
+  }
+  .weui-search-bar__label {
+    background-color: #f1f1f1;
+  }
+}
 </style>
+
 <style lang="scss" scoped>
 @import "~lib/sandal/core";
 @import "~assets/css/core/functions",
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
- 
 
 .class-list {
   position: absolute;
@@ -265,38 +250,12 @@ export default {
     display: flex;
     justify-content: flex-start;
     border-bottom: $borderColor solid 1px;
-    .search-box {
-      flex: 1;
-    }
-
     .establish-btn {
+      width: 40px;
+      // margin: 0 5px;
       display: flex;
-      width: 30px;
-      justify-content: center;
       align-items: center;
-    }
-  }
-  
-.top-header-search {
-    width: 100%;
-    position: relative;
-    top: 0;
-    display: flex;
-    justify-content: flex-start;
-    border-bottom: $borderColor solid 1px;
-    .search-box {
-      // position: absolute;
-      // top: 0;
-      flex: 1;
-      height: 100%;
-      margin: 0 36px;
-    }
-
-    .establish-btn {
-      display: flex;
-      width: 30px;
       justify-content: center;
-      align-items: center;
     }
   }
 
@@ -305,13 +264,11 @@ export default {
     padding: $padding;
     display: flex;
     align-items: center;
-    // justify-content: flex-start;
     @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
 
     .class-img {
       width: $quotationUserImgW+14px;
       height: $quotationUserImgW+14px;
-      // margin: 0 auto;
 
       img {
         width: 100%;
@@ -372,19 +329,6 @@ export default {
     @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
   }
 }
-.tag-type {
-  width: 100%;
-  padding: 5px $padding;
-  @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
-  .tag-type-name {
-    display: inline-block;
-    padding: 0 15px;
-    background-color: $borderColor;
-    margin: 5px 10px;
-    border-radius: 20px;
-    color: #ac9374;
-  }
-}
 .class-info-box {
   margin-top: 10px;
   border-bottom: $borderColor solid 5px;
@@ -423,5 +367,24 @@ export default {
 }
 .box1-item:first-child {
   margin-left: 0;
+}
+
+.label {
+
+  width: 100%;
+  padding: $padding;
+   @include halfpxline(0, $borderColor, 0 , 0, 2px, 0);
+
+  .label-default {
+    margin: 5px;
+    border: 1px solid $bgGray;
+    padding: 2px 10px;
+    border-radius: 15px;
+    background-color: $bgGray;
+  }
+
+  .label-selected {
+    border: 1px solid $colorYellowEasy;
+  }
 }
 </style>

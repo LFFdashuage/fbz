@@ -870,6 +870,18 @@ const routes = [{
         }
     },
     {
+        // 共赢
+        path: '/win-win',
+        name: 'winWin',
+        component: loadView(loaded => {
+            require(['../modules/user-center/win-win/win-win.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '共赢'
+        }
+    },
+    {
         // 我的班级
         path: '/class',
         name: 'class',
@@ -914,6 +926,18 @@ const routes = [{
         meta: {
             uuid: '',
             title: '班级'
+        }
+    },
+    {
+        // 创建班级
+        path: '/establish-class',
+        name: 'establishClass',
+        component: loadView(loaded => {
+            require(['../modules/class/establish-class/establish-class.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '创建班级'
         }
     },
 ]

@@ -55,12 +55,14 @@ export default {
     flex-direction: row;
     align-items: center;
     position: relative;
+    
     .name {
       flex: 1;
       padding-left: $padding;
       font-size: $fontSizeH4;
       @include ellipsisMore(1);
     }
+
     .time {
       position: relative;
       right: 0;
