@@ -47,16 +47,18 @@
                     </div>
                   </div>
                 </div>
+                 <div v-if="hasBuy == 1">
+                  <div v-if="commentInfoList.int<3" class="hide-more">
+                    <div class="show-more">
+                      <div @click="showMore">填写评价</div>
+                    </div>
+                  </div>
 
-                <div v-if="commentInfoList.int<3" class="hide-more">
-                  <div class="show-more">
-                    <div @click="showMore">填写评价</div>
+                  <div v-if="commentInfoList.int==3" class="show-more">
+                    <div @click="showMore">填写并查看更多评价</div>
                   </div>
                 </div>
 
-                <div v-if="commentInfoList.int==3" class="show-more">
-                  <div @click="showMore">填写并查看更多评价</div>
-                </div>
               </div>
             </div>
 
