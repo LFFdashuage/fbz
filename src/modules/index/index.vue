@@ -37,16 +37,18 @@
 				</div> -->
 				<!-- 课程预告 -->
 				<el-card-more :card-more-data="coursePreview">
-					<div class="card-more-content-slot course-preview clearfix" slot="content">
-						<div @click="goPage({name: 'courseDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
-							<div class="course-preview-header">
-								<img :src="item.img" alt="头像">
-								<span>{{ item.author }}</span>
+					<scroller lock-y slot="content" height="127px" ref="scrollerBottomCourse" v-cloak>
+						<div @click.stop="stopTop" class="card-more-content-slot course-preview clearfix" >
+							<div @click="goPage({name: 'courseDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
+								<div class="course-preview-header">
+									<img :src="item.img" alt="头像">
+									<span>{{ item.author }}</span>
+								</div>
+								<p>{{ item.name }}</p>
+								<span>{{ item.date }}</span>
 							</div>
-							<p>{{ item.name }}</p>
-							<span>{{ item.date }}</span>
 						</div>
-					</div>
+					</scroller>
 				</el-card-more>
 
 				<!-- 培训头条 -->
@@ -230,6 +232,9 @@
 	  	this.fetchData();
 	  },
 	  methods: {
+	  	stopTop () {j
+
+	  	},
 	  	fetchData	() {
 	  		let _this = this;
 	  		// 获取所有数据

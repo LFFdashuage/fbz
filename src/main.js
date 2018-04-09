@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import store from './store'
 import router from './router'
+// import vueTouch from 'vue-touch'
 import App from './App'
 import myFilter from './filter'
 import wordBook from './commons/wordBook'
@@ -10,6 +11,9 @@ import hold from 'src/commons/hold'
 
 import qs from 'qs'
 Vue.prototype.qs = qs
+
+
+// Vue.use(vueTouch)
 
 // 很重要！！！这里不是直接引入jsencrypt
 import JsEncrypt from 'jsencrypt/bin/jsencrypt'
