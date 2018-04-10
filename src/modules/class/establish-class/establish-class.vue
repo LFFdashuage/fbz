@@ -31,31 +31,11 @@
 </template>
 
 <script>
-import {
-  Group,
-  Cell,
-  Selector,
-  XTextarea,
-  XInput,
-  XButton,
-  XAddress,
-  ChinaAddressV3Data,
-  Checker,
-  CheckerItem
-} from "vux";
+import { Group, Cell, Selector, XTextarea, XInput, XButton, XAddress, ChinaAddressV3Data, Checker, CheckerItem } from "vux";
 export default {
   name: "establishClass",
   components: {
-    Group,
-    Cell,
-    Selector,
-    XTextarea,
-    XInput,
-    XButton,
-    XAddress,
-    ChinaAddressV3Data,
-    Checker,
-    CheckerItem
+    Group, Cell, Selector, XTextarea, XInput, XButton, XAddress, ChinaAddressV3Data, Checker, CheckerItem
   },
   data() {
     return {

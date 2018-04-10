@@ -207,27 +207,33 @@ export default {
     background-size: 100% 100%;
     background-position: auto;
   }
+
   .weui-search-bar__label {
     background-color: #BB9D7A;
     border-radius: 15px;
   }
+
   .weui-search-bar__cancel-btn {
     color: #fff;
   }
+
   .weui-search-bar__box {
     background-color: #f1f1f1;
     border-radius: 15px;
     border: 0;
   }
+
   .weui-search-bar__form:after {
     border: 0;
   }
+
   .weui-search-bar__form:after{
     // background-color: #BB9D7A;
     background: #BB9D7A url(~assets/img/class/class-bg.png)no-repeat;
     background-size: 100% 100%;
     background-position: auto;
   }
+
   .weui-search-bar__form {
     // background-color: #BB9D7A;
         background: #BB9D7A url(~assets/img/class/class-bg.png)no-repeat;
@@ -310,14 +316,17 @@ export default {
     @include ellipsisMore(1);
   }
 }
+
 .dynamic {
   background-color: $bgGray;
 }
+
 .footer-icon {
   width: 100%;
   position: absolute;
   left: -1000px;
 }
+
 .footer-icon-tow {
   width: 100%;
   position: absolute;

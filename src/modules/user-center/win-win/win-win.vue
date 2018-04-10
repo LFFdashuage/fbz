@@ -29,15 +29,7 @@
 </template>
 
 <script type="text/babel">
-import {
-  Swiper,
-  SwiperItem,
-  Checker,
-  CheckerItem,
-  XInput,
-  Cell,
-  XTextarea
-} from "vux";
+import { Swiper, SwiperItem, Checker, CheckerItem, XInput, Cell, XTextarea } from "vux";
 const baseList = [
   {
     url: "javascript:",
@@ -64,13 +56,7 @@ const urlList = baseList.map((item, index) => ({
 export default {
   name: "winWin",
   components: {
-    Swiper,
-    SwiperItem,
-    Checker,
-    CheckerItem,
-    XInput,
-    Cell,
-    XTextarea
+    Swiper, SwiperItem, Checker, CheckerItem, XInput, Cell, XTextarea
   },
   data() {
     return {
@@ -191,13 +177,16 @@ export default {
 @import "~assets/css/core/functions",
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
+  
 .establish-class-headr {
   // padding: $padding;
   @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+
   p {
     padding: $padding;
     @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
   }
+
   .label {
     // background-color: #999;
     // height: 50px;
@@ -217,13 +206,16 @@ export default {
     }
   }
 }
+
 .footer-box {
   @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+
   p {
     padding: $padding;
     @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
   }
 }
+
 .btn {
   width: 200px;
   margin: 40px auto 0;

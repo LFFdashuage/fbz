@@ -136,17 +136,20 @@ export default {
     @include ellipsisMore(1);
     line-height: 1.75;
   }
+
   .release-time {
     color: $fontColorGray;
     font-size: $fontSizeTips;
     margin-bottom: 10px;
     line-height: 1.75;
   }
+
   .dynamic-content {
     text-indent: 1em;
     line-height: 1.75;
     font-size: $fontSize;
   }
+
   .dynamic-center-img {
     width: 100%;
     display: flex;
@@ -158,6 +161,7 @@ export default {
       width: 100px;
       height: 80px;
       background-color: $bgGray;
+
       img {
         height: 100%;
         width: 100%;
@@ -169,22 +173,26 @@ export default {
   background-color: #fff;
   height: 100%;
   width: 100%;
+
   .footer-tips {
     display: flex;
     flex-direction: row;
     border: 1px solid $borderColor;
     position: relative;
+
     .footer-tips-btn {
       padding: 5px 0;
       width: 100px;
       text-align: center;
       font-size: $fontSize;
     }
+
     .comment-icon {
       background: #fff url(~assets/img/class/comment2.png)no-repeat;
       background-size: 15%;
       background-position: 15px 7px;
     }
+
     .comment-icon-tow {
       background: #fff url(~assets/img/class/comment.png)no-repeat;
       background-size: 15%;
@@ -195,11 +203,13 @@ export default {
       text-align: right;
       padding-right: 15px; 
     }
+
     .sign-up-icon {
       background: #fff url(~assets/img/class/sign-up2.png)no-repeat;
       background-size: 15%;
       background-position: 15px 7px;
     }
+
     .sign-up-icon-tow {
       background: #fff url(~assets/img/class/sign-up.png)no-repeat;
       background-size: 15%;
@@ -210,17 +220,20 @@ export default {
       position: absolute;
       right: 0;
     }
+    
     .thumbsUp-icon {
       background: #333 url(~assets/img/class/thumbs-up.png)no-repeat;
       background-size: 15%;
       background-position: 15px 7px;
     }
+
     .thumbsUp-icon-tow {
       background: #fff url(~assets/img/class/thumbs-up.png)no-repeat;
       background-size: 15%;
       background-position: 15px 7px;
     }
   }
+  
   .sign-up-list {
   }
 }

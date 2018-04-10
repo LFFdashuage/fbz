@@ -24,8 +24,7 @@ export default {
   name: "elExpenditure",
   components: {
     Scroller,
-    elLoadMore,
-    elImgTextMoney
+    elLoadMore, elImgTextMoney
   },
   data() {
     return {

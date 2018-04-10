@@ -267,6 +267,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     border-bottom: $borderColor solid 1px;
+
     .establish-btn {
       width: 40px;
       margin: 0 5px;
@@ -366,10 +367,12 @@ export default {
   float: left;
   text-align: center;
   @include halfpxline(0, $borderColor, 0 , 2px, 0, 0);
+  
   .name {
     font-size: $fontSizeH4;
     @include ellipsisMore(1);
   }
+
   .class-img {
     width: $quotationUserImgW+14px;
     height: $quotationUserImgW+14px;

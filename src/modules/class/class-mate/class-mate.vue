@@ -38,10 +38,8 @@ import elImgTextClassMate from "components/class/class-mate/img-text-class-mate"
 export default {
   name: "classMate",
   components: {
-    Search,
-    Scroller,
-    elLoadMore,
-    elImgTextClassMate
+    Search, Scroller,
+    elLoadMore, elImgTextClassMate
   },
   data() {
     return {
@@ -195,24 +193,30 @@ export default {
 .class-mate-search {
    position:relative;
    top: 0;
+
   .weui-search-bar {
     background-color: #fff;
   }
+
   .weui-search-bar__label {
     background-color: #f1f1f1;
     border-radius: 15px;
   }
+
   .weui-search-bar__cancel-btn {
     color: #333;
   }
+
   .weui-search-bar__box {
     background-color: #f1f1f1;
     border-radius: 15px;
     border: 0;
   }
+
   .weui-search-bar__form:after {
     border: 0;
   }
+
   .weui-search-bar__form {
     background-color: #fff;
   }
@@ -224,6 +228,7 @@ export default {
 @import "~assets/css/core/functions",
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
+  
 .class-mate-list {
   padding: 8px $padding;
 }
