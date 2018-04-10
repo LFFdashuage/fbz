@@ -6,10 +6,10 @@
    <div class="establish-class-headr">
      <p>标签</p>
      <div class="label">
-        <checker v-model="demo23" type="checkbox" default-item-class="label-default" selected-item-class="label-selected">
+        <checker v-model="label" type="checkbox" default-item-class="label-default" selected-item-class="label-selected">
           <checker-item :value="item" v-for="(item, index) in items1" :key="index">{{item.value}}</checker-item>
         </checker>
-		    <div><span>{{demo23}}</span></div>
+		    <div><span>{{label}}</span></div>
       </div>
     </div>
     
@@ -31,10 +31,32 @@
 </template>
 
 <script>
-import { Group, Cell, Selector, XTextarea, XInput, XButton, XAddress, ChinaAddressV3Data, Checker, CheckerItem } from "vux";
+import {
+  Group,
+  Cell,
+  Selector,
+  XTextarea,
+  XInput,
+  XButton,
+  XAddress,
+  ChinaAddressV3Data,
+  Checker,
+  CheckerItem
+} from "vux";
 export default {
   name: "establishClass",
-  components: { Group, Cell, Selector, XTextarea, XInput, XButton, XAddress, ChinaAddressV3Data, Checker, CheckerItem },
+  components: {
+    Group,
+    Cell,
+    Selector,
+    XTextarea,
+    XInput,
+    XButton,
+    XAddress,
+    ChinaAddressV3Data,
+    Checker,
+    CheckerItem
+  },
   data() {
     return {
       items1: [
@@ -63,7 +85,7 @@ export default {
           value: "商业之道"
         }
       ],
-      demo23: "",
+      label: "",
       // orderCode: this.$route.query.orderCode || "",
       addressData: ChinaAddressV3Data,
       address: [],
@@ -144,22 +166,22 @@ export default {
     submit() {
       let _this = this;
 
-      if (_this.county.value == "") {
-        _this.$vux.toast.show({
-          text: "请选择区县"
-        });
+      // if (_this.county.value == "") {
+      //   _this.$vux.toast.show({
+      //     text: "请选择区县"
+      //   });
+      // } else
+
+      if (_this.name == "") {
+        _this.$vux.toast.text("请输入班级名！", "middle");
+      } else if (_this.name.length > 10) {
+        _this.$vux.toast.text("班级名过长！", "middle");
       } else if (_this.detailed == "") {
-        _this.$vux.toast.show({
-          text: "请输入详细介绍"
-        });
-      } else if (_this.name == "") {
-        _this.$vux.toast.show({
-          text: "请输入班级姓名"
-        });
+        _this.$vux.toast.text("请输入详细介绍！", "middle");
       } else if (_this.simple == "") {
-        _this.$vux.toast.show({
-          text: "请输入简单介绍"
-        });
+        _this.$vux.toast.text("请输入简单介绍！", "middle");
+      }else if (_this.label == "") {
+        _this.$vux.toast.text("请选择标签！", "middle");
       } else {
         _this.$store.commit("updateLoadingStatus", { isLoading: true });
         _this.$http
@@ -192,7 +214,6 @@ export default {
   padding: $padding;
 }
 .establish-class-headr {
-
   p {
     padding: $padding;
     @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);

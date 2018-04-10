@@ -31,9 +31,12 @@
 				</div>
 				<!-- <div @click="goPage({name: 'class'})">
 					跳到班级主页
-				</div> -->
-				<!-- <div @click="goPage({name: 'winWin'})">
+				</div>
+				<div @click="goPage({name: 'winWin'})">
 					跳到共赢页
+				</div>
+				<div @click="goPage({name: 'classMate'})">
+					跳到同学页
 				</div> -->
 				<!-- 课程预告 -->
 				<el-card-more :card-more-data="coursePreview">

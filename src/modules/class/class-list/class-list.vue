@@ -4,7 +4,7 @@
 <template>
   <div class="class-list">
     <div v-if="isShow==true">
-      <div class="top-search">
+      <div class="class-list-search">
         <search
             @result-click="resultClick"
             @on-change="getResult"
@@ -39,7 +39,7 @@
     </div>
 
     
-      <div class="top-search">
+      <div class="class-list-search">
         <search
             @result-click="resultClick"
             @on-change="getResult"
@@ -85,14 +85,14 @@
           <div><span>{{demo23}}</span></div>
         </div>
           
-        <!-- 主页 -->
+        <!-- 全国 -->
 	      <template v-if="tabSelected == 0">
             <div v-for="(item, index) in 2" :key="index">
               <el-img-text-class :type-data="typeData"></el-img-text-class>
             </div>
 	    	</template>
 	        
-        <!-- 动态 -->
+        <!-- 本地 -->
 	      <template v-if="tabSelected == 1">
             <div v-for="(item, index) in 4" :key="index">
               <el-img-text-class></el-img-text-class>
@@ -223,12 +223,29 @@ export default {
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
 
-.top-search {
+.class-list-search {
+   position:relative;
+   top: 0;
   .weui-search-bar {
     background-color: #fff;
   }
   .weui-search-bar__label {
     background-color: #f1f1f1;
+    border-radius: 15px;
+  }
+  .weui-search-bar__cancel-btn {
+    color: #333;
+  }
+  .weui-search-bar__box {
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    border: 0;
+  }
+  .weui-search-bar__form:after {
+    border: 0;
+  }
+  .weui-search-bar__form {
+    background-color: #fff;
   }
 }
 </style>
@@ -243,7 +260,7 @@ export default {
   position: absolute;
   width: 100%;
 
-  .top-search {
+  .class-list-search {
     width: 100%;
     position: relative;
     top: 0;
@@ -252,7 +269,7 @@ export default {
     border-bottom: $borderColor solid 1px;
     .establish-btn {
       width: 40px;
-      // margin: 0 5px;
+      margin: 0 5px;
       display: flex;
       align-items: center;
       justify-content: center;

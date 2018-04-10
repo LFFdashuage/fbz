@@ -3,15 +3,15 @@
  -->
 <template>
 	<div class="win-win" v-cloak>
-    <swiper loop auto :list="demo06_list" :index="demo06_index" @on-index-change="demo06_onIndexChange"></swiper>
+    <swiper loop auto :list="demo06_list" :index="index" @on-index-change="onIndexChange"></swiper>
 
     <div class="establish-class-headr">
-     <p>标签</p>
+     <p>资源类型</p>
      <div class="label">
-        <checker v-model="value" type="checkbox" default-item-class="label-default" selected-item-class="label-selected">
+        <checker v-model="checkerValue" type="checkbox" default-item-class="label-default" selected-item-class="label-selected">
           <checker-item :value="item" v-for="(item, index) in items1" :key="index">{{item.value}}</checker-item>
         </checker>
-		    <div><span>{{value}}</span></div>
+		    <div><span>{{checkerValue}}</span></div>
       </div>
     </div>
 
@@ -29,21 +29,29 @@
 </template>
 
 <script type="text/babel">
-import { Swiper, SwiperItem, Checker, CheckerItem, XInput, Cell,  XTextarea } from "vux";
+import {
+  Swiper,
+  SwiperItem,
+  Checker,
+  CheckerItem,
+  XInput,
+  Cell,
+  XTextarea
+} from "vux";
 const baseList = [
   {
     url: "javascript:",
-    img: "https://static.vux.li/demo/1.jpg",
+    img: "https://ww1.sinaimg.cn/large/663d3650gy1fq66vvsr72j20p00gogo2.jpg",
     title: "送你一朵fua"
   },
   {
     url: "javascript:",
-    img: "https://static.vux.li/demo/2.jpg",
+    img: "https://ww1.sinaimg.cn/large/663d3650gy1fq66vw1k2wj20p00goq7n.jpg",
     title: "送你一辆车"
   },
   {
     url: "javascript:",
-    img: "https://static.vux.li/demo/1.jpg",
+    img: "https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg",
     title: "送你一次旅行"
   }
 ];
@@ -55,14 +63,22 @@ const urlList = baseList.map((item, index) => ({
 
 export default {
   name: "winWin",
-  components: {  Swiper, SwiperItem, Checker, CheckerItem, XInput, Cell,  XTextarea },
+  components: {
+    Swiper,
+    SwiperItem,
+    Checker,
+    CheckerItem,
+    XInput,
+    Cell,
+    XTextarea
+  },
   data() {
     return {
       detailed: "",
       tel: "",
       demo06_list: urlList,
-      demo06_index: 0,
-      value: "",
+      index: 0,
+      checkerValue: "",
       items1: [
         {
           key: "1",
@@ -91,8 +107,46 @@ export default {
       ]
     };
   },
-  mounted() {},
+  mounted() {
+    // this.fetchData();
+  },
   methods: {
+    // 获取资源类型列表
+    fetchData() {
+      let _this = this;
+
+      _this.$http
+        .post(
+          "/api/xxx/xxx/xxx",
+          _this.qs.stringify({
+            customerId: this.user.userId
+          })
+        )
+        .then(function(e) {
+          if (e.data.code == 200) {
+            let list = [];
+            if (
+              e.data.data &&
+              e.data.data.result &&
+              e.data.data.result.length > 0
+            ) {
+              list = e.data.data.result.map(function(item, ind) {
+                return {
+                  id: item.id,
+                  text: item.text
+                };
+              });
+            }
+            // console.log(list)
+            _this.items1 = list;
+          } else {
+            _this.$vux.alert.show({
+              content: e.data.msg
+            });
+          }
+        });
+    },
+
     submit() {
       let _this = this;
 
@@ -104,7 +158,7 @@ export default {
         _this.$vux.toast.show({
           text: "请输入联系方式"
         });
-      } else if (_this.value == "") {
+      } else if (_this.checkerValue == "") {
         _this.$vux.toast.show({
           text: "请选择标签"
         });
@@ -125,8 +179,9 @@ export default {
           });
       }
     },
-    demo06_onIndexChange(index) {
-      this.demo06_index = index;
+    
+    onIndexChange(index) {
+      this.index = index;
     }
   }
 };

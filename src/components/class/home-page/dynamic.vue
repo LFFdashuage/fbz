@@ -7,7 +7,7 @@
         <p class="title-name">题目题目题目题目</p><span class="title-when-long">30分钟前</span>
     </div>
 
-    <div class="dynamic-center" @click="goPage('dynamicDetails')">
+    <div class="dynamic-center" @click="goPage('dynamicDetails')"> 
       <p>
         写山坡的诗很多，有的写着写着，诗就陡起来了，这首也是。
         如果不细读，却也看不出什么奇崛之处，无非就是晒太阳。
@@ -21,7 +21,8 @@
     <div class="dynamic-footer">
       <div class="comment dynamic-footer-btn" @click="goPage('classMoney')">543</div>
       <div class="sign-up dynamic-footer-btn" @click="signUp">报名</div>
-      <div class="thumbs-up dynamic-footer-btn" @click="thumbsUp">123</div>
+      <!-- <div class="thumbs-up dynamic-footer-btn" @click="thumbsUp">123</div> -->
+      <div class="thumbs-up dynamic-footer-btn"  :class="{ 'thumbsUp-icon' : isIcon, 'thumbsUp-icon-tow': !isIcon}" @click="thumbsUp"> 104</div>
     </div>
     
 	</div>
@@ -32,7 +33,9 @@ export default {
   name: "elDynamic",
   // props: ["infoData"],
   data() {
-    return {};
+    return {
+      isIcon:false
+    };
   },
   methods: {
     	goPage (url) {
@@ -51,9 +54,28 @@ export default {
     },
     //点赞
     thumbsUp() {
-      this.$vux.alert.show({
-        content: "点赞"
-      });
+      this.isIcon = !this.isIcon;
+      //  let _this = this;
+      // _this.$http
+      //   .post(
+      //     "/api/xxx/xxx",
+      //     _this.qs.stringify({
+      //       customerId: _this.$store.state.user.userId,
+      //       Id: _this.$route.query.id
+      //     })
+      //   )
+      //   .then(function(e) {
+      //     if (e.data.code == 200) {
+      //       _this.$vux.toast.show({
+      //         text: e.data.msg
+      //       });
+      //       _this.isIcon = !_this.isIcon;
+      //     } else {
+      //       _this.$vux.alert.show({
+      //         content: e.data.msg
+      //       });
+      //     }
+      //   });
     }
   }
 };
@@ -142,8 +164,18 @@ export default {
       background-position: 29px 9px;
     }
 
-    .thumbs-up {
+    // .thumbs-up {
+    //   background: #fff url(~assets/img/class/thumbs-up.png)no-repeat;
+    //   background-size: 15%;
+    //   background-position: 29px 9px;
+    // }
+    .thumbsUp-icon{
       background: #fff url(~assets/img/class/thumbs-up.png)no-repeat;
+      background-size: 15%;
+      background-position: 29px 9px;
+    }
+    .thumbsUp-icon-tow{
+      background: #999 url(~assets/img/class/thumbs-up.png)no-repeat;
       background-size: 15%;
       background-position: 29px 9px;
     }

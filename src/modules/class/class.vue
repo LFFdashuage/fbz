@@ -10,7 +10,7 @@
         <span class="class-search " @click="setFocus"></span>
       </div>
 
-      <div class="footer-icon"  :class="{ 'footer-icon' : !discountIcon, 'footer-icon-tow': discountIcon}">
+      <div class="header-search"  :class="{ 'footer-icon' : !discountIcon, 'footer-icon-tow': discountIcon}">
        <search
           @result-click="resultClick"
           @on-change="getResult"
@@ -18,10 +18,10 @@
           v-model="searchValue"
           position="absolute"
           auto-scroll-to-top top="0px"
-          @on-focus="onFocus"
           @on-cancel="onCancel"
           @on-submit="onSubmit"
           ref="search"
+          placeholder="请输入关键字！"
          >
           </search>
         </div>
@@ -53,11 +53,7 @@
         <!-- 动态 -->
 	      <template v-if="tabSelected == 1">
 					<div class="dynamic">
-            <div class="dynamic-tip"><span>动态</span><span>（15条结果）</span></div>
-            <el-dynamic></el-dynamic> 
-            <el-dynamic></el-dynamic> 
-            <el-dynamic></el-dynamic> 
-            <el-dynamic></el-dynamic> 
+            <el-tab-dynamic></el-tab-dynamic> 
           </div>
 	      </template>
 
@@ -78,13 +74,13 @@
 <script>
 import { Tab, TabItem, Search } from "vux";
 import elHome from "components/class/home-page/home";
-import elDynamic from "components/class/home-page/dynamic";
+import elTabDynamic from "components/class/home-page/tab-dynamic";
 import elAlbum from "components/class/home-page/album";
 export default {
   name: "class",
   components: {
     Tab, TabItem, Search,
-    elHome, elDynamic, elAlbum
+    elHome, elTabDynamic, elAlbum
   },
   data() {
     return {
@@ -167,8 +163,6 @@ export default {
       console.log(val);
       // this.results = val ? getResult(this.searchValue) : []
     },
-    // 输入框获取到焦点时触发
-    onFocus() {},
     resultClick(item) {
       window.alert("you click the result item: " + JSON.stringify(item));
     },
@@ -200,6 +194,49 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+@import "~lib/sandal/core";
+@import "~assets/css/core/functions",
+  "~assets/css/core/mixins",
+  "~assets/css/core/vars";
+
+.header-search {
+  .weui-search-bar {
+    // background-color: #8D6F4C;
+    background: #BB9D7A url(~assets/img/class/class-bg.png)no-repeat;
+    background-size: 100% 100%;
+    background-position: auto;
+  }
+  .weui-search-bar__label {
+    background-color: #BB9D7A;
+    border-radius: 15px;
+  }
+  .weui-search-bar__cancel-btn {
+    color: #fff;
+  }
+  .weui-search-bar__box {
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    border: 0;
+  }
+  .weui-search-bar__form:after {
+    border: 0;
+  }
+  .weui-search-bar__form:after{
+    // background-color: #BB9D7A;
+    background: #BB9D7A url(~assets/img/class/class-bg.png)no-repeat;
+    background-size: 100% 100%;
+    background-position: auto;
+  }
+  .weui-search-bar__form {
+    // background-color: #BB9D7A;
+        background: #BB9D7A url(~assets/img/class/class-bg.png)no-repeat;
+    background-size: 100% 100%;
+    background-position: auto;
+  }
+}
+</style>
+
 
 <style lang="scss" scoped>
 @import "~lib/sandal/core";
@@ -234,7 +271,7 @@ export default {
   .class-img {
     width: $quotationUserImgW+14px;
     height: $quotationUserImgW+14px;
-    margin: 0 auto;
+    margin: 13px auto;
 
     img {
       width: 100%;
@@ -275,15 +312,9 @@ export default {
 }
 .dynamic {
   background-color: $bgGray;
-  .dynamic-tip {
-    padding: 7px $padding;
-    font-size: $fontSizeTips;
-    background-color: #fff;
-    color: $fontColorGray;
-    @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
-  }
 }
 .footer-icon {
+  width: 100%;
   position: absolute;
   left: -1000px;
 }

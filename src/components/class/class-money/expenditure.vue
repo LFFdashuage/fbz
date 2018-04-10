@@ -24,11 +24,11 @@ export default {
   name: "elExpenditure",
   components: {
     Scroller,
-    elLoadMore, elImgTextMoney
+    elLoadMore,
+    elImgTextMoney
   },
   data() {
     return {
-      termType: 0,
       scrollerInfo: {
         onFetching: false,
         loadAll: false,
@@ -39,32 +39,27 @@ export default {
           {
             money: 455,
             name: "的孙而非",
-            time: "2018/02/12  22:32",
-         
+            time: "2018/02/12  22:32"
           },
           {
             money: 455,
             name: "财务测",
-            time: "2018/02/12  22:32",
-          
+            time: "2018/02/12  22:32"
           },
           {
             money: 455,
             name: "UI看就可",
-            time: "2018/02/12  22:32",
-            
+            time: "2018/02/12  22:32"
           },
           {
             money: 455,
             name: "牛肉和",
-            time: "2018/02/12  22:32",
-         
+            time: "2018/02/12  22:32"
           },
           {
             money: 455,
             name: "添加好友特级",
-            time: "2018/02/12  22:32",
-            
+            time: "2018/02/12  22:32"
           }
         ]
       }
@@ -81,12 +76,9 @@ export default {
 
       _this.$http
         .post(
-          "/api/product/term/list",
+          "/api/xxxx/xx/xxx",
           _this.qs.stringify({
-            pageNum: this.scrollerInfo.pageNum,
-            pageSize: this.scrollerInfo.pageSize,
-            termType: this.termType,
-            sortType: 1
+            id: id
           })
         )
         .then(function(e) {
@@ -100,13 +92,7 @@ export default {
               list = e.data.data.result.map(function(item, ind) {
                 return {
                   id: item.termId,
-                  img: item.images,
-                  price: item.price,
-                  readCount: item.playCount,
-                  desc: item.remark,
-                  title: item.termName,
-                  totalTerm: item.totalTerm,
-                  upToDate: item.updateCount
+                  int: int
                 };
               });
             }
@@ -117,9 +103,9 @@ export default {
             }
 
             if (_this.scrollerInfo.pageNum == 1) {
-              // _this.scrollerInfo.list = list;
+              _this.scrollerInfo.list = list;
             } else {
-              // _this.scrollerInfo.list = _this.courseList.concat(list);
+              _this.scrollerInfo.list = _this.scrollerInfo.concat(list);
             }
 
             _this.scrollerInfo.pageNum++;

@@ -1,13 +1,14 @@
 <!-- 
-收入
+动态
  -->
  
 <template>
 	<div>
-
+     <div class="dynamic-tip"><span>动态</span><span>（15条结果）</span></div>
 		<scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" v-cloak>
-			<div class="income-box">
-				   <el-img-text-money v-for="(item, index) in scrollerInfo.list" :img-text-data="item" :type-data="1" :key="index"></el-img-text-money>
+			<div>
+				<!-- <el-dynamic v-for="(item, index) in scrollerInfo.list" :img-text-data="item" :key="index"></el-dynamic> -->
+        <el-dynamic v-for="(item, index) in 4" :img-text-data="item" :key="index"></el-dynamic>
         <el-load-more :load-all="scrollerInfo.loadAll"></el-load-more>
 			</div>
 		</scroller>
@@ -18,13 +19,13 @@
 <script type="text/babel">
 import { Scroller } from "vux";
 import elLoadMore from "components/load-more/load-more";
-import elImgTextMoney from "components/class/class-money/img-text-money";
+import elDynamic from "components/class/home-page/dynamic";
 
 export default {
-  name: "elIncome",
+  name: "elTabDynamic",
   components: {
-    Scroller,
-    elLoadMore, elImgTextMoney
+    Scroller, 
+    elLoadMore, elDynamic
   },
   data() {
     return {
@@ -35,36 +36,6 @@ export default {
         pageSize: this.wordBook.pageSize,
         offsetBottom: 50,
         list: [
-          {
-            money: 353453,
-            name: "逆差额尔",
-            time: "2018/02/12  22:32",
-         
-          },
-          {
-            money: 5345,
-            name: "二哥让但钱",
-            time: "2018/02/12  22:32",
-          
-          },
-          {
-            money: 353,
-            name: "优酷网上的",
-            time: "2018/02/12  22:32",
-            
-          },
-          {
-            money: 36666,
-            name: "二哥和",
-            time: "2018/02/12  22:32",
-         
-          },
-          {
-            money: 345,
-            name: "是否吧R额",
-            time: "2018/02/12  22:32",
-            
-          }
         ]
       }
     };
@@ -140,7 +111,12 @@ export default {
 @import "~assets/css/core/functions",
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
-  .income-box{
-    padding: 0 $padding;
+  
+  .dynamic-tip {
+    padding: 7px $padding;
+    font-size: $fontSizeTips;
+    background-color: #fff;
+    color: $fontColorGray;
+    @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
   }
 </style>

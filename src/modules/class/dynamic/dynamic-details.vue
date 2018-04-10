@@ -91,6 +91,27 @@ export default {
     },
     thumbsUp() {
       this.isIcon = !this.isIcon;
+      // let _this = this;
+         // _this.$http
+      //   .post(
+      //     "/api/xxx/xxx",
+      //     _this.qs.stringify({
+      //       customerId: _this.$store.state.user.userId,
+      //       Id: _this.$route.query.id
+      //     })
+      //   )
+      //   .then(function(e) {
+      //     if (e.data.code == 200) {
+      //       _this.$vux.toast.show({
+      //         text: e.data.msg
+      //       });
+      //       _this.isIcon = !_this.isIcon;
+      //     } else {
+      //       _this.$vux.alert.show({
+      //         content: e.data.msg
+      //       });
+      //     }
+      //   });
     }
   }
 };
@@ -172,7 +193,7 @@ export default {
 
     .sign-up {
       text-align: right;
-      padding-right: 15px;
+      padding-right: 15px; 
     }
     .sign-up-icon {
       background: #fff url(~assets/img/class/sign-up2.png)no-repeat;

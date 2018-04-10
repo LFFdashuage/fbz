@@ -939,7 +939,18 @@ const routes = [{
             uuid: '',
             title: '创建班级'
         }
-    },
+    }, {
+        // 同学列表
+        path: '/class-mate',
+        name: 'classMate',
+        component: loadView(loaded => {
+            require(['../modules/class/class-mate/class-mate.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '同学列表'
+        }
+    }
 ]
 
 export default routes
