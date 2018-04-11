@@ -870,18 +870,6 @@ const routes = [{
         }
     },
     {
-        // 共赢
-        path: '/win-win',
-        name: 'winWin',
-        component: loadView(loaded => {
-            require(['../modules/user-center/win-win/win-win.vue'], loaded)
-        }),
-        meta: {
-            uuid: '',
-            title: '共赢'
-        }
-    },
-    {
         // 我的班级
         path: '/class',
         name: 'class',

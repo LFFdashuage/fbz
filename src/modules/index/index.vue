@@ -32,9 +32,6 @@
 				<!-- <div @click="goPage({name: 'class'})">
 					跳到班级主页
 				</div>
-				<div @click="goPage({name: 'winWin'})">
-					跳到共赢页
-				</div>
 				<div @click="goPage({name: 'classMate'})">
 					跳到同学页
 				</div> -->
