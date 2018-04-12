@@ -176,7 +176,7 @@
 				if(this.scrollerInfo.onFetching || this.scrollerInfo.loadAll) {
           this.$refs.scrollerBottom.reset();
 				} else {					
-					this.getGoods(this.goodsType[this.selectType].id, this.scrollerInfo.pageNum);
+					this.getGoods(this.goodsType.id, this.scrollerInfo.pageNum);
 				}
 			},
 			changeType(data, ind) {
