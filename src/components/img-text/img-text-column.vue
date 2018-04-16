@@ -73,6 +73,7 @@
 
 			& > p {
 				color: $colorYellowEasy;
+				margin-top: 18px;
 			}
 		}
 

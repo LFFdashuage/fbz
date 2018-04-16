@@ -5,15 +5,11 @@
 <template>
   <div class="filter-file-box" >
     <div class=" clearfix" v-for="(item, index) in filterData" :key="index">
-      
-      <div :class="['filter-file-block-title', 'fa', item.status ? 'fa-angle-up' : 'fa-angle-down']" @click="item.status = !item.status;">
-        {{ item.name }}
-      </div>
-
+  
       <div v-show="item.status" class="filter-file-img-text">
-        <div  @click="setSelectedId(it)" :class="['filter-file-block-cell', {'active': selectedId == it.id }]" class="filter-filter" v-for="(it, ind) in item.list" :key="ind">
+        <div  @click="setSelectedId(item)" :class="['filter-file-block-cell', {'active': selectedId == item.id }]" class="filter-filter" v-for="(item, index) in filterData" :key="index" >
           <img src="~assets/img/download/download1.png" alt="">
-          <span>{{ it.name }}</span>
+          <span>{{ item.name }}</span>
         </div>
       </div>
 

@@ -1,9 +1,10 @@
 // 底部tab
 @import '~lib/sandal/core';
-@import '~assets/css/core/functions', '~assets/css/core/mixins', '~assets/css/core/vars';
-
+@import '~assets/css/core/functions',
+'~assets/css/core/mixins',
+'~assets/css/core/vars';
 nav {
-	.weui-tabbar__label {
-		color: $colorYellowEasy;
-	}
+    .weui-tabbar__label {
+        color: $colorRedDeep;
+    }
 }
