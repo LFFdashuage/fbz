@@ -46,7 +46,7 @@
 				<el-card-more :card-more-data="coursePreview" class="card-first">
 					<scroller lock-y slot="content" height="139px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
 						<div @click.stop="stopTop" class="card-more-content-slot course-preview clearfix" >
-							<div @click="goPage({name: 'courseDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
+							<div @click="goPage({name: 'courseNewDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
 								<div class="course-preview-header">
 									<img :src="item.img" alt="头像">
 								</div>
@@ -125,19 +125,7 @@
 <script type="text/babel">
 import { mapState } from "vuex";
 import hold from "src/commons/hold";
-import {
-  Scroller,
-  Group,
-  Cell,
-  Swiper,
-  SwiperItem,
-  Card,
-  Panel,
-  Popup,
-  XInput,
-  XButton,
-  TransferDom
-} from "vux";
+import { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, TransferDom } from "vux";
 
 import elTop from "components/index/top";
 import elTuijian from "components/tuijian/tuijian";

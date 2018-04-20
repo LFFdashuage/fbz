@@ -1,5 +1,5 @@
 <!-- 
-	废弃-课程详情页
+	新课程详情页
  -->
 <template>
 	<div class="detail" v-show="courseInfo.name" v-cloak>
@@ -7,7 +7,9 @@
       
       <!-- 顶部详情 -->
 			<div class="detail-header-box">
-      	<el-img-text-relate :img-text-data="courseInfo"></el-img-text-relate>
+      	<!-- <el-img-text-relate :img-text-data="courseInfo"></el-img-text-relate> -->
+          <el-img-text-detail-course :img-text-data="courseInfo"></el-img-text-detail-course>
+
 			</div>
 			
 			<div class="tab">
@@ -37,7 +39,8 @@
 	      	</template>
 
 	        <template v-if="tabSelected == 1">
-	        	<el-img-text-relate v-for="(item, index) in relateData" :img-text-data="item" :key="index"></el-img-text-relate>
+	        	<!-- <el-img-text-relate v-for="(item, index) in relateData" :img-text-data="item" :key="index"></el-img-text-relate> -->
+            <el-img-text-course v-for="(item, index) in relateData" :img-text-data="item" :key="index"></el-img-text-course>
 	        </template>
 
 	      </div>
@@ -65,18 +68,21 @@
   import elWitness from "components/witness/witness";
   import elVideo from "components/video/video";
   import elTeacher from "components/teacher/teacher";
+  import elImgTextCourse from "components/course/img-text-course";
+  import elImgTextDetailCourse from "components/course/img-text-detail-course";
 
   export default {
-    name: "detail",
+    name: "courseNewDetail",
     directives: {
       TransferDom
     },
     components: {
       Divider, XButton, Flexbox, FlexboxItem, Tab, TabItem, Swiper, SwiperItem, Sticky,
-      elImgTextRank, elImgTextRelate, elComment, elAuthor, elReward, elWitness, elVideo, elTeacher
+      elImgTextRank, elImgTextRelate, elComment, elAuthor, elReward, elWitness, elVideo, elTeacher,elImgTextCourse,elImgTextDetailCourse
     },
     data() {
       return {
+        typeData:1,
         isIcon: false,
         introduceShow: false,
         showall: false,
@@ -100,23 +106,36 @@
         tabDatas: [
           {
             value: "detail",
-            title: "课程详情"
+            title: "全部"
           },
           {
             value: "relate",
-            title: "相关课程"
+            title: "相关"
           }
         ],
         tabSelected: 0,
         relateData: [
           {
-            title: "",
-            type: "",
-            pay: "",
-            img: "",
-            like: "",
-            url: "",
-            query: {}
+            id: 17,
+            img:
+              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
+            title: "大方是是大V是",
+            time: "2018-02-122018-05-01",
+            address: "杭州",
+            surplus: 33,
+            price: 455636,
+            originalPrice: 345345
+          },
+          {
+            id: 18,
+            img:
+              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
+            title: "截图你随便巴尔查",
+            time: "2018-02-122018-05-01",
+            address: "杭州",
+            surplus: 33,
+            price: 455636,
+            originalPrice: 345345
           }
         ],
         authorData: {},
@@ -255,7 +274,7 @@
                   };
                 });
               }
-              _this.relateData = list;
+              // _this.relateData = list;
             } else {
               _this.$vux.alert.show({
                 content: e.data.msg
