@@ -2,7 +2,7 @@
 	套餐详情页
  -->
 <template>
-	<div class="detail" v-cloak>
+	<div class="detail" v-cloak> 
 		<div class="header-info">
       <div class="info-img">
         <img src="~assets/img/video-base.jpg" alt="">
