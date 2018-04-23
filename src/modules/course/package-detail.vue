@@ -5,7 +5,7 @@
 	<div class="detail" v-cloak> 
 		<div class="header-info">
       <div class="info-img">
-        <img src="~assets/img/video-base.jpg" alt="">
+        <img :src="info.images" alt="">
       </div>
       <div class="info-conter">
         <p class="name"> {{info.name}}</p>
@@ -120,8 +120,8 @@ export default {
             _this.info.images=resInfo.images;
             _this.info.discountId=resInfo.discountId;
             _this.info.name=resInfo.discountName;
-            _this.info.price=resInfo.discountprice;
-            _this.info.originalPrice=resInfo.packagePrice;
+            _this.info.price=resInfo.discountprice || 0;
+            _this.info.originalPrice=resInfo.packagePrice || 0;
             _this.info.content=resInfo.content;
             _this.info.ramk=resInfo.remark;
             // _this.info.lessons=resInfo.lessons;

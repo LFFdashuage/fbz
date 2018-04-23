@@ -56,6 +56,7 @@
             <p class="comment-content">{{ item.content }}</p>
 				  </div>
 
+        <div v-if="tableDetailData.isBuy == 1">
           <div v-if="commentInfo.int<3" class="hide-more">
             <div class="show-more">
               <div @click="showMore">填写评价</div>
@@ -64,6 +65,7 @@
           <div v-if="commentInfo.int==3" class="show-more">
             <div @click="showMore"> 填写并查看更多评价 </div>
           </div>
+        </div>
 
         </div>
       </div>

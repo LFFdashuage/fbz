@@ -48,15 +48,15 @@
           <p>{{packageData.ramk}}</p>
         </div>
 
-        <scroller lock-y  height="146px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+        <scroller lock-y  height="160px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
           <div  class="card-more-content-slot screen-preview clearfix" >
             <!-- <div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="screen-preview-block" v-for="(item, index) in packageData.taoCanDatas" :key="index"> -->
               <div class="screen-preview-block" v-for="(item, index) in packageData.taoCanDatas" :key="index">
               <div class="screen-preview-header">
                 <img :src="item.src" alt="头像">
-                <div class="icon">
+                <!-- <div class="icon">
                   <img src="~assets/img/icon/icon-video.png" alt="">
-                </div>
+                </div> -->
               </div>
               <p>{{ item.name }}</p>
               <p class="package-address">
@@ -672,22 +672,23 @@ export default {
         text-align: center;
         position: relative;
 
-        .icon {
-          position: absolute;
-          left: -20px;
-          top: 10px;
-          width: 66px;
-          text-align: center;
+        // .icon {
+        //   position: absolute;
+        //   left: -20px;
+        //   top: 10px;
+        //   width: 66px;
+        //   text-align: center;
 
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
+        //   img {
+        //     width: 100%;
+        //     height: 100%;
+        //   }
+        // }
 
         img {
-          width: 100%;
-          height: 100%;
+          width: 148px;
+          height: 82px;
+          // height: 100%;
         }
       }
 

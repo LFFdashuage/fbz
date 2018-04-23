@@ -12,14 +12,14 @@
 	      <div class="content">
           <!-- 最近更新 -->
 	      	<template v-if="tabSelected == 0">
-            <div>
+            <div class="box">
                <el-operate-newest> </el-operate-newest>
             </div>
 	      	</template>
 	        
           <!-- 最多购买 -->
 	        <template v-if="tabSelected == 1">
-						<div>
+						<div class="box">
                 <el-operate-max-purchase></el-operate-max-purchase>
             </div>
 	        </template>
@@ -74,5 +74,7 @@ export default {
     font-size: $fontSizeH4;
     color:$fontColorBlack;
   }
-
+.box{
+  padding:0 $padding;
+}
 </style>
