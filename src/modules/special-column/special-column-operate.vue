@@ -55,7 +55,7 @@ export default {
           title: "最多购买"
         }
       ]
-    };
+    };   
   },
 
   methods: {}
