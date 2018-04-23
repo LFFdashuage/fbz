@@ -10,6 +10,7 @@
 # install dependencies
 npm install / cnpm install 
 
+test test test 
 
 bower install
 
