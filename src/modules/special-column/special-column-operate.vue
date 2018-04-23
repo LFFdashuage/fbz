@@ -59,8 +59,8 @@ export default {
   },
 
   methods: {}
-};
-</script>
+};    
+</script> 
 
 <style lang="scss" scoped>
 @import "~lib/sandal/core";
