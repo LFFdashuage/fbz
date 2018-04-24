@@ -57,7 +57,7 @@ export default {
   "~assets/css/core/vars";
 
 $filterW: 6em;
-$filterPadding: 1.2em;
+$filterPadding: 1em;
 
 .filter-file-block-title {
   @include halfpxline(0, #fff, 0 , 0, 1px, 0);
@@ -78,24 +78,26 @@ $filterPadding: 1.2em;
   @include halfpxline(0, #fff, 0 , 0, 1px, 0);
   // text-indent: 1.6em;
   text-align: center;
-  background: #f8f8f8;
+  // background: #f8f8f8;
+  background: #fff;
   line-height: 1;
 
   &.active {
-    background: #fff;
+    // background: #fff;
+     background: #f8f8f8;
     color: $colorYellowEasy;
 
-    &:before {
-      content: "";
-      position: absolute;
-      bottom: -7px;
-      left: 3.3em;
-      width: 3px;
-      height: 2em;
-      margin-top: -0.5em;
-      transform: rotate(90deg);
-      background: #9fcfe3;
-    }
+    // &:before {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: -7px;
+    //   left: 3.3em;
+    //   width: 3px;
+    //   height: 2em;
+    //   margin-top: -0.5em;
+    //   transform: rotate(90deg);
+    //   background: #9fcfe3;
+    // }
   }
 }
 
@@ -124,5 +126,6 @@ $filterPadding: 1.2em;
 img {
   height: 40px;
   margin: 0 auto;
+  margin-bottom: 6px;
 }
 </style>
