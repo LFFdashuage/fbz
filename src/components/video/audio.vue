@@ -85,7 +85,7 @@
           _this.duration = $audio.duration;
           $audio.pause();
           $audio.play();
-          $audio.pause();
+          // $audio.pause();
         }
       },
       playAudio () {
