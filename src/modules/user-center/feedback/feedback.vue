@@ -86,5 +86,9 @@
 	.btn {
 		padding: $padding;
 		margin-top: 40px;
+		.weui-btn,.weui-btn_primary{
+			height: 40px;
+			color: #fff;
+		}
 	}
 </style>

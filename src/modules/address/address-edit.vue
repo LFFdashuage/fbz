@@ -231,6 +231,10 @@
 	.btn {
 		margin-top: 40px;
 		padding: $padding;
+		.weui-btn,.weui-btn_primary{
+			height: 40px;
+			color: #fff;
+		}
 	}
 
 </style>

@@ -163,5 +163,9 @@
 	
 	.btns {
 		padding: $padding;
+		.weui-btn,.weui-btn_primary{
+			height: 40px;
+			color: #fff;
+		}
 	}
 </style>
