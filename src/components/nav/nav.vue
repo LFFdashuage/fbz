@@ -41,7 +41,7 @@
         				name: "课程",
                         icon: 'course',
                         link: {
-                            name: 'course'
+                            name: 'naw-course'
                         }
         			},{
         				value: "mall",

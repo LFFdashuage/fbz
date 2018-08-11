@@ -114,7 +114,7 @@
 		height: 100%;
 		// margin-left: -10px;
 		background: url(~assets/img/index/top-msg.png) no-repeat;
-		background-size: 80%;
+		background-size: 90%;
 		background-position: bottom;
 
 		& > span {
@@ -137,7 +137,7 @@
 		position: relative;
 		flex: 1;
 		height: 100%;
-		margin: 0 36px;
+		margin: 0 20px;
 		// background: $bgGray url(~assets/img/index/top-search.png) no-repeat;
 		// background-size: 100%;
 		// background-position: center;

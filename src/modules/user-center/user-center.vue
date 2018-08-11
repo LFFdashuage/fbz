@@ -50,6 +50,10 @@
             </div>
           </div>
 
+          <div @click="goPage({name: 'winWin'})">
+					跳到共赢页
+				</div>
+
           <div class="xueba" @click="goPage({name: 'xueba'})">
             <div class="xueba-header">加入“学霸养成计划”</div>
             <div class="xueba-content">

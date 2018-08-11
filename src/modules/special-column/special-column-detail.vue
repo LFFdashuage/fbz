@@ -12,25 +12,23 @@
         <el-audio @on-audio-buy="purchase" @audio-btn-change="audioBtnChange" ref="audio" :audio-data="videoData"></el-audio>
       </template>
 
-      <section>      
+       <section>      
   	    <div class="term-info">
-          <p>
-            <span class="termName">{{ specialData.termName }}</span>
-            <span class="totalTerm">（共{{specialData.totalTerm}}期）</span>
+          <p class="name" v-if="specialData.onlineType == 1">{{ specialData.termName }}</p>
+          <p class="term-info-ramk">
+            <span class="price">￥{{ specialData.price | numToCash}}</span>
+            <span class="original-price">￥{{ specialData.originalPrice | numToCash}}</span>
+            <span class="total-term">更{{specialData.updateCount}}期|共{{specialData.totalTerm}}期</span>
           </p>
-          <span class="termTypeName">{{specialData.termTypeName}}</span>
+          <p class="term-info-footer">
+            <span class="rater">
+              <rater :active-color="wordBook.raterConfig.newActiveColor" :font-size="wordBook.raterConfig.fontSize" v-model="specialData.termRank" disabled></rater>
+              {{specialData.termRank.toFixed(1)}}分
+            </span>
+            <span class="play-count">{{ specialData.playCount }}人学过</span>
+            <span class="termTypeName">{{specialData.termTypeName}}</span>
+          </p>
         </div>
-        <div class="rater">
-          <rater :active-color="wordBook.raterConfig.activeColor" :font-size="wordBook.raterConfig.fontSize" v-model="specialData.termRank" disabled></rater>
-          {{specialData.termRank.toFixed(1)}}
-        </div>
-        <div class="price">
-          现价：¥<span> {{ specialData.price | numToCash}}</span>
-        </div>
-        <div class="original-price" >
-          原价：¥<span> {{ specialData.originalPrice | numToCash }}</span>
-        </div>
-        <p class="playCount">已播放{{ specialData.playCount }}次</p>
       </section>
 
     </div>
@@ -158,11 +156,11 @@ export default {
       tabDatas: [
         {
           value: "detail",
-          title: "专栏详情"
+          title: "详情"
         },
         {
           value: "curriculum",
-          title: "专栏选集"
+          title: "选集"
         }
       ],
       isIcon: false
@@ -233,7 +231,7 @@ export default {
               content: resData.content,
               authorId: resData.authorId,
               termTypeName: resData.termTypeName,
-              updateCount: resData.updateCount,
+              updateCount: resData.updateCount || 0,
               termType: resData.termType,
               isBuy: resData.isBuy == 1 || hasBuyState == 1 ||resData.price == 0 ? 1 : 0,
               termRank: resData.termRank || 5,
@@ -439,92 +437,55 @@ export default {
   text-align: left;
   background: #fff;
   // display: inline-block;
-  padding-bottom: $padding;
+  // padding-bottom: $padding;
   position: relative;
 
-  img {
-    width: 100%;
-    height: 200px;
-    margin: 0 auto;
+.term-info{
+  padding:$padding;
+  .name{
+    text-align: left;
+    font-size: $fontSizeH3;
+    @include ellipsisOne();
+    margin-bottom: $padding;    
   }
-  .playCount {
-    position: absolute;
-    bottom: 140px;
-    right: 20px;
-    color: #fff;
+  .term-info-ramk{
+    .price{
+      font-size: $fontSizeH2;
+      color:$colorRedDeep;
+    }
+    .original-price{
+      font-size: $fontSizeTips;
+      color:$fontColor;
+      text-decoration: line-through;
+    }
+    .total-term{
+      font-size: $fontSizeTips;
+      color:$colorYellowEasyDeep;
+      float: right;
+    }
   }
-
-  .term-info {
-    margin: 0;
-    padding: $padding $padding 0;
-
-    @extend %clearfix;
-    P {
-      display: inline-block;
-      text-align: justify;
-      position: relative;
+  .term-info-footer{
+    margin-top: 6px;
+    .play-count{
+      margin-left: 20px;
+      font-size: $fontSizeTips;
+      color:$fontColor;
     }
-    .termName {
-      font-size: $fontSizeH4;
-      display: inline-block;
-      width: 200px;
-      line-height: 1.5;
-      margin: 0;
-      @include ellipsisOne();
-    }
-
-    .totalTerm {
-      position: absolute;
-      right: -70px;
-      top: 5px;
-      font-size: $fontSize;
-    }
-
     .termTypeName {
       display: inline-block;
       float: right;
       font-size: $fontSizeTips;
-      border: 1px solid $bgGray;
-      color: $fontColorBlack;
-      padding: 5px;
+      // border: 1px solid $bgGray;
+      color: #fff;
+      padding: 5px 10px;
+     border-radius: 5px;
+      background-color: $colorGrayDisabled;
     }
-  }
-  .rater {
-    // padding-left: $padding;
-    margin: 0 $padding;
-    border-bottom: 2px solid $bgGray;
-    padding-bottom: 5px;
-    @extend %clearfix;
-    span {
-      float: right;
-      display: inline-block;
-      font-size: $fontSizeTips;
-      color: $fontColorBlack;
-      padding: 5px $padding;
-    }
-  }
-  .price {
-    font-size: $fontSize;
-    color: $fontColorBlack;
-    padding: $padding/2 $padding;
-
-    span {
-      // margin-left: .5em;
-      color: $colorRed;
-      font-size: $fontSizeH4;
-    }
-  }
-
-  .original-price {
-    padding-left: $padding;
-    text-decoration: line-through;
-    color: $fontColorGray;
-
-    span {
-      // padding-left: .5em;
+    .rater{
       font-size: $fontSizeTips;
     }
   }
+}
 }
 
 .content{

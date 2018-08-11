@@ -5,15 +5,11 @@
 <template>
   <div class="filter-file-box" >
     <div class=" clearfix" v-for="(item, index) in filterData" :key="index">
-      
-      <div :class="['filter-file-block-title', 'fa', item.status ? 'fa-angle-up' : 'fa-angle-down']" @click="item.status = !item.status;">
-        {{ item.name }}
-      </div>
-
+  
       <div v-show="item.status" class="filter-file-img-text">
-        <div  @click="setSelectedId(it)" :class="['filter-file-block-cell', {'active': selectedId == it.id }]" class="filter-filter" v-for="(it, ind) in item.list" :key="ind">
+        <div  @click="setSelectedId(item)" :class="['filter-file-block-cell', {'active': selectedId == item.id }]" class="filter-filter" v-for="(item, index) in filterData" :key="index" >
           <img src="~assets/img/download/download1.png" alt="">
-          <span>{{ it.name }}</span>
+          <span>{{ item.name }}</span>
         </div>
       </div>
 
@@ -61,7 +57,7 @@ export default {
   "~assets/css/core/vars";
 
 $filterW: 6em;
-$filterPadding: 1.2em;
+$filterPadding: 1em;
 
 .filter-file-block-title {
   @include halfpxline(0, #fff, 0 , 0, 1px, 0);
@@ -82,24 +78,26 @@ $filterPadding: 1.2em;
   @include halfpxline(0, #fff, 0 , 0, 1px, 0);
   // text-indent: 1.6em;
   text-align: center;
-  background: #f8f8f8;
+  // background: #f8f8f8;
+  background: #fff;
   line-height: 1;
 
   &.active {
-    background: #fff;
+    // background: #fff;
+     background: #f8f8f8;
     color: $colorYellowEasy;
 
-    &:before {
-      content: "";
-      position: absolute;
-      bottom: -7px;
-      left: 3.3em;
-      width: 3px;
-      height: 2em;
-      margin-top: -0.5em;
-      transform: rotate(90deg);
-      background: #9fcfe3;
-    }
+    // &:before {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: -7px;
+    //   left: 3.3em;
+    //   width: 3px;
+    //   height: 2em;
+    //   margin-top: -0.5em;
+    //   transform: rotate(90deg);
+    //   background: #9fcfe3;
+    // }
   }
 }
 
@@ -128,5 +126,6 @@ $filterPadding: 1.2em;
 img {
   height: 40px;
   margin: 0 auto;
+  margin-bottom: 6px;
 }
 </style>

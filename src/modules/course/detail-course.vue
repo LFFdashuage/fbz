@@ -1,5 +1,5 @@
 <!-- 
-	课程详情页
+	废弃-课程详情页
  -->
 <template>
 	<div class="detail" v-show="courseInfo.name" v-cloak>

@@ -228,6 +228,21 @@ const routes = [{
             routerTitle: '课程首页'
         }
     }, {
+        // 新课程
+        path: '/naw-course',
+        name: 'naw-course',
+        query: {
+            type: "", // 1：近期课程，0：所有课程，只是课程切换
+        },
+        component: loadView(loaded => {
+            require(['../modules/course/naw-course.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '课程',
+            routerTitle: '课程首页'
+        }
+    }, {
         // 课程
         path: '/course-nav',
         name: 'courseNav',
@@ -287,7 +302,7 @@ const routes = [{
             routerTitle: '专栏详情'
         }
     }, {
-        // 课程详情
+        // 课程详情-废弃
         path: '/course-detail',
         name: 'courseDetail',
         force: true,
@@ -301,6 +316,38 @@ const routes = [{
             uuid: '',
             title: '课程详情',
             routerTitle: '课程详情'
+        }
+    }, {
+        // 新课程详情
+        path: '/new-course-detail',
+        name: 'courseNewDetail',
+        force: true,
+        query: {
+            periodsId: "" // 课程期数Id
+        },
+        component: loadView(loaded => {
+            require(['../modules/course/course-new-detail.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '课程详情',
+            routerTitle: '课程详情'
+        }
+    }, {
+        // 套餐详情
+        path: '/package-detail',
+        name: 'packageDetail',
+        force: true,
+        query: {
+            periodsId: "" // 套餐Id
+        },
+        component: loadView(loaded => {
+            require(['../modules/course/package-detail.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '套餐详情',
+            routerTitle: '套餐详情'
         }
     }, {
         // 活动
@@ -867,6 +914,17 @@ const routes = [{
         meta: {
             uuid: '',
             title: '评论列表'
+        }
+    }, {
+        // 共赢
+        path: '/win-win',
+        name: 'winWin',
+        component: loadView(loaded => {
+            require(['../modules/user-center/win-win/win-win.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '共赢'
         }
     }
 ]

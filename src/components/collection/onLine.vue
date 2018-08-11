@@ -97,7 +97,7 @@ export default {
             if (_this.scrollerInfo.pageNum == 1) {
               _this.scrollerInfo.list = list;
             } else {
-              _this.scrollerInfo.list = _this.courseList.concat(list);
+              _this.scrollerInfo.list = _this.scrollerInfo.list.concat(list);
             }
 
             _this.scrollerInfo.pageNum++;

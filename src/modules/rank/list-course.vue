@@ -125,7 +125,7 @@
 									status: true,
 									id: item.id,
 									name: item.name,
-									list: item.children || []
+									// list: item.children || []
 								}
 							});
 						}

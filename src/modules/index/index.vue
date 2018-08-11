@@ -12,7 +12,7 @@
 			<div class="index-container scroll-fix">
 			
 				<div class="banner">
-		    	<swiper auto dots-position="center" :interval=2000 loop>
+		    	<swiper auto height="167px" dots-position="center" :interval=2000 loop class="shadow">
 		    	<!-- <swiper auto dots-position="center" :interval=2000 :list="bannerTopDatas" loop> -->
 		    		<swiper-item v-for="(item, index) in bannerTopDatas" :key="index">
 		    			<div class="banner-img" :style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
@@ -20,8 +20,9 @@
 		    	</swiper>
 				</div>
 				
-				<div v-if="user.level == 'commom'" class="join-in">
-					<label for="">现在加入，你讲获得200份免费协议资料。</label>
+				<div v-if="user.level == 'commom'"  class="join-in">
+					<label for="">现在加入，你将获得200份免费协议资料。</label>
+					<span class="join-btn" @click="joinIn">加入富班长</span>
 				</div>
 				
 				<div class="entry">
@@ -30,25 +31,9 @@
 					</div>
 				</div>
 				
-				<!-- 课程预告 -->
-				<el-card-more :card-more-data="coursePreview">
-					<scroller lock-y slot="content" height="127px" ref="scrollerBottomCourse" v-cloak>
-						<div @click.stop="stopTop" class="card-more-content-slot course-preview clearfix" >
-							<div @click="goPage({name: 'courseDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
-								<div class="course-preview-header">
-									<img :src="item.img" alt="头像">
-									<span>{{ item.author }}</span>
-								</div>
-								<p>{{ item.name }}</p>
-								<span>{{ item.date }}</span>
-							</div>
-						</div>
-					</scroller>
-				</el-card-more>
-
 				<!-- 培训头条 -->
 				<div class="index-news">
-					<div class="index-news-title">培训<span>头条</span></div>
+					<div class="index-news-title"></div> 
 					<div class="index-news-msg">
 						<swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
 				      <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
@@ -57,30 +42,64 @@
 					<div class="index-news-btn" @click="goPage({name: 'news'})">更多</div>
 				</div>
 
+				<!-- 课程预告 -->
+				<el-card-more :card-more-data="coursePreview" class="card-first">
+					<scroller lock-y slot="content" height="139px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+						<div @click.stop="stopTop" class="card-more-content-slot course-preview clearfix" >
+							<div @click="goPage({name: 'courseNewDetail', query: { periodsId: item.id } })" class="course-preview-block" v-for="(item, index) in coursePreview.list" :key="index">
+								<div class="course-preview-header">
+									<img :src="item.img" alt="头像">
+								</div>
+								<p class="author">{{ item.author }}</p>
+								<p class="name">{{ item.name }}</p>
+								<span>{{ item.date }}</span>
+							</div>
+						</div>
+					</scroller>
+				</el-card-more>
+
+				
+
 				<!-- 音频 -->
-				<el-card-more :card-more-data="tuijianAudioDatas">
-					<div class="card-more-content-slot clearfix" slot="content">
-						<el-card-more-block class="card-more-padding" v-for="(item, index) in tuijianAudioDatas.list" :card-more-block-data="item" :key="index"></el-card-more-block>
-					</div>
+				<el-card-more :card-more-data="tuijianAudioDatas" class="border-top">
+					<scroller lock-y slot="content" height="133px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+						<div @click.stop="stopTop" class="card-more-content-slot sound-preview clearfix" >
+							<div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="sound-preview-block" v-for="(item, index) in tuijianAudioDatas.list" :key="index">
+								<div class="sound-preview-header">
+									<img :src="item.src" alt="头像">
+                  <div class="icon">
+                    <img src="~assets/img/icon/icon-audio.png" alt="">
+                  </div>
+								</div>
+								<p>{{ item.name }}</p>
+							</div>
+						</div>
+					</scroller>
 				</el-card-more>
 
 				<!-- 视频 -->
 				<el-card-more :card-more-data="tuijianVideoDatas">
+					<scroller lock-y slot="content" height="146px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+						<div @click.stop="stopTop" class="card-more-content-slot screen-preview clearfix" >
+							<div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="screen-preview-block" v-for="(item, index) in tuijianVideoDatas.list" :key="index">
+								<div class="screen-preview-header">
+									<img :src="item.src" alt="头像">
+                  <div class="icon">
+                    <img src="~assets/img/icon/icon-video.png" alt="">
+                  </div>
+								</div>
+								<p>{{ item.name }}</p>
+                
+							</div>
+						</div>
+					</scroller>
+				</el-card-more>
+
+				<!-- 视频 <el-card-more :card-more-data="tuijianVideoDatas">
 					<div class="card-more-content-slot clearfix" slot="content">
 						<el-card-more-block class="card-more-padding" v-for="(item, index) in tuijianVideoDatas.list" :card-more-block-data="item" :key="index"></el-card-more-block>
 					</div>
-				</el-card-more>
-				<!-- <el-card-more :card-more-data="tuijianVideoDatas">
-					<div class="peixun-news" slot="content">
-						<el-img-text-news :img-text-data="item" @click="goPage({name: 'courseTypeDetail', query: { type: 'video', id: item.id }})" v-for="(item, index) in tuijianVideoDatas.list" :key="index"></el-img-text-news>
-					</div>
 				</el-card-more> -->
-
-				<!-- 培训导航推荐 -->
-				<a :href="bannerCenterDatas.adLinked" class="tuijian-banner">
-				<!-- <a href="bannerCenterDatas.adLinked" class="tuijian-banner" @click="goPage('course', {'type': 1})"> -->
-					<img :src="bannerCenterDatas.adImage" alt="">
-				</a>
 
 				<!-- 专栏订阅 -->
 				<el-card-more :card-more-data="specialColumn">
@@ -104,743 +123,652 @@
 </template>
 
 <script type="text/babel">
-  import { mapState } from 'vuex'
-	import hold from 'src/commons/hold'
-	import { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, TransferDom } from 'vux'
-	
-	import elTop from 'components/index/top'
-	import elTuijian from 'components/tuijian/tuijian'
-	import elImgText from 'components/img-text/img-text'
-	import elImgTextZhuanlan from 'components/img-text/img-text-zhuanlan'
-	import elVideo from 'components/video/video'
-	import elCardMore from 'components/card/card-more'
-	import elCardMoreBlock from 'components/card/card-more-block'
-	import elImgTextNews from 'components/img-text/img-text-news'
-	import elImgTextColumn from 'components/img-text/img-text-column'
+import { mapState } from "vuex";
+import hold from "src/commons/hold";
+import { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, TransferDom } from "vux";
 
-	import { getterIndex } from 'services/index';
+import elTop from "components/index/top";
+import elTuijian from "components/tuijian/tuijian";
+import elImgText from "components/img-text/img-text";
+import elImgTextZhuanlan from "components/img-text/img-text-zhuanlan";
+import elVideo from "components/video/video";
+import elCardMore from "components/card/card-more";
+import elCardMoreBlock from "components/card/card-more-block";
+import elImgTextNews from "components/img-text/img-text-news";
+import elImgTextColumn from "components/img-text/img-text-column";
 
-	import imgBanner from 'assets/img/banner-base.jpg'
+import { getterIndex } from "services/index";
 
-	export default {
-		name: 'index',
-		directives: {
-	    TransferDom
-	  },
-		components: { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, 
-			elTop, elTuijian, elImgText, elImgTextZhuanlan, elVideo, elCardMore, elCardMoreBlock, elImgTextNews, elImgTextColumn },
-	  data () {
-	    return {
-	    	imgBanner: imgBanner,
-	    	scrollerInfo: {
-					offsetBottom: 94
-				},
-	    	bannerWidthHeight: this.wordBook.bannerWidthHeight,
-	      bannerTopDatas: [],
-	      bannerCenterDatas: {},
-	      bannerBottomDatas: [],
-	      entryDatas: getterIndex.entryDatas,
-	      coursePreview: {
-	      	title: "课程预告",
-	      	url: {
-	      		name: "courseNav"
-	      	},
-	      	text: '更多',
-	      	list: []
-	      },
-	      tuijianAudioDatas: {
-	      	title: "音频",
-	      	url: {
-	      		name: 'rankList',
-	      		params: {
-		      		type: 'audio'
-		      	}
-	      	},
-	      	text: '查看更多',
-	      	list: []
-	      },
-	      tuijianVideoDatas: {
-	      	title: "视频",
-	      	url: {
-	      		name: 'rankList',
-	      		params: {
-		      		type: 'video'
-		      	}
-	      	},
-	      	text: '查看更多',
-	      	list: []
-	      },
-	      indexNewsList: {
-	      	title: '培训头条',
-	      	newsTop: {
-	      		title: "",
-	      		id: ""
-	      	},
-	      	url: {
-	      		name: 'news'
-	      	},
-	      	text: '查看更多',
-	      	list: [],
-	      	timeout: ''
-	      },
-	      specialColumn: {
-	      	title: "专栏订阅",
-	      	url: {
-	      		name: "specialColumn"
-	      	},
-	      	text: "查看更多",
-	      	list: []
-	      },
-	      entranceData: [
-		      {
-		      	title: "赚钱风口",
-		      	titleEn: "Make money outlet",
-		      	img: "outlet"
-		      },{
-		      	title: "平台服务",
-		      	titleEn: "Platform services",
-		      	img: "service"
-		      },{
-		      	title: "招商融资",
-		      	titleEn: "Investment financing",
-		      	img: "investment"
-		      },{
-		      	title: "技术支持",
-		      	titleEn: "Technical support",
-		      	img: "support"
-		      }
-		    ]
-	    }
-	  },
-    computed: {
-      ...mapState({
-        user: state => state.user
-      })
+import imgBanner from "assets/img/banner-base.jpg";
+
+export default {
+  name: "index",
+  directives: {
+    TransferDom
+  },
+  components: {
+    Scroller,
+    Group,
+    Cell,
+    Swiper,
+    SwiperItem,
+    Card,
+    Panel,
+    Popup,
+    XInput,
+    XButton,
+    elTop,
+    elTuijian,
+    elImgText,
+    elImgTextZhuanlan,
+    elVideo,
+    elCardMore,
+    elCardMoreBlock,
+    elImgTextNews,
+    elImgTextColumn
+  },
+  data() {
+    return {
+      imgBanner: imgBanner,
+      scrollerInfo: {
+        offsetBottom: 94
+      },
+      bannerWidthHeight: this.wordBook.bannerWidthHeight,
+      bannerTopDatas: [],
+      bannerBottomDatas: [],
+      entryDatas: getterIndex.entryDatas,
+      coursePreview: {
+        title: "课程预告",
+        url: {
+          name: "courseNav"
+        },
+        text: "更多",
+        list: []
+      },
+      tuijianAudioDatas: {
+        title: "音频",
+        url: {
+          name: "rankList",
+          params: {
+            type: "audio"
+          }
+        },
+        text: "更多",
+        list: []
+      },
+      tuijianVideoDatas: {
+        title: "视频",
+        url: {
+          name: "rankList",
+          params: {
+            type: "video"
+          }
+        },
+        text: "更多",
+        list: []
+      },
+      indexNewsList: {
+        title: "培训头条",
+        newsTop: {
+          title: "",
+          id: ""
+        },
+        url: {
+          name: "news"
+        },
+        text: "更多",
+        list: [],
+        timeout: ""
+      },
+      specialColumn: {
+        title: "专栏订阅",
+        url: {
+          name: "specialColumn"
+        },
+        text: "更多",
+        list: []
+      },
+      entranceData: [
+        {
+          title: "赚钱风口",
+          titleEn: "Make money outlet",
+          img: "outlet"
+        },
+        {
+          title: "平台服务",
+          titleEn: "Platform services",
+          img: "service"
+        },
+        {
+          title: "招商融资",
+          titleEn: "Investment financing",
+          img: "investment"
+        },
+        {
+          title: "技术支持",
+          titleEn: "Technical support",
+          img: "support"
+        }
+      ]
+    };
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  watch: {
+    bannerTopDatas: (newValue, oldValue) => {
+      console.log(1);
+      // alert(0)
+    }
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    stopTop() {},
+
+    fetchData() {
+      let _this = this;
+      // 获取所有数据
+      // _this.getAd();
+      _this.getHomePage();
     },
-    watch: {
-    	bannerTopDatas: (newValue, oldValue) => {
-    		console.log(1)
-    		// alert(0)
-    	}
-    },
-	  mounted () {
-	  	this.fetchData();
-	  },
-	  methods: {
-	  	stopTop () {j
 
-	  	},
-	  	fetchData	() {
-	  		let _this = this;
-	  		// 获取所有数据
-	  		_this.getBanner(0);
-	  		_this.getCourse();
-	  		_this.getAudio();
-	  		_this.getVideo();
-	  		_this.getNews();
-	  		// _this.getAd();
-	  		_this.getColumn();
-	  	},
-	  	getAd () {
-	  		let _this = this;
-  		 	_this.$http.post('/api/goods/recommend'
-	  			).then(function(e) {
-	  				if(e.data.code == 200) {
+    //获取主页全部数据
+    getHomePage() {
+      let _this = this;
+      _this.$http.post("/api/index/homePage").then(function(e) {
+        let resData = e.data.data,
+          topList = [],
+          audioList = [],
+          videoList = [],
+          newsList = [],
+          lessonsList = [],
+          termList = [];
+        if (e.data.code == 200) {
+          // console.log(e.data.data)
 
-	  				} else {
-	  					_this.$vux.alert.show({
-	  						content: e.data.msg
-	  					})
-	  				}
-	  				_this.resetView();
-	  			});
-	  	},
-	  	getBanner (type) {
-	  		let _this = this;
-  		 	_this.$http.post('/api/index/advertisement',
-	  				this.qs.stringify({
-							type: type
-						})
-	  			).then(function(e) {
-	  				let resData = e.data.data,
-	  						topList = [],
-	  						midList = [];
-	  				if(e.data.code == 200) {
-	  					if(resData.adTopList.length > 0) {
-		  					topList = resData.adTopList.map(function(item, index){
-		  						return {
-		  							url: item.adLinked,
-									  img: item.adImage
-		  						}
-		  					});
-	  					}
-	  					_this.bannerTopDatas = topList;
+          //top 轮播
+          if (resData.adTopList.length > 0) {
+            topList = resData.adTopList.map(function(item, index) {
+              return {
+                url: item.adLinked,
+                img: item.images
+              };
+            });
 
-	  					if(resData.adMidList.length > 0) {
-		  					_this.bannerCenterDatas = resData.adMidList[0];
-	  					}
-	  				} else {
-	  					_this.$vux.alert.show({
-	  						content: e.data.msg
-	  					})
-	  				}
-	  				_this.resetView();
-	  			});
-	  	},
-	  	getAudio () {
-	  		let _this = this;
-  		 	_this.$http.post('/api/product/online/list',
-	  				_this.qs.stringify({
-							onlineType: 0, // 音频
-							topTag: 1,
-							freeStatus: '',
-							showRankingStatus: '',
-							productId: "",
-							pageNum: 1,
-							pageSize: 4,
-							customerId: ''
-						})
-	  			).then(function(e) {
-	  				if(e.data.code == 200) {
-	  					let res = e.data.data,
-	  							list = [];
-	  					
-	  					if(res.result.length > 0) {
-	  						list = res.result.map(function(item, index){
-	  							return {
-										id: item.id,
-										src: item.images,
-										name: item.name,
-										originalPrice: item.originalPrice,
-										price: item.price,
-										desc: item.subscribeStatus,
-										type: 'audio'
-									}
-								})
+            _this.bannerTopDatas = topList;
+          }
+          //音频
+          if (resData.audioList.length > 0) {
+            audioList = resData.audioList.map(function(item, index) {
+              return {
+                id: item.id,
+                src: item.images,
+                name: item.name,
+                type: "audio"
+              };
+            });
 
-								_this.tuijianAudioDatas.list = list;
-	  					}
+            _this.tuijianAudioDatas.list = audioList;
+          }
 
-	  				} else {
-	  					_this.$vux.alert.show({
-	  						content: e.data.msg
-	  					})
-	  				}
-	  				_this.resetView();
-	  			});
-	  	},
-	  	getVideo () {
-	  		let _this = this;
-  		 	_this.$http.post('/api/product/online/list',
-	  				this.qs.stringify({
-							onlineType: 1, // 视频
-							topTag: 1,
-							freeStatus: '',
-							showRankingStatus: '',
-							productId: "",
-							pageNum: 1,
-							pageSize: 4,
-							customerId: ''
-						})
-	  			).then(function(e) {
-	  				if(e.data.code == 200) {
-	  					let res = e.data.data,
-	  							list = [];
-	  					
-	  					if(res.result.length > 0) {
-	  						list = res.result.map(function(item, index){
-	  							return {
-										id: item.id,
-										src: item.images,
-										name: item.name,
-										originalPrice: item.originalPrice,
-										price: item.price,
-										desc: item.subscribeStatus,
-										type: 'video'
-									}
-								})
+          //视频
+          if (resData.videoList.length > 0) {
+            videoList = resData.videoList.map(function(item, index) {
+              return {
+                id: item.id,
+                src: item.images,
+                name: item.name,
+                type: "video"
+              };
+            });
 
-								_this.tuijianVideoDatas.list = list;
-	  					}
-	  				} else {
-	  					_this.$vux.alert.show({
-	  						content: e.data.msg
-	  					})
-	  				}
-	  				_this.resetView();
-	  			});
-	  	},
-	  	getNews () {
-	  		let _this = this;
-  		 	_this.$http.post('/api/news/list',
-	  				this.qs.stringify({
-							"topTag": 1,
-							"pageNum": 1,
-							"pageSize": 4,
-						})
-	  			).then(function(e) {
-	  				if(e.data.code == 200) {
-	  					let res = e.data.data,
-	  							list = [];
-	  					if(res.result && res.result.length > 0) {
-	  						list = res.result.map(function(item, index){
-	  							if(index == 0) {
-			  						_this.indexNewsList.newsTop = {
-			  							id: item.id,
-			  							title: item.title,
-			  							ind: index
-			  						};
-	  							}
-	  							return {
-										time: item.updateTime || item.createTime,
-										desc: item.content,
-										id: item.id,
-										readCount: item.readCount,
-										img: _this.resolveImg(item.images),
-										title: item.title,
-										ind: index
-									}
-	  						});
-	  						_this.indexNewsList.list = list;
-	  					}
-	  				} else {
-	  					_this.$vux.alert.show({
-	  						content: e.data.msg
-	  					})
-	  				}
-	  				_this.resetView();
-	  			});
-	  	},
-	  	updateNews () {
-				// // 定时更新显示的广告
-	  	// 	let _this = this;
-				// if(_this.indexNewsList.timeout) 
-				// 	clearTimeout(_this.indexNewsList.timeout);
-				// let newsTop = _this.indexNewsList.newsTop,
-				// 	newsTopList = _this.indexNewsList.list,
-				// 	ind = newsTop.ind;
-				// if(ind == 3) {
-				// 	_this.indexNewsList.newsTop = {
-				// 		id: newsTopList[0].id,
-				// 		title: newsTopList[0].title,
-				// 		ind: 0
-				// 	}
-				// } else {
-				// 	_this.indexNewsList.newsTop = {
-				// 		id: newsTopList[ind+1].id,
-				// 		title: newsTopList[ind+1].title,
-				// 		ind: newsTopList[ind+1].ind
-				// 	}	
-				// }
-				// _this.indexNewsList.timeout = setTimeout(_this.updateNews(), 10000);
-	  	},
-	  	getCourse () {
-	  		let _this = this;
+            _this.tuijianVideoDatas.list = videoList;
+          }
 
-	  		_this.$http.post('/api/curriculum/curriculumList',
-					_this.qs.stringify({
-						type: "",
-						pageNum: 1,
-						pageSize: 4
-					})).then(function(e) {
-						if(e.data.code == 200) {
-							let list = [];
-							if(e.data.data && e.data.data.result && e.data.data.result.length > 0) {
-								list = e.data.data.result.map(function(item, ind){
-									return {
-										id: item.periodsId,
-										img: item.authorImages,
-										author: item.authorName,
-										name: item.name,										
-										endDate: item.endDate,
-										date: item.startDate
-									}
-								});
-							}
-							_this.coursePreview.list = list;
-						}	else {
-							_this.$vux.alert.show({
-								content: e.data.msg
-							})
-						}
-	  				_this.resetView();
-					});
-	  	},
-	  	getColumn () {
-	  		let _this = this;
-	  		_this.$http.post(
-          "/api/product/term/list",
-          _this.qs.stringify({
-            pageNum: 1,
-            pageSize: 4,
-            topTag: 1
-          })
-        ).then(function(e) {
-          if (e.data.code == 200) {
-            let list = [];
-            if (e.data.data && e.data.data.result && e.data.data.result.length > 0) {
-              list = e.data.data.result.map(function(item, ind) {
-                return {
-                  id: item.termId,
-                  img: item.images,
-                  price: item.price,
-                  readCount: item.playCount,
-                  buyCount: item.buyCount,
-                  desc: item.remark,
-                  title: item.termName,
-                  totalTerm: item.totalTerm,
-                  upToDate: item.updateCount
+          //头条
+          if (resData.newsList && resData.newsList.length > 0) {
+            newsList = resData.newsList.map(function(item, index) {
+              if (index == 0) {
+                _this.indexNewsList.newsTop = {
+                  id: item.id,
+                  title: item.name,
+                  ind: index
                 };
-              });
-            }
-            _this.specialColumn.list = list;
-          } else {
-            _this.$vux.alert.show({
-              content: e.data.msg
+              }
+              return {
+                id: item.id,
+                img: _this.resolveImg(item.images),
+                title: item.name,
+                ind: index
+              };
+            });
+            _this.indexNewsList.list = newsList;
+          }
+
+          //课程预告
+          if (resData.lessonsList && resData.lessonsList.length > 0) {
+            lessonsList = resData.lessonsList.map(function(item, ind) {
+              return {
+                id: item.id,
+                img: item.images,
+                author: item.authorName,
+                name: item.name,
+                date: item.startDate
+              };
+            });
+            _this.coursePreview.list = lessonsList;
+          }
+
+          //专栏
+          if (resData.termList && resData.termList.length > 0) {
+            termList = resData.termList.map(function(item, ind) {
+              return {
+                id: item.id,
+                img: item.images,
+                price: item.price,
+                readCount: item.playCount,
+                title: item.name,
+                totalTerm: item.totalTerm,
+                upToDate: item.updateCount
+              };
             });
           }
-  				_this.resetView();
-        });
-	  	},
-	  	entry (url, type) {
-	  		this.$router.push({ name: url, params: { type: type }})
-	  	},
-	  	videoAudioDetail (url, id) {
-	  		this.$router.push({ name: url, params: { id: id }})
-	  	},
-			resetView () {
-				let _this = this;
-				this.$nextTick(() => {
-          this.$refs.scrollerBottom.reset();
+          _this.specialColumn.list = termList;
+        } else {
+          _this.$vux.alert.show({
+            content: e.data.msg
+          });
+        }
+        _this.resetView();
+      });
+    },
+    //加入富班长
+    joinIn() {
+      // this.$router.push({ name: "banding"});
+      this.$router.push({ name: "binding" });
+    },
+    getAd() {
+      let _this = this;
+      _this.$http.post("/api/goods/recommend").then(function(e) {
+        if (e.data.code == 200) {
+          console.log(e.data);
+        } else {
+          _this.$vux.alert.show({
+            content: e.data.msg
+          });
+        }
+        _this.resetView();
+      });
+    },
 
-          setTimeout(()=>{
-	          this.$nextTick(() => {
-	          	this.$refs.scrollerBottom.reset();
-	          })
-          }, 1000)
-        })
-			}
-	  }
-	}
+    updateNews() {
+      // // 定时更新显示的广告
+      // 	let _this = this;
+      // if(_this.indexNewsList.timeout)
+      // 	clearTimeout(_this.indexNewsList.timeout);
+      // let newsTop = _this.indexNewsList.newsTop,
+      // 	newsTopList = _this.indexNewsList.list,
+      // 	ind = newsTop.ind;
+      // if(ind == 3) {
+      // 	_this.indexNewsList.newsTop = {
+      // 		id: newsTopList[0].id,
+      // 		title: newsTopList[0].title,
+      // 		ind: 0
+      // 	}
+      // } else {
+      // 	_this.indexNewsList.newsTop = {
+      // 		id: newsTopList[ind+1].id,
+      // 		title: newsTopList[ind+1].title,
+      // 		ind: newsTopList[ind+1].ind
+      // 	}
+      // }
+      // _this.indexNewsList.timeout = setTimeout(_this.updateNews(), 10000);
+    },
+
+    entry(url, type) {
+      this.$router.push({ name: url, params: { type: type } });
+    },
+
+    videoAudioDetail(url, id) {
+      this.$router.push({ name: url, params: { id: id } });
+    },
+
+    resetView() {
+      let _this = this;
+      this.$nextTick(() => {
+        this.$refs.scrollerBottom.reset();
+
+        setTimeout(() => {
+          this.$nextTick(() => {
+            this.$refs.scrollerBottom.reset();
+          });
+        }, 1000);
+      });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-	@import '~lib/sandal/core';
-	@import '~assets/css/core/functions', '~assets/css/core/mixins', '~assets/css/core/vars';
-	
-	@import '~assets/css/entry';
-	@import '~assets/css/form';
-	
-	$playImgW: 60px;
-	$playBtnW: 30px;
+@import "~lib/sandal/core";
+@import "~assets/css/core/functions",
+  "~assets/css/core/mixins",
+  "~assets/css/core/vars";
 
-	.index {
-		height: 100%;
-		width: 100%;
-		padding-top: $indexTopH;
-		// padding-bottom: 30px;
-	}
+@import "~assets/css/entry";
+@import "~assets/css/form";
 
-	.ad {
-		margin: 0 auto;
-	}
+.card-first {
+  border-top: 0 !important;
+}
 
-	.banner-img {
-		width: 100%;
-		height: 100%;
-		background: no-repeat;
-		background-size: cover;
-		background-position: center;
-	}
+$playImgW: 60px;
+$playBtnW: 30px;
 
-	.course-others {
-		@extend %clearfix;
-		padding: $padding;
+.index {
+  height: 100%;
+  width: 100%;
+  padding-top: $indexTopH;
+  // padding-bottom: 30px;
+}
 
-		a {
-			float: left;
-			width: 50%;
-			display: block;
+.banner {
+  padding: 5px $padding;
+  border-radius: 10px;
 
-			&:nth-child(odd) {
-				padding-right: 5px;
-			}
+  .shadow {
+    box-shadow: 0px 2px 15px #888888;
+    border-radius: 10px;
+  }
+}
+.banner-img {
+  width: 100%;
+  height: 100%;
+  background: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
 
-			&:nth-child(even) {
-				padding-left: 5px;
-			}
-		}
+.card-more-content {
+  padding-top: 15px;
+}
 
-		img {
-			width: 100%;
-		}
-	}
-	
-	.tuijian-data {		    
-		img {
-			border-radius: $tuijianImgW
-		}
-	}
+.card-more-content-slot {
+  padding: $uiMarginH 0;
+}
 
-	.card-block {
-		.card-block-header {
-			position: relative;
-			padding: 0 $padding;
-			@include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
-			line-height: 50px;
+.card-more-padding {
+  border-right: 5px solid transparent;
 
-			h5 {
-				font-size: $fontSizeH4;
-				color: $fontColorBlack;
-			}
+  &:nth-child(even) {
+    border-left: 5px solid transparent;
+    border-right: 0;
+  }
+}
 
-			.link {
-				position: absolute;
-				top: 0;
-				right: $padding;
+.join-in {
+  width: 100%;
+  line-height: 34px;
+  padding: $uiMarginH $padding;
+  display: flex;
 
-				span {
-					margin-left: .5em;
-				}
-			}
-		}
-
-		.card-block-content {
-			padding: 0 $padding;
-		}
-	}
-
-	.quotation-index {
-		padding: $padding 0;
-		display: flex;
-
-		.quotation-index-img {
-			width: 102px;
-			height: 80px;
-			background-size: cover;
-		}
-
-		p {
-			flex: 1;
-			padding-left: 1em;
-			line-height: 2;
-			@include ellipsisMore(3);
-		}
-	}
-
-	// 推荐banner
-	.tuijian-banner {
-		@include uiBorderTop();
- 		padding: $padding;
+  label {
+    padding-left: 30px;
+    font-size: $fontSizeH5;
+    @include ellipsisOne();
+    flex: 1;
     display: block;
+    background: #fff url(~assets/img/index/broadcast.png) no-repeat;
+    background-position: 5px center;
+    background-size: auto 55%;
+  }
 
- 		img {
- 			width: 100%;
- 		}
-	}
+  .join-btn {
+    padding: 0 $padding;
+    background-color: #b72d20;
+    border-radius: 34px;
+    font-size: $fontSize;
+    color: #fff;
+  }
+}
 
-	// 培训头条新闻
-	.peixun-news {
-		padding: 0;
+.course-preview {
+  width: 180%;
+  margin-left: -$padding;
+  padding: 0;
+}
 
-		.img-text {
-			padding-left: 0;
-			padding-right: 0;
-		}
-		
-		.peixun-block {
-			position: relative;
-			@include ellipsisOne;
-			line-height: 30px;
-			text-indent: 20px;
+.course-preview-block {
+  float: left;
+  width: 25%;
+  // padding: 0 $padding;
+  // line-height: 1.75;
+  // border-right: 1px solid $borderColor;
+  text-align: center;
 
-			&:before {
-				content: "";
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 0;
-		    height: 0;
-		    border-top: 5px solid transparent;
-		    border-left: 10px solid $fontColorGray;
-		    border-bottom: 5px solid transparent;
-		    margin-top: 10px;
-			}
-		}
-	}
+  &:last-child {
+    border-right-width: 0;
+  }
 
-	.card-more-content {
-		padding-top: 15px;
-	}
+  .course-preview-header {
+    position: relative;
+    width: $tuijianImgW + 36px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
 
-	.card-more-content-slot {
-		padding: $uiMarginH 0;
-	}
+    img {
+      width: $tuijianImgW;
+      height: $tuijianImgW;
+      margin: 0 auto;
+      border-radius: $tuijianImgW;
+    }
 
-	.card-more-padding {
-		border-right: 5px solid transparent;
-		
-		&:nth-child(even) {
-			border-left: 5px solid transparent;
-			border-right: 0;	
-		}
-	}
+    span {
+      width: 20px;
+      line-height: 1.35;
+      margin: 0 auto;
+      margin-left: 1em;
+      color: $fontColorGray;
+      word-break: break-all;
+      white-space: normal;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .author {
+    font-size: $fontSizeH5;
+    @include ellipsisOne();
+    margin-left: 10px;
+    width: 90%;
+    margin-top: 6px;
+  }
 
-	.join-in {
-		width: 100%;
-		line-height: 34px;
-		padding: $uiMarginH $padding;
-		font-size: $fontSizeH5;
-		display: flex;
+  .name {
+    color: $fontColorGray;
+    @include ellipsisOne();
+    margin-left: 10px;
+    width: 90%;
+    margin-top: 6px;
+    font-size: $fontSizeTips;
+  }
 
-		label {
-			@include ellipsisOne();
-			flex: 1;
-			display: block;
-		}
+  & > span {
+    color: $fontColorGray;
+    font-size: 10px;
+  }
+}
+.border-top {
+  @include uiBorderTop();
+}
 
-		.join-btn {
-			padding: 0 .8em;
-			background-color: #b72d20;
-			border-radius: 34px;
-			color: #fff;
-		}
-	}
+.sound-preview {
+  width: 180%;
+  margin-left: -$padding;
+  padding: 0;
+  padding: $padding 0;
+}
 
-	.course-preview {
-		width: 180%;
-		margin-left: -$padding;
-		padding: 0;
-		padding: $padding 0;
-	}
+.sound-preview-block {
+  float: left;
+  width: 25%;
+  // padding: 0 $padding;
+  padding: 0 6px;
+  line-height: 1.75;
+  // border-right: 1px solid $borderColor;
+  text-align: center;
 
-	.course-preview-block {
-		float: left;
-		width: 25%;
-		padding: 0 $padding;
-		line-height: 1.75;
-		border-right: 1px solid $borderColor;
-		text-align: center;
+  &:last-child {
+    border-right-width: 0;
+  }
 
-		&:last-child {
-			border-right-width: 0;
-		}
+  .sound-preview-header {
+    width: 145px;
+    margin: 0 auto;
+    text-align: center;
+     position: relative;
 
-		.course-preview-header {
-			position: relative;
-			width: $tuijianImgW + 36px;
-			margin: 0 auto;
-			text-align: center;
-			display: flex;
+    .icon {
+      position: absolute;
+      left: -20px;
+      top: 10px;
+      width: 66px;
+      text-align: center;
 
-			img {
-				width: $tuijianImgW;
-				height: $tuijianImgW;
-				margin: 0 auto;
-				border-radius: $tuijianImgW;
-			}
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
-			span {
-				width: 20px;
-				line-height: 1.35;
-				margin: 0 auto;
-				margin-left: 1em;
-				color: $fontColorGray;
-				word-break: break-all;
-				white-space: normal;
-    		display: flex;
-		    align-items: center;
-			}
-		}
+    img {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+    }
+  }
 
-		& > p {
-			@include ellipsisOne();
-			width: 90%;
-			color: $fontColorBlack;
-		}
+  & > p {
+    @include ellipsisOne();
+    width: 90%;
+    margin-left: 10px;
+    color: $fontColorBlack;
+    margin-top: 6px;
+  }
+}
+.screen-preview {
+  width: 210%;
+  margin-left: -$padding+1px;
+  padding: 0;
+  padding: $padding 0;
+}
 
-		& > span {
-			color: $fontColorGray;
-		}
-	}
+.screen-preview-block {
+  float: left;
+  width: 25%;
+  padding: 0 6px;
+  line-height: 1.75;
+  // border-right: 1px solid $borderColor;
+  text-align: center;
 
-	.index-news {
-		@include uiBorderTop();
-		height: 48px + $uiMarginH;
-		padding: $uiMarginH $padding;
-		line-height: 48px - $uiMarginH*2;
-		display: flex;
+  &:last-child {
+    border-right-width: 0;
+  }
 
-		.index-news-title {
-			width: 7em;
-			font-size: $fontSizeH3;
-			color: $fontColorBlack;
-			font-weight: bolder;
+  .screen-preview-header {
+    width: 167px;
+    // height: 88px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
 
-			span {
-				position: relative;
-				width: 3em;
-				height: 30px;
-				margin-left: .3em;
-				font-size: inherit;
-				color: #fff;
-				text-align: center;
-				background: #b72d20;
-				border-radius: $borderRadius;
-				display: inline-block;
+    .icon {
+      position: absolute;
+      left: -20px;
+      top: 10px;
+      width: 66px;
+      text-align: center;
 
-				&:before {
-					content: "";
-					position: absolute;
-					top: 0;
-					right: -20px;
-					width: 20px;
-					height: 100%;
-					background: url(~assets/img/index/index-news.png) no-repeat;
-					background-position: left;
-					background-size: auto 100%;
-				}
-			}
-		}
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
-		.index-news-msg {
-			flex: 1;
-			height: 99%;
-			margin-right: 1em;
-			overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-			p {
-				@include ellipsisMore(1);
-				font-size: $fontSizeH5;
-			}
-		}
-		
-		.index-news-btn {
-			position: relative;
-			width: 3em;
-			color: $fontColorGray;
-			text-indent: .5em;
-			@include halfpxline(0, $fontColorGray, 0, 0, 0, 2px);
+  & > p {
+    @include ellipsisOne();
+    margin-left: 10px;
+    width: 90%;
+    color: $fontColorBlack;
+    margin-top: 6px;
+  }
+}
 
-			&:after {
-				content: "";
-				position: absolute;
-				top: 50%;
-				left: 0;
-				height: $fontSizeH5 * 2;
-				width: 1px;
-				margin-top: - $fontSizeH5/2;
-			}
-		}
-	}
+.index-news {
+  // @include uiBorderTop();
+  height: 40px;
+  // padding: $uiMarginH $padding;
+  padding: 10px $padding;
+  line-height: 40px - $uiMarginH*2;
+  display: flex;
+  background-color: #f6f7f6;
 
-	@keyframes changeNews {
-		0% {
-			transform: translateY(0);
-		}
-		100% {
-			transform: translateY(-32px);
-		}
-	}
-	
+  .index-news-title {
+    width: 6em;
+    background: url(~assets/img/index/headlines.png) no-repeat;
+    background-position: 5px 5px;
+    background-size: auto 80%;
+  }
+
+  .index-news-msg {
+    flex: 1;
+    height: 99%;
+    margin-right: 1em;
+    overflow: hidden;
+
+    p {
+      @include ellipsisMore(1);
+      font-size: $fontSizeH5;
+    }
+  }
+
+  .index-news-btn {
+    position: relative;
+    width: 3em;
+    // color: $fontColorGray;
+    color: $colorYellowEasy;
+    text-indent: 0.5em;
+    // @include halfpxline(0, $fontColorGray, 0, 0, 0, 2px);
+
+    // &:after {
+    //   content: "";
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 0;
+    //   height: $fontSizeH5 * 2;
+    //   width: 1px;
+    //   margin-top: - $fontSizeH5+9px;
+    // }
+  }
+}
+
+@keyframes changeNews {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-32px);
+  }
+}
 </style>

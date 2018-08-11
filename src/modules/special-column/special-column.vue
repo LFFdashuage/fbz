@@ -8,8 +8,7 @@
 
           <!-- 轮播图 -->
           <div class="special-swiper-img">
-            <group-title class="title">今日推荐</group-title>
-            <swiper loop auto :list="swiperImg" :index="swiperImgInt"></swiper>
+            <swiper loop auto height="129px" :list="swiperImg" :index="swiperImgInt"></swiper>
           </div>
 
           <!-- 四个小图标 -->
@@ -22,8 +21,13 @@
 
           <!-- 底部列表 -->
           <div>
-            <group-title class="title">热门专栏</group-title>
-            <el-img-text-special v-for="(item, index) in scrollerInfo.specialList" :img-text-data="item" :key="index"> </el-img-text-special> 
+            <div class="card-more-header"><h5>热门专栏</h5></div>
+            <!-- <el-img-text-special v-for="(item, index) in scrollerInfo.specialList" :img-text-data="item" :key="index"> </el-img-text-special>  -->
+           
+            <div class="list-box">
+              <el-img-text-column v-for="(item, index) in scrollerInfo.specialList" :img-text-data="item" :key="index"></el-img-text-column>
+            </div>
+            
             <el-load-more :load-all="scrollerInfo.loadAll"></el-load-more>
           </div>
 
@@ -33,15 +37,16 @@
 </template>
 
 <script type="text/babel">
-import { GroupTitle, Swiper, SwiperItem, Scroller } from "vux";
+import { Swiper, SwiperItem, Scroller } from "vux";
 import elLoadMore from "components/load-more/load-more";
 import elImgTextSpecial from "components/img-text/img-text-special";
+import elImgTextColumn from "components/img-text/img-text-column";
 
 export default {
   name: "specialColumn",
   components: {
-    Swiper, SwiperItem, GroupTitle, Scroller,
-    elLoadMore, elImgTextSpecial
+    Swiper, SwiperItem, Scroller,
+    elLoadMore, elImgTextSpecial,elImgTextColumn
   },
   data() {
     return {
@@ -92,12 +97,21 @@ export default {
             ) {
               list = e.data.data.result.map(function(item, ind) {
                 return {
-                  images: item.images,
-                  termId: item.termId,
-                  remark: item.remark,
-                  termName: item.termName,
-                  playCount: item.playCount,
-                  totalTerm: item.totalTerm
+                  // images: item.images,
+                  // termId: item.termId,
+                  // remark: item.remark,
+                  // termName: item.termName,
+                  // playCount: item.playCount,
+                  // totalTerm: item.totalTerm
+
+                  id: item.termId,
+                  img: item.images,
+                  price: item.price,
+                  readCount: item.playCount,
+                  desc: item.remark,
+                  title: item.termName,
+                  totalTerm: item.totalTerm,
+                  upToDate: item.updateCount
                 };
               });
             }
@@ -197,20 +211,18 @@ export default {
 @import "~assets/css/course";
 
 .special-column {
-  background-color: $colorBgGray;
+   background-color: #fff;
 
   .special-swiper-img {
+    padding: $padding;
     background-color: #fff;
-    margin-bottom: $padding;
   }
 
   .special-router {
     width: 100%;
-    height: 90px;
     display: flex;
     justify-content: space-around;
-    margin-bottom: $padding;
-    background-color: #fff;
+    border-bottom: $padding solid $bgGray;
 
     div {
       height: 90px;
@@ -224,19 +236,35 @@ export default {
         width: 42px;
         padding: 5px;
         margin: $padding auto 5px;
-        border-radius: 50%;
-        background-color: $colorYellowEasy;
       }
     }
   }
-
-  .title {
-    font-size: $fontSizeH4;
-    background-color: #fff;
-    margin: 0;
-    padding: 5px 12px;
-    color: $fontColorBlack;
+  .list-box{
+    padding: 0 $padding;
+  }
+  .card-more-header {
+    position: relative;
+    padding: 0 $padding;
     @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+    line-height: 40px;
+
+    h5 {
+      font-size: $fontSizeH3;
+      color: $fontColorBlack;
+      font-weight: bolder;
+      display: inline-block;
+      padding: 0 6px;
+			
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10px;
+        height: 16px;
+        border-left: 3px solid $colorRedDeep;
+        margin-top: 11px;
+      }
+    }
   }
 
 }
