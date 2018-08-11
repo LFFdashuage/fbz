@@ -30,18 +30,12 @@
 						<p>{{ item.name }}</p>
 					</div>
 				</div>
-				
-				<!-- 培训头条 -->
-				<div class="index-news">
-					<div class="index-news-title"></div> 
-					<div class="index-news-msg">
-						<swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
-				      <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
-				    </swiper>
-					</div>
-					<div class="index-news-btn" @click="goPage({name: 'news'})">更多</div>
+				<!-- <div @click="goPage({name: 'class'})">
+					跳到班级主页
 				</div>
-
+				<div @click="goPage({name: 'classMate'})">
+					跳到同学页
+				</div> -->
 				<!-- 课程预告 -->
 				<el-card-more :card-more-data="coursePreview" class="card-first">
 					<scroller lock-y slot="content" height="139px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">

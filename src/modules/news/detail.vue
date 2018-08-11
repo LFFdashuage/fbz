@@ -7,7 +7,8 @@
 		<div class="news-detail-header">
 			<h5>{{ news.title }}</h5>
 			<div class="info">
-				<span>{{ news.time }}</span>
+				<span v-if="news.typeNames">分类：{{ news.typeNames	}}</span>
+        <span v-if="news.authorName">作者：{{ news.authorName }}</span>
 				<span v-if="news.readCount > 0">{{ news.readCount }}人浏览</span>
 			</div>
 		</div>
@@ -51,7 +52,8 @@
           spareType: "1", // spareType打赏类型 0产品 1头条
           id: this.$route.query.id,
           content: "",
-          time: "",
+          typeNames	: "",
+          authorName:"",
           readCount: "",
           img: "",
           commentCount: 0,
@@ -85,7 +87,8 @@
               let res = e.data.data;
               _this.news.title = res.title;
               _this.news.content = res.content;
-              _this.news.time = res.updateTime || res.createTime;
+              _this.news.typeNames	 = res.typeNames;
+              _this.news.authorName = res.authorName	;
               _this.news.readCount = res.readCount || 0;
               _this.news.commentCount = res.commentCount || 0;
               _this.news.isCollection = res.isCollection || 0;
@@ -128,13 +131,20 @@
             }
           });
       },
-      // 评价
-      comment() {
-        this.$router.push({
-          name: "comment",
-          query: { id: this.news.id }
-        });
-      }
+      // // 评价
+      // comment() {
+      //   this.$router.push({
+      //     name: "comment",
+      //     query: { id: this.news.id }
+      //   });
+      // },
+       // 跳转评论页面
+    comment() {
+      this.$router.push({
+        name: "commentType",
+        query: { id: this.news.id, type: 3 }
+      });
+    }
     }
   };
 </script>
@@ -183,12 +193,14 @@
     .info {
       font-size: $fontSizeTips;
       color: $fontColorGray;
+       display: flex;
+       justify-content: space-between ;
 
-      span {
-        &:last-child {
-          float: right;
-        }
-      }
+      // span {
+      //   &:last-child {
+      //     float: right;
+      //   }
+      // }
     }
   }
 

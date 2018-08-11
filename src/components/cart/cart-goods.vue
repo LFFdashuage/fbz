@@ -138,7 +138,8 @@ export default {
               customerId: _this.$store.state.user.userId,
               payPwd: pwd,
               orderId: _this.orderInfo.orderId,
-              type: _this.orderInfo.type
+              type: _this.orderInfo.type,
+              isFree:0 
             })
           )
           .then(function(e) {

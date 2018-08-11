@@ -915,16 +915,75 @@ const routes = [{
             uuid: '',
             title: '评论列表'
         }
-    }, {
-        // 共赢
-        path: '/win-win',
-        name: 'winWin',
+    },
+    {
+        // 我的班级
+        path: '/class',
+        name: 'class',
         component: loadView(loaded => {
-            require(['../modules/user-center/win-win/win-win.vue'], loaded)
+            require(['../modules/class/class.vue'], loaded)
         }),
         meta: {
             uuid: '',
-            title: '共赢'
+            title: '我的班级'
+        }
+    },
+    {
+        // 班费明细
+        path: '/class-money',
+        name: 'classMoney',
+        component: loadView(loaded => {
+            require(['../modules/class/class-money/class-money.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '班费明细'
+        }
+    }, {
+        // 动态
+        path: '/dynamic',
+        name: 'dynamicDetails',
+        component: loadView(loaded => {
+            require(['../modules/class/dynamic/dynamic-details.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '动态'
+        }
+    },
+    {
+        // 班级列表
+        path: '/class-list',
+        name: 'classList',
+        component: loadView(loaded => {
+            require(['../modules/class/class-list/class-list.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '班级'
+        }
+    },
+    {
+        // 创建班级
+        path: '/establish-class',
+        name: 'establishClass',
+        component: loadView(loaded => {
+            require(['../modules/class/establish-class/establish-class.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '创建班级'
+        }
+    }, {
+        // 同学列表
+        path: '/class-mate',
+        name: 'classMate',
+        component: loadView(loaded => {
+            require(['../modules/class/class-mate/class-mate.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '同学列表'
         }
     }
 ]
