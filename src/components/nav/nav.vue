@@ -37,6 +37,13 @@
                             name: 'index'
                         }
         			},{
+        				value: "comments-o",
+        				name: "活动",
+                        icon: 'activity',
+                        link: {
+                            name: 'activity'
+                        }
+        			},{
         				value: "headphones",
         				name: "课程",
                         icon: 'course',
@@ -49,13 +56,6 @@
                         icon: 'mall',
         				link: {
                             name: 'courseNav'
-                        }
-        			},{
-        				value: "comments-o",
-        				name: "线下活动",
-                        icon: 'activity',
-                        link: {
-                            name: 'activity'
                         }
         			},{
         				value: "user-o",
@@ -91,11 +91,11 @@
             // }
             if(to.name == 'index') {
                 this.navSelected = 0;
-            } else if(to.name == 'course') {
-                this.navSelected = 1;
-            } else if(to.name == 'courseNav') {
-                this.navSelected = 2;
             } else if(to.name == 'activity') {
+                this.navSelected = 1;
+            } else if(to.name == 'naw-course') {
+                this.navSelected = 2;
+            } else if(to.name == 'courseNav') {
                 this.navSelected = 3;
             } else if(to.name == 'userCenter') {
                 this.navSelected = 4

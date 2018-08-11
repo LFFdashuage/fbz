@@ -41,31 +41,32 @@
       <el-course-tuijian></el-course-tuijian>
     </div> -->
     <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" v-cloak class="centre">
-
-      <div class="package-box" @click="goPage('packageDetail', { periodsId: packageData.periodsId})">
+      <div class="package-box" v-for="(itema, indea) in scrollerInfo.lessonsPackages" :key="indea" @click="goPage('packageDetail', { periodsId: itema.packageId})">
         <div class="package-title">
-          <h4>{{packageData.name}}</h4>
-          <p>{{packageData.ramk}}</p>
+          <h4>{{itema.packageName}}</h4>
+          <p>{{itema.remark}}</p>
         </div>
 
-        <scroller lock-y  height="160px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+        <div class="aaa">
+        <scroller lock-y height="160px" ref="scrollerRight" v-cloak :scrollbar-x="false">
           <div  class="card-more-content-slot screen-preview clearfix" >
             <!-- <div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="screen-preview-block" v-for="(item, index) in packageData.taoCanDatas" :key="index"> -->
-              <div class="screen-preview-block" v-for="(item, index) in packageData.taoCanDatas" :key="index">
+              <div class="screen-preview-block" v-for="(item, index) in itema.lessons" :key="index">
               <div class="screen-preview-header">
-                <img :src="item.src" alt="头像">
+                <img :src="item.images" alt="头像">
               </div>
-              <p>{{ item.name }}</p>
+              <p>{{ item.lessonName }}</p>
               <p class="package-address">
                 <span>{{item.address}}</span>
-                <span>{{item.time}}</span>
+                <span>{{item.startDate}}</span>
               </p>
             </div>
           </div>
         </scroller>
-        <p class="original-price">¥{{ packageData.originalPrice | numToCash }}</p>
+        </div>
+        <p class="original-price">¥{{ itema.orginalPrice | numToCash }}</p>
         <div class="package-btn">
-          <div> 组合套餐{{ packageData.price | numToCash }}元</div>
+          <div> 组合套餐{{ itema.price | numToCash }}元</div>
         </div> 
       </div>
     
@@ -160,6 +161,24 @@
       <popup v-model="cityShow" position="top" :show-mask="false">
         <div class="city-show">
           选择城市
+          {{scrollerInfo.cityId}}
+          <div class="header-choice-box">
+
+            <checker
+              v-model="scrollerInfo.cityId"
+              default-item-class="checker-item"
+              selected-item-class="checker-item-selected"
+              >
+              <checker-item v-for="(item, index) in radioList.cityList" :key="index" :value="item.cityId" >{{item.cityName}}</checker-item>
+            </checker>
+          </div>
+
+          <div class="but-popup">
+            <div class="reset" @click="reset('cityId')">重置</div>
+            <div class="confirm" @click="confirm">确定</div>
+          </div>
+     
+
         </div>
       </popup>
     </div>
@@ -195,75 +214,41 @@ export default {
         courseTypeId: "", //课程类型id
         sort: "", //排序
         list: [
-          {
-            id: 28,
-            img:
-              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
-            title: "大方是是大V是",
-            time: "2018-02-122018-05-01",
-            address: "杭州",
-            surplus: 33,
-            price: 455636,
-            originalPrice: 345345
-          },
-          {
-            id: 19,
-            img:
-              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
-            title: "截图你随便巴尔查",
-            time: "2018-02-122018-05-01",
-            address: "杭州",
-            surplus: 33,
-            price: 455636,
-            originalPrice: 345345
-          }
+          // {
+          //   id: 28,
+          //   img:
+          //     "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
+          //   title: "大方是是大V是",
+          //   time: "2018-02-122018-05-01",
+          //   address: "杭州",
+          //   surplus: 33,
+          //   price: 455636,
+          //   originalPrice: 345345 
+          //   typeData:1,
+          //   remark: "描述",               
+          // }
+        ],
+        lessonsPackages:[
+      //      {
+      //   packageId: 14,
+      //   packageName: "从零到亿，影响以上的财富课",
+      //   remark: "逆向盈利+你想融资+逆向招商，三大课程首次打包",
+      //   orginalPrice: 30000,
+      //   price: 20000,
+      //   lessons: [
+      //     {
+      //       lessonId: 23,
+      //       images:
+      //         "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
+      //       lessonName: "如果人人份儿饭",
+      //       address: "杭州",
+      //       startDate: "2018-03-04-11:34"
+      //     }
+      //   ]
+      // },
         ]
       },
-      packageData: {
-        periodsId: 14,
-        name: "从零到亿，影响以上的财富课",
-        ramk: "逆向盈利+你想融资+逆向招商，三大课程首次打包",
-        originalPrice: 30000,
-        price: 20000,
-        taoCanDatas: [
-          {
-            type: 1,
-            id: 23,
-            src:
-              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
-            name: "如果人人份儿饭",
-            address: "杭州",
-            time: "2018-03-04-11:34"
-          },
-          {
-            type: 1,
-            id: 23,
-            src:
-              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
-            name: "如果人人份儿饭",
-            address: "苏州",
-            time: "2018-03-04-11:34"
-          },
-          {
-            type: 1,
-            id: 23,
-            src:
-              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
-            name: "如果人人份儿饭",
-            address: "苏州",
-            time: "2018-03-04-11:34"
-          },
-          {
-            type: 1,
-            id: 23,
-            src:
-              "http://fubanzhang.oss-cn-hangzhou.aliyuncs.com/images/086960367d644f7ab64dfd280a5a645f.jpg",
-            name: "如果人人份儿饭",
-            address: "杭州",
-            time: "2018-03-04-11:34"
-          }
-        ]
-      },
+      
       secondIcon: false,
       wholeIcon: false,
       priceIcon: false,
@@ -301,22 +286,23 @@ export default {
         authors: [],
         companys: [],
         courseTypes: [],
-        industrys: []
+        cityList: []
       }
     };
   },
   mounted() {
     this.fetchData();
     this.getselectorList();
+    this.getCitys();
   },
   methods: {
-    getselectorList() {
-      let _this = this;
+    getselectorList(){
+       let _this = this;
       _this.$http.post("/api/curriculum/selectorList").then(function(e) {
         _this.radioList.authors = e.data.data.authors;
         _this.radioList.companys = e.data.data.companys;
         _this.radioList.courseTypes = e.data.data.courseTypes;
-        _this.radioList.industrys = e.data.data.industrys;
+        // _this.radioList.industrys = e.data.data.industrys;
 
         // console.log(e.data.data.authors);
         // console.log(e.data.data.companys);
@@ -324,7 +310,16 @@ export default {
         // console.log(e.data.data.industrys);
       });
     },
+    getCitys() {
+      let _this = this;
+      _this.$http.post("/api/index/citys").then(function(e) {
+        
+        _this.radioList.cityList = e.data.data;
+        // console.log(e.data.data);
+      });
+    },
     confirm() {
+      this.scrollerInfo.list=[];
       this.fetchData("confirm");
     },
     fetchData(val) {
@@ -346,7 +341,7 @@ export default {
             pageNum: this.scrollerInfo.pageNum, //第几页
             pageSize: this.scrollerInfo.pageSize, //每页显示条数
             isRequired: 0, //是否为必修课程 0否 1是
-            cityId: "", //开课城市
+            cityId: this.scrollerInfo.cityId, //开课城市
             companyId: _this.scrollerInfo.companyId, //机构id
             authorId: _this.scrollerInfo.authorId, //	讲师id
             courseTypeId: _this.scrollerInfo.courseTypeId, //课程类型id
@@ -357,24 +352,27 @@ export default {
           })
         )
         .then(function(e) {
-          console.log(e);
+          console.log(e.data.data);
           if (e.data.code == 200) {
+            _this.scrollerInfo.lessonsPackages= e.data.data.lessonsPackages;
             let list = [];
             if (
               e.data.data &&
-              e.data.data.result &&
-              e.data.data.result.length > 0
+              e.data.data.lessons &&
+              e.data.data.lessons.length > 0
             ) {
-              list = e.data.data.result.map(function(item, ind) {
+              list = e.data.data.lessons.map(function(item, ind) {
                 return {
-                  id: item.termId,
+                  id: item.lessonsId,
                   img: item.images,
+                  originalPrice: item.originalPrice,
                   price: item.price,
-                  readCount: item.playCount,
-                  desc: item.remark,
-                  title: item.termName,
-                  totalTerm: item.totalTerm,
-                  upToDate: item.updateCount
+                  address: item.address,
+                  title:item.lessonsName,
+                  remark: item.remark,
+                  surplus: item.remainingNumber,
+                  time: item.startDate+"--"+item.endDate,
+                  typeData:item.sellTicketState,
                 };
               });
             }
@@ -385,9 +383,9 @@ export default {
             }
 
             if (_this.scrollerInfo.pageNum == 1) {
-              // _this.scrollerInfo.list = list;
+              _this.scrollerInfo.list = list;
             } else {
-              // _this.scrollerInfo.list = _this.scrollerInfo.list.concat(list);
+              _this.scrollerInfo.list = _this.scrollerInfo.list.concat(list);
             }
 
             _this.scrollerInfo.pageNum++;
@@ -519,12 +517,19 @@ export default {
       if (val == "courseTypeId") {
         this.scrollerInfo.courseTypeId = "";
         // this.curriculumShow = false;
+        this.fetchData();
       }
       if (val == "companyId") {
         this.scrollerInfo.companyId = "";
+        this.fetchData();
       }
       if (val == "authorId") {
         this.scrollerInfo.authorId = "";
+        this.fetchData();
+      }
+      if(val == "cityId"){
+        this.scrollerInfo.cityId = "";
+        this.fetchData();
       }
     },
     // goPage(code, status) {
@@ -820,5 +825,9 @@ $choiceBlockMargin: 6px;
     background-size: auto 50%;
     box-shadow: 3px 0px 4px $colorYellowEasy inset;
   }
+}
+.aaa{
+   overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 </style>

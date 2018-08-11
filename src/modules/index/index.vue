@@ -24,6 +24,21 @@
 					<label for="">现在加入，你将获得200份免费协议资料。</label>
 					<span class="join-btn" @click="joinIn">加入富班长</span>
 				</div>
+
+        <!-- 培训头条 -->
+
+        <div class="news">
+          <div class="index-news">
+            <div class="index-news-title"><i>培训<span>头条</span></i></div>
+            <div class="index-news-msg">
+              <swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
+                <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
+              </swiper>
+            </div>
+            <div class="index-news-btn" @click="goPage({name: 'news'})">更多 <span class="fa fa-angle-right"></span></div>
+          </div>
+        </div>
+        
 				
 				<div class="entry">
 					<div v-for="(item, index) in entryDatas" :key="index" :class="['entry-' + item.img]" @click="entry(item.url, item.type)">
@@ -56,7 +71,7 @@
 
 				<!-- 音频 -->
 				<el-card-more :card-more-data="tuijianAudioDatas" class="border-top">
-					<scroller lock-y slot="content" height="133px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+					<!-- <scroller lock-y slot="content" height="133px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
 						<div @click.stop="stopTop" class="card-more-content-slot sound-preview clearfix" >
 							<div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="sound-preview-block" v-for="(item, index) in tuijianAudioDatas.list" :key="index">
 								<div class="sound-preview-header">
@@ -68,12 +83,27 @@
 								<p>{{ item.name }}</p>
 							</div>
 						</div>
-					</scroller>
+					</scroller> -->    
+
+          <div slot="content">
+            <div class="audio-block-item"  @click="goPage({name: 'courseTypeDetail', query: { type: itemc.type, id: itemc.id} })" v-for="(itemc , indc) in tuijianAudioDatas.list" :key="indc" >
+
+              <div class="audio-img">
+                <img :src="itemc.src" alt="头像">
+              </div>
+
+              <div class="right-audio-info">
+             	<p class="name">{{ itemc.name }}</p>
+               	<p class="dese">{{ itemc.remark }}</p>
+              </div>
+
+            </div>
+          </div>
 				</el-card-more>
 
 				<!-- 视频 -->
 				<el-card-more :card-more-data="tuijianVideoDatas">
-					<scroller lock-y slot="content" height="146px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+					<!-- <scroller lock-y slot="content" height="146px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
 						<div @click.stop="stopTop" class="card-more-content-slot screen-preview clearfix" >
 							<div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="screen-preview-block" v-for="(item, index) in tuijianVideoDatas.list" :key="index">
 								<div class="screen-preview-header">
@@ -86,7 +116,25 @@
                 
 							</div>
 						</div>
-					</scroller>
+					</scroller> -->
+
+           <div slot="content" >
+             <div class="video-block">
+            <div class="video-block-item" @click="goPage({name: 'courseTypeDetail', query: { type: itemv.type, id: itemv.id} })" v-for="(itemv , indc) in tuijianVideoDatas.list" :key="indc" >
+
+              <div class="video-img">
+                <img :src="itemv.src" alt="头像">
+              </div>
+              <p>{{ itemv.name }}</p>
+
+              <div class="icon">
+                 <img src="~assets/img/icon/icon-video.png" alt="">
+              </div>
+
+            </div>
+            </div>
+          </div>
+
 				</el-card-more>
 
 				<!-- 视频 <el-card-more :card-more-data="tuijianVideoDatas">
@@ -103,14 +151,14 @@
 				</el-card-more>
 
 				<!-- 底部入口 entrance -->
-				<div class="index-entrance">
+				<!-- <div class="index-entrance">
 					<div class="index-entrance-block" v-for="(item, index) in entranceData" :key="index">				
 						<div :class="['index-entrance-block-content', 'index-entrance-' + item.img]">
 							<p>{{ item.title }}</p>
 							<span>{{ item.titleEn }}</span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</scroller>
 	</div>
@@ -119,7 +167,19 @@
 <script type="text/babel">
 import { mapState } from "vuex";
 import hold from "src/commons/hold";
-import { Scroller, Group, Cell, Swiper, SwiperItem, Card, Panel, Popup, XInput, XButton, TransferDom } from "vux";
+import {
+  Scroller,
+  Group,
+  Cell,
+  Swiper,
+  SwiperItem,
+  Card,
+  Panel,
+  Popup,
+  XInput,
+  XButton,
+  TransferDom
+} from "vux";
 
 import elTop from "components/index/top";
 import elTuijian from "components/tuijian/tuijian";
@@ -129,7 +189,7 @@ import elVideo from "components/video/video";
 import elCardMore from "components/card/card-more";
 import elCardMoreBlock from "components/card/card-more-block";
 import elImgTextNews from "components/img-text/img-text-news";
-import elImgTextColumn from "components/img-text/img-text-column";
+import elImgTextColumn from "components/img-text/index-img-text-column";
 
 import { getterIndex } from "services/index";
 
@@ -215,7 +275,7 @@ export default {
         timeout: ""
       },
       specialColumn: {
-        title: "专栏订阅",
+        title: "专栏",
         url: {
           name: "specialColumn"
         },
@@ -302,6 +362,7 @@ export default {
                 id: item.id,
                 src: item.images,
                 name: item.name,
+                remark: item.remark,
                 type: "audio"
               };
             });
@@ -366,6 +427,7 @@ export default {
                 price: item.price,
                 readCount: item.playCount,
                 title: item.name,
+                authorName:item.authorName,
                 totalTerm: item.totalTerm,
                 upToDate: item.updateCount
               };
@@ -471,12 +533,13 @@ $playBtnW: 30px;
 }
 
 .banner {
-  padding: 5px $padding;
-  border-radius: 10px;
+  // padding: 5px $padding;
+  // border-radius: 10px;
 
   .shadow {
-    box-shadow: 0px 2px 15px #888888;
-    border-radius: 10px;
+    // 底部阴影
+    // box-shadow: 0px 2px 15px #888888;
+    // border-radius: 10px;
   }
 }
 .banner-img {
@@ -485,7 +548,7 @@ $playBtnW: 30px;
   background: no-repeat;
   background-size: cover;
   background-position: center;
-  border-radius: 10px;
+  // border-radius: 10px;
 }
 
 .card-more-content {
@@ -625,7 +688,7 @@ $playBtnW: 30px;
     width: 145px;
     margin: 0 auto;
     text-align: center;
-     position: relative;
+    position: relative;
 
     .icon {
       position: absolute;
@@ -657,7 +720,7 @@ $playBtnW: 30px;
 }
 .screen-preview {
   width: 210%;
-  margin-left: -$padding+1px;
+  margin-left: -$padding + 1px;
   padding: 0;
   padding: $padding 0;
 }
@@ -709,20 +772,30 @@ $playBtnW: 30px;
   }
 }
 
+.news {
+  padding: 8px 0;
+  background-color: #eee;
+}
 .index-news {
   // @include uiBorderTop();
+  background-color: #fff;
   height: 40px;
-  // padding: $uiMarginH $padding;
+  // margin: $padding 0;
   padding: 10px $padding;
-  line-height: 40px - $uiMarginH*2;
+  line-height: 40px - $uiMarginH * 2;
   display: flex;
-  background-color: #f6f7f6;
+  // background-color: #f6f7f6;
 
   .index-news-title {
-    width: 6em;
-    background: url(~assets/img/index/headlines.png) no-repeat;
-    background-position: 5px 5px;
-    background-size: auto 80%;
+    // width: 6em;
+    // color: #000;
+    margin: 0 $padding/2;
+    font-size: 17px;
+    color: #323332;
+    font-weight: bolder;
+    // background: url(~assets/img/index/headlines.png) no-repeat;
+    // background-position: 5px 5px;
+    // background-size: auto 80%;
   }
 
   .index-news-msg {
@@ -739,9 +812,9 @@ $playBtnW: 30px;
 
   .index-news-btn {
     position: relative;
-    width: 3em;
-    // color: $fontColorGray;
-    color: $colorYellowEasy;
+    width: 3.8em;
+    color: $fontColorGray;
+    // color: $colorYellowEasy;
     text-indent: 0.5em;
     // @include halfpxline(0, $fontColorGray, 0, 0, 0, 2px);
 
@@ -763,6 +836,68 @@ $playBtnW: 30px;
   }
   100% {
     transform: translateY(-32px);
+  }
+}
+
+.audio-block-item {
+  padding: $padding 0;
+  @include halfpxline(0, $borderColor, 1px, 0, 1px, 0);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  .audio-img {
+    width: $tuijianImgW;
+    height: $tuijianImgW;
+    border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  .right-audio-info {
+    width: 80%;
+    // background-color: #999;
+    padding-left: $padding;
+    p {
+      line-height: 25px;
+      @include ellipsisMore(1);
+    }
+    .name {
+      margin-top: 5px;
+      font-size: $fontSizeH5;
+      color: $fontColorBlack;
+    }
+    .dese {
+      font-size: $fontSizeBut;
+      color: $fontColor;
+    }
+  }
+}
+.video-block {
+  display: flex;
+  flex-wrap: wrap;
+  .video-block-item {
+    position: relative;
+    padding: 6px;
+    width: 50%;
+    // background-color: #999;
+    .video-img {
+      width: 100%;
+    }
+    p {
+      @include ellipsisMore(1);
+    }
+    .icon{
+      // background-color: #999;
+      position: absolute;
+      top: 20%;
+      left: 15%;
+      img{
+        width: 60px;
+        height: 60px;
+      }
+    }
   }
 }
 </style>

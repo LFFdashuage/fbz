@@ -54,6 +54,11 @@ export default {
   padding: $padding;
   .img-text-img{
     background-color: $colorGray;
+    img{
+      height:100%;
+       width: 100%;
+
+    }
   }
   .title {
     @include ellipsisMore(1);

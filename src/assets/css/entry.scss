@@ -13,9 +13,9 @@
 	investment, // 招商融资
 	support; // 技术支持
 	.entry {
-	    @include halfpxline(0, $borderColor, 0, 0, 1px, 0);
+	    // @include halfpxline(0, $borderColor, 0, 0, 8px, 0);
 	    // @include uiBorderTop();
-	    // border-top: 2px solid $borderColor;
+	    border-bottom: 8px solid $borderColor;
 	    width: 100%;
 	    padding: $padding 5px $padding;
 	    line-height: 1;

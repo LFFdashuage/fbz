@@ -63,7 +63,8 @@
 	.top .top-search {
 		.weui-search-bar {
 			padding: 0;
-			border-radius: $borderRadius;
+			border-radius: 15px;
+			border:0;
 
 			&:before, &:after {
 				display: none;
@@ -73,9 +74,14 @@
 		.weui-search-bar__form {
 			border-radius: $borderRadius;
 		}
-
+		.weui-search-bar__form:after{
+			border:0;
+		}
 		.weui-search-bar__label {
+			text-align: left;
+			padding-left:$padding;
 			background-color: #f1f1f1;
+			border-radius: 15px;
 		}
 	}
 </style>

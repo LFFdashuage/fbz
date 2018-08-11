@@ -53,8 +53,8 @@ export default {
   .card-more-header {
     position: relative;
     padding: 0 $padding;
-    // @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
-    line-height: 40px;
+    @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+    line-height: 35px;
 
     h5 {
       font-size: $fontSizeH3;
@@ -69,7 +69,7 @@ export default {
         top: 0;
         left: 10px;
         height: 16px;
-        border-left: 3px solid $colorRedDeep;
+        // border-left: 3px solid $colorRedDeep;
         margin-top: 11px;
       }
     }
