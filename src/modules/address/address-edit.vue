@@ -157,10 +157,14 @@ export default {
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
 
-.check {
-  @include halfpxline(0, $borderColor, 1px, 0, 0, 0);
-  padding: $padding;
-}
+	.btn {
+		margin-top: 40px;
+		padding: $padding;
+		.weui-btn,.weui-btn_primary{
+			height: 40px;
+			color: #fff;
+		}
+	}
 
 .btn {
   margin-top: 40px;
