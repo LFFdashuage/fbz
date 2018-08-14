@@ -2,11 +2,11 @@
   班费明细
  -->
 <template>
-  <div>
+  <div class="class-money">
       <div class="wallet-header">
-        <p>班费（元）</p>
+        <p>班费</p>
         <div class="money">{{ money | numToCash }}</div>
-        <div class="wallet-btn">提现</div>
+        <div class="wallet-btn" @click="getMoney">提现</div>
       </div>
 
     	<div class="tab">
@@ -85,6 +85,10 @@ export default {
 	  				})
 	  			}
 	  		});
+    },
+    //提现
+    getMoney(){
+      console.log('提现')
     }
   }
 };
@@ -95,14 +99,14 @@ export default {
 @import "~assets/css/core/functions",
   "~assets/css/core/mixins",
   "~assets/css/core/vars";
-
 .wallet-header {
-  padding: 30px 0 20px;
+  position: relative;
+  padding: 40px 0 20px;
   color: #fff;
   text-align: center;
-  background: #fff url(~assets/img/class/class-money-bg.jpg)no-repeat;
-  background-size: 100% auto;
-  background-position: auto;
+  background: url(~assets/img/class/class-money-bg.png)no-repeat;
+  background-size: 100% 80%;
+  background-position:50% 100%;
 
   p {
     margin-bottom: 10px;
@@ -115,12 +119,15 @@ export default {
   }
 
   .wallet-btn {
+    position: absolute;
+    right: 10px;
+    top:30%;
     font-size: 12px;
     padding: 0 2em;
     line-height: 30px;
-    background-color: #fff;
-    color: #333;
-    border-radius: 20px;
+    // background-color: #999;
+    color: #fff;
+    // border-radius: 20px;
     display: inline-block;
   }
 }

@@ -58,7 +58,7 @@ Vue.http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 
 // // // 自己
 // window.sessionStorage.setItem("openId", "o7ox6wnFTVcg2NCcHM4PvWcCqW0c");
-hold.storage.set("openId", "o5fuYwpjOLBaqApUC4v_UIX8r7K4");
+// hold.storage.set("openId", "o5fuYwpjOLBaqApUC4v_UIX8r7K4");
 // // // 马一鸣
 // hold.storage.set("openId", "o7ox6wl7r4Z0UZXLRNvM4wsQdR_g");
 // window.sessionStorage.setItem("openId", "o7ox6wl7r4Z0UZXLRNvM4wsQdR_g");

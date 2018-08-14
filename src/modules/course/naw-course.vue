@@ -6,11 +6,11 @@
 	<div class="detail-type" v-cloak>
 
 
-    <div class="toppp">
+    <div class="toppp" TransferDom>
       <div class="detail-type-search">
         <search
             @on-change="getResult"
-            v-model="searchValue"
+            v-model="scrollerInfo.searchKeyword"
             position="relative"
             auto-scroll-to-top top="0px"
             @on-cancel="onCancel"
@@ -26,10 +26,10 @@
         <div class="first-level-filter" :class="{ 'filter-icon' : timeIcon, 'filter-icon-tow': !timeIcon}" @click="filter('time')">时间</div>
         <div class="first-level-filter" :class="{ 'filter-icon' : hotIcon, 'filter-icon-tow': !hotIcon}" @click="filter('hot')" > 热门</div>
         <div class="first-level-filter" :class="{ 'filter-icon' : priceIcon, 'filter-icon-tow': !priceIcon}" @click="filter('price')" >价格</div>
-        <div class="first-level-filter" @click="showFilter('screen')">筛选</div>
+        <div class="first-level-filter" @click="showScreen">筛选</div>
       </div>
 
-      <div class="second-filter-box"> 
+      <div class="second-filter-box" v-if="isScreen"> 
         <div class="second-filter" :class="{ 'second-icon' : curriculumShow, 'second-icon-tow': !curriculumShow}"  @click="showFilter('curriculum')"> 课程</div>
         <div class="second-filter" :class="{ 'second-icon' : mechanismShow, 'second-icon-tow': !mechanismShow}"  @click="showFilter('mechanism')"> 机构</div>
         <div class="second-filter" :class="{ 'second-icon' : lecturerShow, 'second-icon-tow': !lecturerShow}"  @click="showFilter('lecturer')">讲师</div>
@@ -40,7 +40,7 @@
     <div class="centre">
       <el-course-tuijian></el-course-tuijian>
     </div> -->
-    <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" v-cloak class="centre">
+    <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" @on-scroll-bottom="loadMore" ref="scrollerBottom" v-cloak :class="{ 'centre' : isScreen, 'centre-tow': !isScreen}">
       <div class="package-box" v-for="(itema, indea) in scrollerInfo.lessonsPackages" :key="indea" @click="goPage('packageDetail', { periodsId: itema.packageId})">
         <div class="package-title">
           <h4>{{itema.packageName}}</h4>
@@ -201,6 +201,7 @@ export default {
   data() {
     return {
       // authorId:'',
+      isScreen:false,
       scrollerInfo: {
         onFetching: false,
         loadAll: false,
@@ -213,6 +214,7 @@ export default {
         authorId: "", //	讲师id
         courseTypeId: "", //课程类型id
         sort: "", //排序
+        searchKeyword:"",
         list: [
           // {
           //   id: 28,
@@ -254,7 +256,6 @@ export default {
       priceIcon: false,
       hotIcon: false,
       timeIcon: false,
-      searchValue: "",
       tabData: [
         {
           value: "whole",
@@ -338,6 +339,7 @@ export default {
         .post(
           "/api/curriculum/allCourses",
           _this.qs.stringify({
+            searchKeyword:this.scrollerInfo.searchKeyword, //关键字
             pageNum: this.scrollerInfo.pageNum, //第几页
             pageSize: this.scrollerInfo.pageSize, //每页显示条数
             isRequired: 0, //是否为必修课程 0否 1是
@@ -411,6 +413,9 @@ export default {
         this.fetchData();
       }
     },
+    showScreen(){
+      this.isScreen = !this.isScreen;
+    },
     filter(val) {
       let _this = this;
       // console.log(_this.scrollerInfo.sort)
@@ -418,6 +423,7 @@ export default {
       //       //排序，时间升序：startDate 降序：startDate_DESC
       //       //热门课程升序：salesCount 降序：salesCount_DESC
       //       //价格升序：price 降序：price_DESC
+     this.scrollerInfo.pageNum = 1;
       if (val == "price") {
         if (_this.priceIcon == false) {
           _this.priceIcon = true;
@@ -514,22 +520,23 @@ export default {
       }
     },
     reset(val) {
+      let _this = this; 
       if (val == "courseTypeId") {
-        this.scrollerInfo.courseTypeId = "";
+        _this.scrollerInfo.courseTypeId = "";
         // this.curriculumShow = false;
-        this.fetchData();
+        _this.fetchData();
       }
       if (val == "companyId") {
-        this.scrollerInfo.companyId = "";
-        this.fetchData();
+        _this.scrollerInfo.companyId = "";
+        _this.fetchData();
       }
       if (val == "authorId") {
-        this.scrollerInfo.authorId = "";
-        this.fetchData();
+        _this.scrollerInfo.authorId = "";
+        _this.fetchData();
       }
       if(val == "cityId"){
-        this.scrollerInfo.cityId = "";
-        this.fetchData();
+        _this.scrollerInfo.cityId = "";
+        _this.fetchData();
       }
     },
     // goPage(code, status) {
@@ -546,11 +553,19 @@ export default {
     },
 
     //取消搜索
-    onCancel() {},
+    onCancel() {
+      this.scrollerInfo.searchKeyword = '';
+        this.scrollerInfo.list = [];
+       this.scrollerInfo.pageNum = 1;
+      this.fetchData();
+    },
 
     // 搜索提交
     onSubmit(value) {
-      console.log("提交了", value);
+      console.log("提交了", this.scrollerInfo.searchKeyword);
+      this.scrollerInfo.list = [];
+       this.scrollerInfo.pageNum = 1;
+      this.fetchData();
     },
 
     // 输入文字变化时触发
@@ -647,8 +662,9 @@ $choiceBlockMargin: 6px;
 
   .centre {
     padding: 130px 0 0;
-    .centre-list {
-    }
+  }
+  .centre-tow{
+    padding: 80px 0 0;
   }
 
   .filter-icon {

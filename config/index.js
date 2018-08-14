@@ -31,10 +31,10 @@ module.exports = {
             '/api': {
                 // target: 'https://fbz.ittun.com/',
                 // target: 'http://192.168.22.100:8088/',
-                // target: 'http://zls.10-suns.com/api/',
+                target: 'http://zls.10-suns.com/api/',
                 // target: 'http://fbz3.10-suns.com/api/',
 
-                target:"http://m18721713212.e1.luyouxia.net:34798", 
+                // target:"http://m18721713212.e1.luyouxia.net:34798", 
 
 
 

@@ -62,6 +62,7 @@ export default {
   }
 
   .money {
+    color: $colorRedDeep;
     float: right;
     height: 100%;
     display: flex;
