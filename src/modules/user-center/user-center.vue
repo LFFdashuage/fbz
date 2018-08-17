@@ -7,17 +7,20 @@
   
     <scroller lock-x :height="-scrollerInfo.offsetBottom + 'px'" ref="scrollerBottom" v-cloak>
       <div>
-        <header>
+        <header class="header">
           <div class="person-info">
-            <div class="information"  @click="goPage({'name': 'msg'})">
+            
+            <!-- <div class="information"  @click="goPage({'name': 'msg'})">
               <span v-if="msgNum > 0">{{ msgNum | numMaxToChange }}</span>
-            </div>
+            </div> -->
+            
             <div class="img">
               <img @click="goPage({name:'personal'})" :src="user.img" alt="">
             </div>
             <div class="header-info">
               <!-- <label>{{ user.level == 'common' ? '普通用户' : user.levelName || "会员" }}</label> -->
               <p>{{ user.name }}</p>
+              <!--  -->
               <p class="grade">{{ user.level == 'common' ? '普通用户' : user.levelName || "会员" }}
                 <span v-if="user.level == 'common'" @click="goPage('binding')">会员注册</span>
                 <span v-if="user.level != 'common' && user.level != 'dreamPartner' " @click="submitUpgrade">升级</span>
@@ -50,18 +53,19 @@
             </div>
           </div>
 
-          <div @click="goPage({name: 'winWin'})">
+          <!-- <div @click="goPage({name: 'winWin'})">
 					跳到共赢页
-				</div>
+				</div> -->
 
           <div class="xueba" @click="goPage({name: 'xueba'})">
-            <div class="xueba-header">加入“学霸养成计划”</div>
+            <img src="~assets/img/user-center/xueba-icon.png" alt="">
+            <!-- <div class="xueba-header">加入“学霸养成计划”</div>
             <div class="xueba-content">
               <img src="~assets/img/user-center/hat.png" alt="">
               <p>月度，季度，年度，专项学霸卡
                 <span>各种课程随心随时随地听</span>
               </p>
-            </div>
+            </div> -->
           </div>
 
           <div class="user-center-setup">
@@ -93,7 +97,10 @@ export default {
     TransferDom
   },
   components: {
-    Scroller, Group, Cell, Actionsheet
+    Scroller,
+    Group,
+    Cell,
+    Actionsheet
   },
   data() {
     return {
@@ -126,17 +133,17 @@ export default {
           new: "", // 推广背景
           show: true
         },
-        {
-          value: "",
-          name: "奖学金",
-          url: "wallet",
-          query: {},
-          value: 0,
-          icon: "wallet",
-          click: false, // 不绑定是否可点击
-          new: "", // 推广背景
-          show: true
-        },
+        // {
+        //   value: "",
+        //   name: "奖学金",
+        //   url: "wallet",
+        //   query: {},
+        //   value: 0,
+        //   icon: "wallet",
+        //   click: false, // 不绑定是否可点击
+        //   new: "", // 推广背景
+        //   show: true
+        // },
         {
           value: "",
           name: "积分",
@@ -153,81 +160,75 @@ export default {
         name: "",
         show: true,
         list: [
-          // ,{
-          // 	value: '',
-          // 	name: '我的消息',
-          // 	// name: '线上资料',
-          // 	url: 'msg',
-          // 	query: {},
-          // 	icon: 'msg',
-          // 	click: false, // 不绑定是否可点击
-          // 	new: '', // 推广背景
-          // 	show: true
-          // },
-          // {
-          // 	value: '',
-          // 	name: '我的奖学金',
-          // 	url: 'wallet',
-          // 	query: {},
-          // 	icon: 'wallet',
-          // 	click: false, // 不绑定是否可点击
-          // 	new: '', // 推广背景
-          // 	show: true
-          // },
-          // {
-          // 	value: '',
-          // 	name: '我的订单',
-          // 	url: 'order',
-          // 	//url: 'orderCourseList',
-          // 	// url: 'orderActivityList',
-          // 	// url: 'orderSourceList',
-          // 	// url: 'orderMallList',
-          // 	 query: {},
-          // 	icon: 'order',
-          // 	click: false, // 不绑定是否可点击
-          // 	new: '', // 推广背景
-          // 	show: true
-          // },
           {
             value: "",
-            name: "课程订单",
-            url: "orderCourseList",
-            icon: "orderCourseList",
+            name: "我的客户",
+            url: "customer",
             query: {},
-            click: false, // 不绑定是否可点击
+            icon: "customer",
+            click: true, // 不绑定是否可点击
             new: "", // 推广背景
             show: true
           },
           {
             value: "",
-            name: "活动订单",
-            url: "orderActivityList",
-            icon: "orderActivityList",
+            name: "我的代理",
+            url: "agency",
             query: {},
-            click: false, // 不绑定是否可点击
-            new: "", // 推广背景
+            icon: "agent",
+            click: true, // 不绑定是否可点击
             show: true
           },
           {
             value: "",
-            name: "套餐订单",
-            url: "orderPackageList",
-            icon: "orderSourceList",
+            name: "我的奖学金",
+            url: "wallet",
             query: {},
-            click: false, // 不绑定是否可点击
-            new: "", // 推广背景
-            show: true
-          },
-          {
-            value: "",
-            name: "商城订单",
-            url: "orderMallList",
-            icon: "orderMallList",
-            query: {},
+            icon: "wallet",
             click: false, // 不绑定是否可点击
             new: "", // 推广背景
             show: true
           }
+          // {
+          //   value: "",
+          //   name: "课程订单",
+          //   url: "orderCourseList",
+          //   icon: "orderCourseList",
+          //   query: {},
+          //   click: false, // 不绑定是否可点击
+          //   new: "", // 推广背景
+          //   show: true
+          // },
+          // {
+          //   value: "",
+          //   name: "活动订单",
+          //   url: "orderActivityList",
+          //   icon: "orderActivityList",
+          //   query: {},
+          //   click: false, // 不绑定是否可点击
+          //   new: "", // 推广背景
+          //   show: true
+          // },
+          // {
+          //   value: "",
+          //   name: "套餐订单",
+          //   url: "orderPackageList",
+          //   icon: "orderSourceList",
+          //   query: {},
+          //   click: false, // 不绑定是否可点击
+          //   new: "", // 推广背景
+          //   show: true
+          // },
+          // {
+          //   value: "",
+          //   name: "商城订单",
+          //   url: "orderMallList",
+          //   icon: "orderMallList",
+          //   query: {},
+          //   click: false, // 不绑定是否可点击
+          //   new: "", // 推广背景
+          //   show: true
+          // }
         ]
       },
       setupDatas: [
@@ -277,57 +278,38 @@ export default {
           click: true, // 不绑定是否可点击
           new: "", // 推广背景
           show: true
+        },
+        {
+          value: "",
+          name: "设置",
+          url: "personal",
+          query: {},
+          icon: "setup",
+          click: true, // 不绑定是否可点击
+          new: "", // 推广背景
+          show: true
         }
       ],
       operationDatas: {
         name: "",
         show: true,
         list: [
-          // {
-          // 	value: '',
-          // 	name: '我的订单',
-          // 	// name: '课程订单',
-          // 	url: 'order',
-          // 	// url: 'orderCourseList',
-          // 	// url: 'orderActivityList',
-          // 	// url: 'orderSourceList',
-          // 	// url: 'orderMallList',
-          // 	query: {},
-          // 	icon: 'order',
-          // 	click: false, // 不绑定是否可点击
-          // 	new: '', // 推广背景
-          // 	show: true
-          // },{
-          // 	value: '',
-          // 	name: '我的消息',
-          // 	// name: '线上资料',
-          // 	url: 'msg',
-          // 	query: {},
-          // 	icon: 'msg',
-          // 	click: false, // 不绑定是否可点击
-          // 	new: '', // 推广背景
-          // 	show: true
-          // },
-
           {
             value: "",
-            name: "我的客户",
-            url: "customer",
+            name: "我的订单",
+            // name: '课程订单',
+            url: "order",
+            // url: 'orderCourseList',
+            // url: 'orderActivityList',
+            // url: 'orderSourceList',
+            // url: 'orderMallList',
             query: {},
-            icon: "customer",
-            click: true, // 不绑定是否可点击
+            icon: "order",
+            click: false, // 不绑定是否可点击
             new: "", // 推广背景
             show: true
           },
-          {
-            value: "",
-            name: "我的代理",
-            url: "agency",
-            query: {},
-            icon: "agent",
-            click: true, // 不绑定是否可点击
-            show: true
-          },
+
           {
             value: "",
             name: "我的资料",
@@ -346,6 +328,17 @@ export default {
             url: "collection",
             query: {},
             icon: "collection",
+            click: false, // 不绑定是否可点击
+            new: "", // 推广背景
+            show: true
+          },
+          {
+            value: "",
+            name: "我的消息",
+            // name: '线上资料',
+            url: "msg",
+            query: {},
+            icon: "msg",
             click: false, // 不绑定是否可点击
             new: "", // 推广背景
             show: true
@@ -429,11 +422,11 @@ export default {
           _this.resetView();
         });
     },
-    resetView () {
+    resetView() {
       let _this = this;
       this.$nextTick(() => {
-        this.$refs.scrollerBottom.reset()
-      })
+        this.$refs.scrollerBottom.reset();
+      });
     },
     clearStorage() {
       window.localStorage.clear();
@@ -523,12 +516,16 @@ export default {
     // 获取有多少信息提示
     getMessage() {
       let _this = this;
-      	this.$http.post('/api/tidings/unreadMessageCount',
-					_this.qs.stringify({
-						customerId: _this.$store.state.user.userId
-					})).then(function(e) {
-						_this.msgNum = e.data.data.allMessage || 0;
-				})
+      this.$http
+        .post(
+          "/api/tidings/unreadMessageCount",
+          _this.qs.stringify({
+            customerId: _this.$store.state.user.userId
+          })
+        )
+        .then(function(e) {
+          _this.msgNum = e.data.data.allMessage || 0;
+        });
     }
   }
 };
@@ -578,12 +575,13 @@ $userCenterIconW: 30px;
 
 header {
   position: relative;
-  padding: $padding 0 0;
-  margin: 0 0 $padding;
-  // background: url(~assets/img/user-center/bg.png) no-repeat;
-  // background-size: 100% 90%;
-  // background-position: center;
-  // background: $colorOrange;
+  padding: $padding 20px 0;
+  // margin: 0 0 $padding;
+
+  background: url(~assets/img/user-center/pg.png) no-repeat;
+  background-size: 100% 90%;
+  background-position: bottom;
+
   color: $fontColorBlack;
   text-align: center;
   background-color: #fff;
@@ -591,13 +589,16 @@ header {
   .person-info {
     display: flex;
     justify-content: space-between;
-    padding: 0 0 $padding $padding;
+    padding: 20px 35px $padding;
     text-align: left;
-    @include halfpxline(0, $borderColor, 0, 0, 1px, 0);
+    // @include halfpxline(0, $borderColor, 0, 0, 1px, 0);
     position: relative;
     .img {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
+      background-color: #fff;
+      padding: 3px;
+      border-radius: $tuijianImgW;
       img {
         width: 100%;
         height: 100%;
@@ -641,6 +642,7 @@ header {
     width: 100%;
     padding: 10px 0 0 $padding;
     font-size: $fontSizeH4;
+    color: #fff;
 
     label {
       position: relative;
@@ -671,12 +673,14 @@ header {
       font-size: $fontSize;
     }
     .grade {
-      color: $fontColorGray;
+      color: #fff;
       span {
         margin-left: 5px;
-        padding: 2px 7px;
-        background-color: $colorRedDeep;
-        color: #fff;
+        padding: 2px $padding;
+        background: url(~assets/img/user-center/vip-bg.png) no-repeat;
+        background-size: 95% 85%;
+        background-position: center;
+        color: $fontColorBlack;
         border-radius: 7px;
       }
     }
@@ -686,14 +690,15 @@ header {
 .user-center-money {
   @extend %clearfix;
   padding: 6px $padding;
-  background-color: #fff;
+  // background-color: #fff;
   color: $fontColorGray;
 }
 
 .user-center-money-block {
-  @include halfpxline(0, $fontColorGray, 0, 0, 0, 1px);
+  // @include halfpxline(0, $fontColorGray, 0, 0, 0, 1px);
+  color: #fff;
   float: left;
-  width: 25%;
+  width: 33%;
   padding: 5px 0;
   text-align: center;
   font-size: $fontSizeTips;
@@ -710,7 +715,7 @@ header {
   span {
     font-size: $fontSizeH4;
     display: block;
-    color: $fontColorBlack;
+    color: #fff;
   }
 }
 
@@ -721,7 +726,7 @@ header {
   border-bottom: 1px solid $bgGray;
 
   &.member-list-padding {
-    padding: 0 $padding*2;
+    padding: 0 $padding * 2;
   }
 
   .member-block {
@@ -818,7 +823,7 @@ main {
   .weui-cell {
     padding-top: 6px;
     padding-bottom: 6px;
-    @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+    @include halfpxline(0, $borderColor, 0, 0, 1px, 0);
   }
   .icon-setup {
     width: 30px;
@@ -839,45 +844,40 @@ main {
 }
 
 .xueba {
-  position: relative;
+  // position: relative;
   padding: $padding;
-  padding-top: $padding*2;
-  margin: $padding*2 0 $padding;
+  // margin: $padding 0 $padding;
   background-color: #fff;
 
-  .xueba-header {
-    position: absolute;
-    left: 0;
-    top: - $padding;
-    padding: 0 $padding*1.5 0 $padding;
-    line-height: 2;
-    background: url(~assets/img/user-center/xueba-bg.png) no-repeat;
-    background-size: 100% 100%;
-    color: #fff;
-  }
+  // .xueba-header {
+  //   position: absolute;
+  //   left: 0;
+  //   top: -$padding;
+  //   padding: 0 $padding * 1.5 0 $padding;
+  //   line-height: 2;
+  //   background: url(~assets/img/user-center/xueba-bg.png) no-repeat;
+  //   background-size: 100% 100%;
+  //   color: #fff;
+  // }
 
-  .xueba-content {
-    position: relative;
-    text-align: left;
-    display: flex;
+  // .xueba-content {
+  //   position: relative;
+  //   text-align: left;
+  //   display: flex;
 
-    img {
-      height: 5em;
-    }
+  //   img {
+  //     height: 5em;
+  //   }
 
-    p {
-      flex: 1;
-      line-height: 2;
-      padding-left: 2em;
-    }
+  //   p {
+  //     flex: 1;
+  //     line-height: 2;
+  //     padding-left: 2em;
+  //   }
 
-    span {
-      // display: block;
-    }
-  }
+  //   span {
+  //     // display: block;
+  //   }
+  // }
 }
 </style>
-<style>
-
-</style>
->
