@@ -69,7 +69,7 @@ export default {
         top: 0;
         left: 10px;
         height: 16px;
-        // border-left: 3px solid $colorRedDeep;
+        border-left: 3px solid $colorRedDeep;
         margin-top: 11px;
       }
     }

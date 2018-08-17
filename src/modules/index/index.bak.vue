@@ -20,10 +20,25 @@
 		    	</swiper>
 				</div>
 				
-				<div v-if="user.level == 'commom'" class="join-in">
+				<div v-if="user.level == 'commom'"  class="join-in">
 					<label for="">现在加入，你将获得200份免费协议资料。</label>
 					<span class="join-btn" @click="joinIn">加入富班长</span>
 				</div>
+
+        <!-- 培训头条 -->
+
+        <div class="news">
+          <div class="index-news">
+            <div class="index-news-title"><i>培训<span>头条</span></i></div>
+            <div class="index-news-msg">
+              <swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
+                <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
+              </swiper>
+            </div>
+            <div class="index-news-btn" @click="goPage({name: 'news'})">更多 <span class="fa fa-angle-right"></span></div>
+          </div>
+        </div>
+        
 				
 				<div class="entry">
 					<div v-for="(item, index) in entryDatas" :key="index" :class="['entry-' + item.img]" @click="entry(item.url, item.type)">
@@ -36,23 +51,6 @@
 				<div @click="goPage({name: 'classMate'})">
 					跳到同学页
 				</div> -->
-
-         <!-- 培训头条 -->
-
-        <div class="news">
-          <div class="index-news">
-            <div class="index-news-title" @click="goPage({name: 'news'})">
-              <!-- <i>培训<span>头条</span></i> -->
-              </div>
-            <div class="index-news-msg">
-              <swiper auto height="32px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
-                <swiper-item v-for="(item, index) in indexNewsList.list" :key="index"><p @click="goPage({name: 'newsDetail', query: {id: item.id}})">{{ item.title }}</p></swiper-item>
-              </swiper>
-            </div>
-            <!-- <div class="index-news-btn" @click="goPage({name: 'news'})">更多 <span class="fa fa-angle-right"></span></div> -->
-          </div>
-        </div>
-
 				<!-- 课程预告 -->
 				<el-card-more :card-more-data="coursePreview" class="card-first">
 					<scroller lock-y slot="content" height="139px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
@@ -73,7 +71,7 @@
 
 				<!-- 音频 -->
 				<el-card-more :card-more-data="tuijianAudioDatas" class="border-top">
-					<scroller lock-y slot="content" height="133px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+					<!-- <scroller lock-y slot="content" height="133px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
 						<div @click.stop="stopTop" class="card-more-content-slot sound-preview clearfix" >
 							<div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="sound-preview-block" v-for="(item, index) in tuijianAudioDatas.list" :key="index">
 								<div class="sound-preview-header">
@@ -85,9 +83,9 @@
 								<p>{{ item.name }}</p>
 							</div>
 						</div>
-					</scroller>    
+					</scroller> -->    
 
-          <!-- <div slot="content">
+          <div slot="content">
             <div class="audio-block-item"  @click="goPage({name: 'courseTypeDetail', query: { type: itemc.type, id: itemc.id} })" v-for="(itemc , indc) in tuijianAudioDatas.list" :key="indc" >
 
               <div class="audio-img">
@@ -100,12 +98,12 @@
               </div>
 
             </div>
-          </div> -->
+          </div>
 				</el-card-more>
 
 				<!-- 视频 -->
 				<el-card-more :card-more-data="tuijianVideoDatas">
-					<scroller lock-y slot="content" height="146px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
+					<!-- <scroller lock-y slot="content" height="146px" ref="scrollerBottomCourse" v-cloak :scrollbar-x="false">
 						<div @click.stop="stopTop" class="card-more-content-slot screen-preview clearfix" >
 							<div @click="goPage({name: 'courseTypeDetail', query: { type: item.type, id: item.id} })" class="screen-preview-block" v-for="(item, index) in tuijianVideoDatas.list" :key="index">
 								<div class="screen-preview-header">
@@ -118,9 +116,9 @@
                 
 							</div>
 						</div>
-					</scroller>
+					</scroller> -->
 
-           <!-- <div slot="content" >
+           <div slot="content" >
              <div class="video-block">
             <div class="video-block-item" @click="goPage({name: 'courseTypeDetail', query: { type: itemv.type, id: itemv.id} })" v-for="(itemv , indc) in tuijianVideoDatas.list" :key="indc" >
 
@@ -135,12 +133,9 @@
 
             </div>
             </div>
-          </div> -->
+          </div>
 
 				</el-card-more>
-        <div class="footer-new">
-          <img src="../../assets/img/index/footer-new.png" alt="">
-        </div>
 
 				<!-- 视频 <el-card-more :card-more-data="tuijianVideoDatas">
 					<div class="card-more-content-slot clearfix" slot="content">
@@ -162,16 +157,8 @@
 							<p>{{ item.title }}</p>
 							<span>{{ item.titleEn }}</span>
 						</div>
- 
 					</div>
 				</div> -->
-        <div class="index-entrance">
-					<div class="index-entrance-block" v-for="(item, index) in entranceData" :key="index">				
-						<div class="index-entrance-block-content">
-							<img style="height: 100%;  width: 100%;" :src="item" alt="">
-						</div>
-					</div>
-				</div>
 			</div>
 		</scroller>
 	</div>
@@ -202,17 +189,11 @@ import elVideo from "components/video/video";
 import elCardMore from "components/card/card-more";
 import elCardMoreBlock from "components/card/card-more-block";
 import elImgTextNews from "components/img-text/img-text-news";
-import elImgTextColumn from "components/img-text/img-text-column";
+import elImgTextColumn from "components/img-text/index-img-text-column";
 
 import { getterIndex } from "services/index";
 
 import imgBanner from "assets/img/banner-base.jpg";
-
-//底部四图片
-import imgInvestment from "assets/img/index/investment.png";
-import imgSkill from "assets/img/index/skill.png";
-import imgPlatform from "assets/img/index/platform.png";
-import imgMakemoney from "assets/img/index/make-money.png";
 
 export default {
   name: "index",
@@ -244,7 +225,7 @@ export default {
     return {
       imgBanner: imgBanner,
       scrollerInfo: {
-        offsetBottom: 95
+        offsetBottom: 94
       },
       bannerWidthHeight: this.wordBook.bannerWidthHeight,
       bannerTopDatas: [],
@@ -302,8 +283,26 @@ export default {
         list: []
       },
       entranceData: [
-       imgMakemoney, imgPlatform, imgInvestment, imgSkill
-       
+        {
+          title: "赚钱风口",
+          titleEn: "Make money outlet",
+          img: "outlet"
+        },
+        {
+          title: "平台服务",
+          titleEn: "Platform services",
+          img: "service"
+        },
+        {
+          title: "招商融资",
+          titleEn: "Investment financing",
+          img: "investment"
+        },
+        {
+          title: "技术支持",
+          titleEn: "Technical support",
+          img: "support"
+        }
       ]
     };
   },
@@ -428,7 +427,7 @@ export default {
                 price: item.price,
                 readCount: item.playCount,
                 title: item.name,
-                authorName: item.authorName,
+                authorName:item.authorName,
                 totalTerm: item.totalTerm,
                 upToDate: item.updateCount
               };
@@ -534,13 +533,13 @@ $playBtnW: 30px;
 }
 
 .banner {
-  padding: 5px $padding;
-  border-radius: 5px;
+  // padding: 5px $padding;
+  // border-radius: 10px;
 
   .shadow {
     // 底部阴影
     // box-shadow: 0px 2px 15px #888888;
-    border-radius: 5px;
+    // border-radius: 10px;
   }
 }
 .banner-img {
@@ -571,7 +570,7 @@ $playBtnW: 30px;
 
 .join-in {
   width: 100%;
-  // line-height: 34px;
+  line-height: 34px;
   padding: $uiMarginH $padding;
   display: flex;
 
@@ -774,12 +773,12 @@ $playBtnW: 30px;
 }
 
 .news {
-  // padding: 8px 0;
+  padding: 8px 0;
   background-color: #eee;
 }
 .index-news {
   // @include uiBorderTop();
-  // background-color: #fff;
+  background-color: #fff;
   height: 40px;
   // margin: $padding 0;
   padding: 10px $padding;
@@ -788,15 +787,15 @@ $playBtnW: 30px;
   // background-color: #f6f7f6;
 
   .index-news-title {
-    width: 6em;
-    color: #000;
-    margin: 0 $padding/2 0 0;
+    // width: 6em;
+    // color: #000;
+    margin: 0 $padding/2;
     font-size: 17px;
     color: #323332;
     font-weight: bolder;
-    background: url(~assets/img/index/headlines.png) no-repeat;
-    background-position: 5px 5px;
-    background-size: auto 80%;
+    // background: url(~assets/img/index/headlines.png) no-repeat;
+    // background-position: 5px 5px;
+    // background-size: auto 80%;
   }
 
   .index-news-msg {
@@ -889,25 +888,16 @@ $playBtnW: 30px;
     p {
       @include ellipsisMore(1);
     }
-    .icon {
+    .icon{
       // background-color: #999;
       position: absolute;
       top: 20%;
       left: 15%;
-      img {
+      img{
         width: 60px;
         height: 60px;
       }
     }
-  }
-}
-.footer-new {
-  width: 100%;
-  height: 105px;
-  background-color: #000;
-  img {
-    width: 100%;
-    height: 100%;
   }
 }
 </style>

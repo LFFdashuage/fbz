@@ -63,8 +63,7 @@
 	.top .top-search {
 		.weui-search-bar {
 			padding: 0;
-			border-radius: 15px;
-			border:0;
+			border-radius: $borderRadius;
 
 			&:before, &:after {
 				display: none;
@@ -74,14 +73,9 @@
 		.weui-search-bar__form {
 			border-radius: $borderRadius;
 		}
-		.weui-search-bar__form:after{
-			border:0;
-		}
+
 		.weui-search-bar__label {
-			text-align: left;
-			padding-left:$padding;
 			background-color: #f1f1f1;
-			border-radius: 15px;
 		}
 	}
 </style>
@@ -120,7 +114,7 @@
 		height: 100%;
 		// margin-left: -10px;
 		background: url(~assets/img/index/top-msg.png) no-repeat;
-		background-size: 90%;
+		background-size: 80%;
 		background-position: bottom;
 
 		& > span {
@@ -143,7 +137,7 @@
 		position: relative;
 		flex: 1;
 		height: 100%;
-		margin: 0 20px;
+		margin: 0 36px;
 		// background: $bgGray url(~assets/img/index/top-search.png) no-repeat;
 		// background-size: 100%;
 		// background-position: center;

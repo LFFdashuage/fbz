@@ -8,7 +8,7 @@
 		</div>
 		<div class="text">
 			<h5 class="title">{{ imgTextData.title }}</h5>
-			<p>更新{{ imgTextData.upToDate }}期，共{{ imgTextData.totalTerm }}期</p>
+			<p>更新{{ imgTextData.upToDate }}期 | 共{{ imgTextData.totalTerm }}期</p>
 			<div class="text-info">
 				<p class="text-info-term">
 					<i>￥</i>
