@@ -79,7 +79,7 @@
 						title: '最新上传',
 						orderType: 1,
 						pageNum: 1,
-						pageSize: this.count,
+						pageSize: this.wordBook.pageSize,
 						onfetching: false,
 						loadAll: false,
 						list: []
@@ -88,7 +88,7 @@
 						title: '下载最多',
 						orderType: 2,
 						pageNum: 1,
-						pageSize: this.count,
+						pageSize: this.wordBook.pageSize,
 						onfetching: false,
 						loadAll: false,
 						list: []

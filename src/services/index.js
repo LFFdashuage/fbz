@@ -33,7 +33,7 @@ export const getterIndex = {
       name: '音视频',
       img: 'audio',
       url: 'rankList',
-      type: 'audio'
+      type: ''
     }, {
       value: 'specialColumn',
       name: '专栏',
@@ -42,10 +42,10 @@ export const getterIndex = {
       type: ''
     }, {
       value: 'video',
-      name: '视频',
+      name: '必修课程',
       img: 'video',
-      url: 'rankList',
-      type: 'video'
+      url: 'forceCourse',
+      type: ''
     }, {
       value: 'mall',
       name: '商城',
@@ -77,7 +77,7 @@ export const getterIndex = {
     value: '1',
     name: '他用一年的时间颠覆了智力',
     img: '',
-    url: 'videoDetail',
+    url: 'videoDetail', 
     id: 3
   }],
   tuijianAudioDatas: {

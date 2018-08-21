@@ -7,8 +7,8 @@
     <div class=" clearfix" v-for="(item, index) in filterData" :key="index">
   
       <div v-show="item.status" class="filter-file-img-text">
-        <div  @click="setSelectedId(item)" :class="['filter-file-block-cell', {'active': selectedId == item.id }]" class="filter-filter" v-for="(item, index) in filterData" :key="index" >
-          <img src="~assets/img/download/download1.png" alt="">
+        <div  @click="setSelectedId(item)" :class="['filter-filter', {'active': selectedId == item.id }]" v-for="(item, index) in filterData" :key="index" >
+          <!-- <img src="~assets/img/download/download1.png" alt=""> -->
           <span>{{ item.name }}</span>
         </div>
       </div>
@@ -59,73 +59,45 @@ export default {
 $filterW: 6em;
 $filterPadding: 1em;
 
-.filter-file-block-title {
-  @include halfpxline(0, #fff, 0 , 0, 1px, 0);
-  width: 100%;
-  padding: $filterPadding 0;
-  text-indent: 0.5em;
-  display: none;
-
-  &:before {
-    padding-right: 0.5em;
-  }
-}
-
-.filter-file-block-cell {
-  width: 50px;
-  height: 50px;
-  padding: $filterPadding 0;
-  @include halfpxline(0, #fff, 0 , 0, 1px, 0);
-  // text-indent: 1.6em;
-  text-align: center;
-  // background: #f8f8f8;
-  background: #fff;
-  line-height: 1;
-
-  &.active {
-    // background: #fff;
-     background: #f8f8f8;
-    color: $colorYellowEasy;
-
-    // &:before {
-    //   content: "";
-    //   position: absolute;
-    //   bottom: -7px;
-    //   left: 3.3em;
-    //   width: 3px;
-    //   height: 2em;
-    //   margin-top: -0.5em;
-    //   transform: rotate(90deg);
-    //   background: #9fcfe3;
-    // }
-  }
-}
-
 .filter-file-box {
   width: 100%;
-  height: 80px;
+  height: 70px;
   // background-color: #888;
   -webkit-overflow-scrolling: touch;
-}
-.filter-file-img-text {
-  display: flex;
+  overflow-y: hidden;
+
+  .clearfix {
+    display: flex;
+    .filter-file-img-text {
+      display: flex;
+    }
+  }
 }
 .filter-filter {
-  // flex-direction:column;
+  padding: $filterPadding * 2 0;
   flex-wrap: nowrap;
-  overflow: hidden;
-  width: 80px;
-  height: 80px;
-  // padding: 20px;
+  width: 100px;
+  height: 70px;
   display: inline-block;
+  // @include halfpxline(0, #000, 0, 0, 1px, 0);
+  background: #fff url("~assets/img/icon/download-bg.png") no-repeat;
+  background-size: 100%;
+  background-position: 50% 40%;
+  color: $fontColor;
+  margin: 0 $padding;
+  text-align: center;
+  line-height: 1;
+  &.active {
+    color: #fff;
+    background: #fff url("~assets/img/icon/download-active-bg.png") no-repeat;
+    background-size: 100%;
+    background-position: 50% 47%;
+  }
 }
 
-.clearfix {
-  display: flex;
-}
-img {
-  height: 40px;
-  margin: 0 auto;
-  margin-bottom: 6px;
-}
+// img {
+//   height: 40px;
+//   margin: 0 auto;
+//   margin-bottom: 6px;
+// }
 </style>

@@ -140,7 +140,7 @@
 				this.$http.post('/api/product/online/list',
 						this.qs.stringify({
 							customerId: _this.user.userId,
-							onlineType: _this.type[_this.$route.params.type],
+							// onlineType: _this.type[_this.$route.params.type],
 							topTag: "",
 							freeStatus: obj.freeStatus,
 							showRankingStatus: obj.showRankingStatus,
@@ -169,7 +169,8 @@
 										url: 'courseTypeDetail',
 										query: {
 											id: item.id,
-											type: _this.$route.params.type
+											// type: _this.$route.params.type
+											type:item.onlineType
 										}
 									}
 								})

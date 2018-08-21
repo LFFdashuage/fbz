@@ -138,7 +138,7 @@ const routes = [{
             title: '富班长'
         }
     }, {
-        path: '/rank/:type', // video：视频， audio: 音频
+        path: '/rank', // video：视频， audio: 音频
         name: 'rankList',
         component: loadView(loaded => {
             require(['../modules/rank/list.vue'], loaded)
@@ -212,7 +212,23 @@ const routes = [{
             uuid: '',
             title: '培训头条'
         }
-    }, {
+    },
+    {
+        //必修课程  
+        path: '/force-course',
+        name: 'forceCourse',
+        query: {
+            type: "", // 1：近期课程，0：所有课程，只是课程切换
+        },
+        component: loadView(loaded => {
+            require(['../modules/force-course/force-course.vue'], loaded)
+        }),
+        meta: {
+            uuid: '',
+            title: '必修课程',
+            routerTitle: '必修课程'
+        }
+    },{
         // 课程
         path: '/course',
         name: 'course',

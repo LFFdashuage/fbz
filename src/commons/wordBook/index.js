@@ -12,9 +12,9 @@ Vue.prototype.wordBook = {
     tabChangeW: 160, // tab+swiper切换滚动多少距离切换，
     bannerWidthHeight: 320 / 751, // banner图片宽高比
     raterConfig: {
-        activeColor: '#a18a5e',
-        newActiveColor: '#970021',
-        fontSize: 12,
+        activeColor: '#970021',
+        newActiveColor: '#a39161',
+        fontSize: 14,
         margin: 0,
         max: 5
     },

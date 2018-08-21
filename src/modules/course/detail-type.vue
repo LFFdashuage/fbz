@@ -10,7 +10,7 @@
           <p class="detail-name">{{list.title}} <span>{{list.viewCount}}人观看</span></p>
 				</div>
 	    </template>
-
+ 
 	    <template v-if="courseInfo.type == 'audio'">        		
 				<el-audio ref="audio" @on-audio-buy="createOrder" @audio-btn-change="audioBtnChange" :audio-data="course" :course-info="list"></el-audio>
 	    </template>
@@ -119,7 +119,7 @@
         playVisitStatus: false, // 是否点击过
         courseInfo: {
           spareType: "0", // spareType打赏类型 0产品 1头条
-          type: this.$route.query.type,
+          type:   this.$route.query.type  == 1 ? 'video':'audio', 
           id: this.$route.query.id,
           name: "",
           desc: ""
