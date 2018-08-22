@@ -23,8 +23,8 @@
 
       	<tr class="package-list-tr" v-for="(item, index) in info.lessons" :key="index">
       		<td><p>{{item.lessonName}}</p></td>
-          <td>{{item.time}}</td>
-      		<td><p>{{item.address}}</p></td>
+          <td>{{item.lessonStartDate}}</td>
+      		<td><p>{{item.lessonAddress}}</p></td>
       	</tr>
       </table>
     </div>
@@ -74,24 +74,24 @@ export default {
           // {
           //   lessonId:1,
           //   lessonName:"从零到亿，影响以上的财富课",
-          //   time:"2018-02-13-11:20",
-          //   address:"上海市虹桥路333号"
+          //   lessonStartDate:"2018-02-13-11:20",
+          //   lessonAddress:"上海市虹桥路333号"
           // },
           // {
           //   lessonId:2,
           //   lessonName:"从零到亿，影响以上的财富课",
-          //   time:"2018-02-13-11:20",
-          //   address:"上海市虹桥路333号"
+          //   lessonStartDate:"2018-02-13-11:20",
+          //   lessonAddress:"上海市虹桥路333号"
           // },{
           //   lessonId:3,
           //   lessonName:"从零到亿，影响以上的财富课",
-          //   time:"2018-02-13-11:20",
-          //   address:"上海市虹桥路333号"
+          //   lessonStartDate:"2018-02-13-11:20",
+          //   lessonAddress:"上海市虹桥路333号"
           // },{
           //   lessonId:4,
           //   lessonName:"从零到亿，影响以上的财富课",
-          //   time:"2018-02-13-11:20",
-          //   address:"上海市虹桥路333号"
+          //   lessonStartDate:"2018-02-13-11:20",
+          //   lessonAddress:"上海市虹桥路333号"
           // },
         ]
       }
