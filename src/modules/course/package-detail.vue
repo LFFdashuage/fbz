@@ -71,28 +71,28 @@ export default {
         ramk:"",
        
         lessons:[
-          {
-            lessonId:1,
-            lessonName:"从零到亿，影响以上的财富课",
-            time:"2018-02-13-11:20",
-            address:"上海市虹桥路333号"
-          },
-          {
-            lessonId:2,
-            lessonName:"从零到亿，影响以上的财富课",
-            time:"2018-02-13-11:20",
-            address:"上海市虹桥路333号"
-          },{
-            lessonId:3,
-            lessonName:"从零到亿，影响以上的财富课",
-            time:"2018-02-13-11:20",
-            address:"上海市虹桥路333号"
-          },{
-            lessonId:4,
-            lessonName:"从零到亿，影响以上的财富课",
-            time:"2018-02-13-11:20",
-            address:"上海市虹桥路333号"
-          },
+          // {
+          //   lessonId:1,
+          //   lessonName:"从零到亿，影响以上的财富课",
+          //   time:"2018-02-13-11:20",
+          //   address:"上海市虹桥路333号"
+          // },
+          // {
+          //   lessonId:2,
+          //   lessonName:"从零到亿，影响以上的财富课",
+          //   time:"2018-02-13-11:20",
+          //   address:"上海市虹桥路333号"
+          // },{
+          //   lessonId:3,
+          //   lessonName:"从零到亿，影响以上的财富课",
+          //   time:"2018-02-13-11:20",
+          //   address:"上海市虹桥路333号"
+          // },{
+          //   lessonId:4,
+          //   lessonName:"从零到亿，影响以上的财富课",
+          //   time:"2018-02-13-11:20",
+          //   address:"上海市虹桥路333号"
+          // },
         ]
       }
     };
@@ -124,7 +124,7 @@ export default {
             _this.info.originalPrice=resInfo.packagePrice || 0;
             _this.info.content=resInfo.content;
             _this.info.ramk=resInfo.remark;
-            // _this.info.lessons=resInfo.lessons;
+            _this.info.lessons=resInfo.lessons;
             
             //  console.log(resInfo)
             if (resInfo.isCollection == 1) {

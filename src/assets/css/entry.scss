@@ -87,9 +87,11 @@
 	
 	.index-entrance {
 	    @extend %clearfix;
-	    width: 100%;
+		width: 100%; 
+		border-top:8px solid $borderColor;
+		// @include halfpxline(0, $borderColor, 8px , 0, 0, 0);
 	    padding: $padding $padding/2;
-	    background-color: #f7f7f7;
+	    background-color: #fff;
 	}
 	
 	.index-entrance-block {
