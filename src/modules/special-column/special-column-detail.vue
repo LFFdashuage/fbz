@@ -83,24 +83,45 @@
 
     <div v-transfer-dom>
       <div class="footer">
-        <div class="footer-content">
+        <!-- <div class="footer-content"> -->
 
-          <div class="footer-collection"  :class="{ 'collection-icon' : isIcon, 'collection-icon-tow': !isIcon}" @click="collection">收藏</div>
-          <div v-if="specialData.isBuy == 0" class="footer-purchase" @click="goPage('curriculumOrder', { id: goPageId, type: 'specialColumn' })">
+          <div class="footer-collection"  :class="{ 'collection-icon' : isIcon, 'collection-icon-tow': !isIcon}" @click="collection"></div>
+          
+
+          <div class="detail-bottom-btn buy ">
+            <div class="left" @click="goPage('forceCourse', { id: specialData.authorId, type: 'course'})" >线下课程</div>
+            
+            <div v-if="specialData.isBuy == 0" @click="goPage('curriculumOrder', { id: goPageId, type: 'specialColumn' })">立即订阅</div>
+            <div v-else>已订阅</div>
+          </div>
+
+          <!-- <div  class="footer-purchase" @click="goPage('curriculumOrder', { id: goPageId, type: 'specialColumn' })">
             <p>立即购买</p>
           </div>
           <div v-else class="footer-purchase">
             <p>已购买</p>
-          </div>
+          </div> -->
         
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { TransferDom , Popup , Tab , TabItem , Swiper , Group , Rater , XTextarea , SwiperItem , Checker , CheckerItem } from "vux";
+import {
+  TransferDom,
+  Popup,
+  Tab,
+  TabItem,
+  Swiper,
+  Group,
+  Rater,
+  XTextarea,
+  SwiperItem,
+  Checker,
+  CheckerItem
+} from "vux";
 import elAudio from "components/video/audio";
 import elVideo from "components/video/video";
 import elTableDetail from "components/special-column/table-detail";
@@ -111,16 +132,27 @@ export default {
     TransferDom
   },
   components: {
-    Tab, TabItem, Swiper, Popup, Group, XTextarea, Rater, SwiperItem, Checker, CheckerItem, 
-    elTableDetail, elAudio, elVideo
+    Tab,
+    TabItem,
+    Swiper,
+    Popup,
+    Group,
+    XTextarea,
+    Rater,
+    SwiperItem,
+    Checker,
+    CheckerItem,
+    elTableDetail,
+    elAudio,
+    elVideo
   },
   data() {
     return {
-      videoint:0,
+      videoint: 0,
       commentRater: 0,
       commentContent: "",
       activeVideo: 0,
-      goPageId:this.$route.query.id,
+      goPageId: this.$route.query.id,
       specialData: {
         termId: this.$route.query.id,
         termName: "",
@@ -191,12 +223,14 @@ export default {
               _this.arrContain(
                 _this.$store.state.user.authorIds,
                 resData.authorId.toString()
-              ) ? "1" : "0";
+              )
+                ? "1"
+                : "0";
             let onlineType = "";
 
             if (resData.childTerm && resData.childTerm.length > 0) {
               list = resData.childTerm.map(function(item, index) {
-                if(index == 0) {
+                if (index == 0) {
                   onlineType = item.onlineType;
                 }
 
@@ -204,7 +238,12 @@ export default {
                   authorName: item.authorName,
                   authorImg: item.authorImages,
                   name: resData.termName,
-                  isBuy: item.childBuyStatus == 1 || hasBuyState == 1 || resData.price? 1 : 0,
+                  isBuy:
+                    item.childBuyStatus == 1 ||
+                    hasBuyState == 1 ||
+                    resData.price
+                      ? 1
+                      : 0,
                   createTime: item.childCreateTime,
                   fileUrl: item.childFileUrl,
                   id: item.childId,
@@ -233,7 +272,10 @@ export default {
               termTypeName: resData.termTypeName,
               updateCount: resData.updateCount || 0,
               termType: resData.termType,
-              isBuy: resData.isBuy == 1 || hasBuyState == 1 ||resData.price == 0 ? 1 : 0,
+              isBuy:
+                resData.isBuy == 1 || hasBuyState == 1 || resData.price == 0
+                  ? 1
+                  : 0,
               termRank: resData.termRank || 5,
               // fileThumb: "",
               list: list,
@@ -244,7 +286,7 @@ export default {
             _this.videoData = {
               fileThumb: list[0].authorImg,
               fileUrl: list[0].fileUrl,
-              isBuy: list[0].isBuy, 
+              isBuy: list[0].isBuy,
               name: list[0].name,
               childName: list[0].childName,
               lecturer: list[0].authorName
@@ -303,34 +345,34 @@ export default {
 
     // 立即购买
     purchase() {
-    //   let _this = this;
-    //   _this.$http
-    //     .post(
-    //       "/api/product/term/order/confirm",
-    //       _this.qs.stringify({
-    //         productId: this.$route.query.id,
-    //         customerId: _this.$store.state.user.userId,
-    //         num: 1,
-    //         voucherStatus: 0,
-    //         walletStatus:0
-    //       })
-    //     )
-    //     .then(function(e) {
-    //       if (e.data.code == 200) {
-    //         _this.$router.push({
-    //           name: "confirmOrder",
-    //           query: {
-    //             orderId: e.data.data.orderId,
-    //             orderType: 4,
-    //             type: e.data.data.type
-    //           }
-    //         });
-    //       } else {
-    //         _this.$vux.alert.show({
-    //           content: e.data.msg
-    //         });
-    //       }
-    //     });
+      //   let _this = this;
+      //   _this.$http
+      //     .post(
+      //       "/api/product/term/order/confirm",
+      //       _this.qs.stringify({
+      //         productId: this.$route.query.id,
+      //         customerId: _this.$store.state.user.userId,
+      //         num: 1,
+      //         voucherStatus: 0,
+      //         walletStatus:0
+      //       })
+      //     )
+      //     .then(function(e) {
+      //       if (e.data.code == 200) {
+      //         _this.$router.push({
+      //           name: "confirmOrder",
+      //           query: {
+      //             orderId: e.data.data.orderId,
+      //             orderType: 4,
+      //             type: e.data.data.type
+      //           }
+      //         });
+      //       } else {
+      //         _this.$vux.alert.show({
+      //           content: e.data.msg
+      //         });
+      //       }
+      //     });
     },
 
     // 收藏/取消收藏
@@ -366,20 +408,20 @@ export default {
         query: { id: this.$route.query.id }
       });
     },
-    audioBtnChange (data) {
-      console.log(data)
+    audioBtnChange(data) {
+      console.log(data);
       let len = this.specialData.list.length;
-      if(data == 'prev') {
-        if(this.activeVideo == 0) {
-          this.loadNext(len-1);
+      if (data == "prev") {
+        if (this.activeVideo == 0) {
+          this.loadNext(len - 1);
         } else {
-          this.loadNext(this.activeVideo - 1)
+          this.loadNext(this.activeVideo - 1);
         }
-      } else if (data == 'next') {
-        if(this.activeVideo == len - 1) {
+      } else if (data == "next") {
+        if (this.activeVideo == len - 1) {
           this.loadNext(0);
         } else {
-          this.loadNext(this.activeVideo + 1)
+          this.loadNext(this.activeVideo + 1);
         }
       }
     },
@@ -390,11 +432,11 @@ export default {
     loadNext(ind) {
       if (this.activeVideo == ind) return;
       let specialData = this.specialData.list[ind];
-      
+
       this.activeVideo = ind;
 
       this.specialData.playCount = specialData.playCount;
-      if(specialData.onlineType == 1) {      
+      if (specialData.onlineType == 1) {
         this.$refs.video.loadNext({
           src: specialData.fileUrl,
           id: specialData.id
@@ -411,7 +453,7 @@ export default {
         });
       }
       this.specialData.onlineType = specialData.onlineType;
-    },
+    }
   }
 };
 </script>
@@ -440,56 +482,55 @@ export default {
   // padding-bottom: $padding;
   position: relative;
 
-.term-info{
-  padding:$padding;
-  .name{
-    text-align: left;
-    font-size: $fontSizeH3;
-    @include ellipsisOne();
-    margin-bottom: $padding;    
-  }
-  .term-info-ramk{
-    .price{
-      font-size: $fontSizeH2;
-      color:$colorRedDeep;
+  .term-info {
+    padding: $padding;
+    .name {
+      text-align: left;
+      font-size: $fontSizeH3;
+      @include ellipsisOne();
+      margin-bottom: $padding;
     }
-    .original-price{
-      font-size: $fontSizeTips;
-      color:$fontColor;
-      text-decoration: line-through;
+    .term-info-ramk {
+      .price {
+        font-size: $fontSizeH2;
+        color: $colorRedDeep;
+      }
+      .original-price {
+        font-size: $fontSizeTips;
+        color: $fontColor;
+        text-decoration: line-through;
+      }
+      .total-term {
+        font-size: $fontSizeTips;
+        color: $colorYellowEasyDeep;
+        float: right;
+      }
     }
-    .total-term{
-      font-size: $fontSizeTips;
-      color:$colorYellowEasyDeep;
-      float: right;
-    }
-  }
-  .term-info-footer{
-    margin-top: 6px;
-    .play-count{
-      margin-left: 20px;
-      font-size: $fontSizeTips;
-      color:$fontColor;
-    }
-    .termTypeName {
-      display: inline-block;
-      float: right;
-      font-size: $fontSizeTips;
-      // border: 1px solid $bgGray;
-      color: #fff;
-      padding: 5px 10px;
-     border-radius: 5px;
-      background-color: $colorGrayDisabled;
-    }
-    .rater{
-      font-size: $fontSizeTips;
+    .term-info-footer {
+      margin-top: 6px;
+      .play-count {
+        margin-left: 20px;
+        font-size: $fontSizeTips;
+        color: $fontColor;
+      }
+      .termTypeName {
+        display: inline-block;
+        float: right;
+        font-size: $fontSizeTips;
+        // border: 1px solid $bgGray;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: $colorGrayDisabled;
+      }
+      .rater {
+        font-size: $fontSizeTips;
+      }
     }
   }
 }
-}
 
-.content{
-
+.content {
   .special-list {
     margin-bottom: 70px;
   }
@@ -498,9 +539,9 @@ export default {
     width: 100%;
     padding: $padding;
     margin-bottom: $padding;
-    @include halfpxline(0, $borderColor, 0 , 0, 10px, 0);
-    
-    .vux-checker-box{
+    @include halfpxline(0, $borderColor, 0, 0, 10px, 0);
+
+    .vux-checker-box {
       padding-left: 20px;
       display: flex;
       flex-wrap: wrap;
@@ -512,7 +553,7 @@ export default {
     display: flex;
     margin: 0 $padding;
     padding: $padding 0;
-    @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+    @include halfpxline(0, $borderColor, 0, 0, 1px, 0);
     line-height: 1;
 
     .title-name {
@@ -532,7 +573,7 @@ export default {
   .checker-catalog-list-selected {
     color: $colorYellowEasy;
     // background-color: red;
-    p{
+    p {
       color: $colorYellowEasy;
     }
   }
@@ -544,7 +585,7 @@ export default {
     .catalog-list-title {
       display: flex;
       padding: $padding;
-      @include halfpxline(0, $borderColor, 0 , 0, 1px, 0);
+      @include halfpxline(0, $borderColor, 0, 0, 1px, 0);
 
       .serial-number {
         color: $colorYellowEasy;
@@ -572,7 +613,7 @@ export default {
     height: 50px;
     text-align: center;
     line-height: 50px;
-    border: 1px solid $bgGray; 
+    border: 1px solid $bgGray;
     background-color: $bgGray;
     border-radius: 5px;
   }
@@ -584,55 +625,60 @@ export default {
 }
 
 .footer {
-  height: 52px;
-  width: 100%;
-  position: fixed;
+  @include halfpxline(0, $borderColor, 1px, 0, 0, 0);
+  position: absolute;
   bottom: 0;
+  left: 0;
   right: 0;
-  z-index: 600;
-  background-color: $bgGray;
+  height: 50px;
+  line-height: 30px;
+  text-align: center;
+  background: $bgGray;
+  color: #fff;
+  font-size: $fontSizeH3;
+  z-index: 500;
+  display: flex;
 
-  .footer-content {
-    height: 100%;
-    width: 100%;
-    font-size: $fontSizeH4;
+  .footer-collection {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    width: 11%;
+    padding-right: 25px;
+    color: #333;
+    // background-color: $colorBlue;
+  }
 
-    .footer-collection {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      height: 100%;
-      width: 27%;
-      padding-right: 25px;
-      // background-color: $colorBlue;
+  .footer-trial {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    width: 27%;
+    padding-right: 20px;
+    background: $bgGray url(~assets/img/icon/trial.png) no-repeat;
+    background-position: 13px center;
+    background-size: auto 40%;
+  }
+
+  .detail-bottom-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    margin: $padding/2 $padding;
+    padding: 5px 0;
+    &.buy {
+      background: $colorRedDeep;
+      border-radius: 2em;
     }
 
-    .footer-trial {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      height: 100%;
-      width: 27%;
-      padding-right: 20px;
-      background: $bgGray url(~assets/img/icon/trial.png) no-repeat;
-      background-position: 13px center;
-      background-size: auto 40%;
+    .left {
+      @include halfpxline(0, $borderColor, 0, 2px, 0, 0);
     }
 
-    .footer-purchase {
-      flex: 1;
-      height: 100%;
-      width: 45%;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      background-color: $colorRedDeep;
-      p {
-        margin:0 auto;
-        color:#fff;
-      }
+    div {
+      width: 50%;
     }
   }
 

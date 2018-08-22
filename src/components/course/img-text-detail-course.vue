@@ -197,7 +197,8 @@ export default {
       margin: 0 0.4em;
       line-height: 30px;
       padding: 0 0.4em;
-      background: rgba(0, 0, 0, 0.6);
+      // background: rgba(0, 0, 0, 0.6);
+      background: $colorRed;
       border-radius: $borderRadius;
       display: inline-block;
     }

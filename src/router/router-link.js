@@ -219,6 +219,7 @@ const routes = [{
         name: 'forceCourse',
         query: {
             type: "", // 1：近期课程，0：所有课程，只是课程切换
+            id:"" //教师id
         },
         component: loadView(loaded => {
             require(['../modules/force-course/force-course.vue'], loaded)

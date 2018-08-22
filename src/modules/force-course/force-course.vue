@@ -1,5 +1,5 @@
 <!-- 
-	推荐课程
+	必修课程
  -->
 
 <template>
@@ -18,7 +18,7 @@ import elLoadMore from "components/load-more/load-more";
 import elImgTextCourse from "components/course/img-text-course";
 
 export default {
-  name: "courseTuijian",
+  name: "forceCourse",
   components: {
     Scroller,
     Timeline,
@@ -47,10 +47,19 @@ export default {
       if (_this.scrollerInfo.onFetching || _this.scrollerInfo.loadAll) return;
       _this.scrollerInfo.onFetching = true;
 
-      _this.$http
-        .post(
-          "/api/curriculum/allCourses",
-          _this.qs.stringify({
+      if(_this.$route.query.type == "course"){
+        var query = {
+            cityId: "", //开课城市
+            companyId: "", //机构id
+            authorId: _this.$route.query.id, //	讲师id
+            courseTypeId: "", //课程类型id
+            sort: "", //排序
+            searchKeyword: "",
+            pageNum: this.scrollerInfo.pageNum,
+            pageSize: this.scrollerInfo.pageSize
+        }
+      }else{
+          var query = {
             isRequired: 1, //是否为必修课程 0否 1是
             cityId: "", //开课城市
             companyId: "", //机构id
@@ -60,7 +69,13 @@ export default {
             searchKeyword: "",
             pageNum: this.scrollerInfo.pageNum,
             pageSize: this.scrollerInfo.pageSize
-          })
+        }
+      }
+
+      _this.$http
+        .post(
+          "/api/curriculum/allCourses",
+          _this.qs.stringify(query)
         )
         .then(function(e) {
           if (e.data.code == 200) {
